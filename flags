@@ -1,0 +1,306 @@
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+	<head>
+		<title>Semaphore Interactive table from Braille Interactive Table from Adam Peterson's Web Page</title>
+		<meta name="description" content="code from http://axon.cs.byu.edu/~adam/gatheredinfo/helpers/braille/braille.php"/>
+		
+<style>
+label {
+  font-weight: bold;
+}
+/*
+ * Styles for the look of the table where the information is populated.
+ */
+table.resultstab {
+	/*width:		100%;*/
+	font-size:	2em;
+}
+table.resultstab>tbody>tr>td {
+	width:		16em;
+	color:		#C00;
+}
+table.resultstab>tbody>tr>th {
+	text-align:	right;
+	width:		5em;
+	color:		#008;
+}
+/*
+ * Styles for the table where the braille code is entered.
+ */
+#braillefield {
+	background-color:	#EEE;
+	padding:			4px;
+	border-style:		double;
+	border-spacing:		16px;
+}
+#braillefield>tbody>tr>td {
+	width:				32px;
+	height:				32px;
+	background-color:	#FFF;
+}
+
+img.semaphoreLetter {
+    width: 200px;
+}
+</style>
+<script>
+function semob(ltr, num, punct, wordpart, word, special) {
+    return {
+        ltr: ltr,
+        num: num,
+        pnc: punct,
+        //prt: wordpart,
+        //wrd: word,
+        //spc: special,
+        //px1: '',
+        //px2: '',
+        //px3: '',
+        //sx1: '',
+        //sx2: '',
+        //sx3: '',
+        //abv: ''
+    }
+}
+semobs = {
+    b000000000: semob('', '', '', '', '', ''),
+    b000110100: semob('numeric', '', 'numeric', '', '', ''),
+    b101010101: semob('error', '', 'error', '', '', ''),
+    b100010001: semob('annul', '', 'annul', '', '', ''),
+    b000010000: semob('', '', '', '', '', ''),
+    b001011000: semob('a', '1', '', '<img src="http://www.anbg.gov.au/images/flags/semaphore/a.gif">', '', ''),
+    b010011000: semob('b', '2', '', '', '', ''),
+    b100011000: semob('c', '3', '', '', '', ''),
+    b000111000: semob('d', '4', '', '', '', ''),
+    b000011100: semob('e', '5', '', '', '', ''),
+    b000011010: semob('f', '6', '', '', '', ''),
+    b000011001: semob('g', '7', '', '', '', ''),
+    b011010000: semob('h', '8', '', '', '', ''),
+    b101010000: semob('i', '9', '', '', '', ''),
+    b000110010: semob('j', '', 'alphabetic', '', '', ''),
+    b001110000: semob('k', '0', '', '', '', ''),
+    b001010100: semob('l', '', '', '', '', ''),
+    b001010010: semob('m', '', '', '', '', ''),
+    b001010001: semob('n', '', '', '', '', ''),
+    b110010000: semob('o', '', '', '', '', ''),
+    b010110000: semob('p', '', '', '', '', ''),
+    b010010100: semob('q', '', '', '', '', ''),
+    b010010010: semob('r', '', '', '', '', ''),
+    b010010001: semob('s', '', '', '', '', ''),
+    b100110000: semob('t', '', '', '', '', ''),
+    b100010100: semob('u', '', '', '', '', ''),
+    b000110001: semob('v', '', '', '', '', ''),
+    b000010110: semob('w', '', '', '', '', ''),
+    b000010101: semob('x', '', '', '', '', ''),
+    b100010010: semob('y', '', '', '', '', ''),
+    b000010011: semob('z', '', '', '<img src="http://www.anbg.gov.au/images/flags/semaphore/z.gif">', '', ''),
+
+}
+
+
+
+function setcontents(element, content) {
+    var el = document.getElementById(element)
+    if (!el) return
+    while (el.hasChildNodes()) {
+        el.removeChild(el.firstChild)
+    }
+    var chunks = content.split("\n")
+    for (var i = 0; i != chunks.length; ++i) {
+        if (i != 0) el.appendChild(document.createElement('br'))
+        el.appendChild(document.createTextNode(chunks[i]))
+    }
+}
+
+function togglepip(num) {
+    var element = document.forms[0]["b" + num]
+    if (!element) return
+    element.checked = !element.checked
+    setfields()
+    return
+}
+
+function togglefields() {
+    for (var i = 0; i++ != 9;)
+    togglepip(i)
+}
+
+function cbn(num) {
+    if (document.forms[0]["b" + num].checked) return '1'
+    return '0'
+}
+
+function setfields() {
+    for (var i = 9; i != 0; --i)
+    document.getElementById("bf" + i).style.backgroundColor = (cbn(i) == '1' ? "#000" : "#FFF")
+    semob = semobs['b' + cbn(1) + cbn(2) + cbn(3) + cbn(4) + cbn(5) + cbn(6) + cbn(7) + cbn(8) + cbn(9)]
+    setcontents("bli_ltr", semob.ltr)
+    setcontents("bli_num", semob.num)
+    setcontents("bli_pnc", semob.pnc)
+    setcontents("bli_prt", semob.prt)
+    //setcontents("bli_wrd", semob.wrd)
+    //setcontents("bli_spc", semob.spc)
+    //setcontents("bli_px1", semob.px1)
+    //setcontents("bli_px2", semob.px2)
+    //setcontents("bli_px3", semob.px3)
+    //setcontents("bli_sx1", semob.sx1)
+    //setcontents("bli_sx2", semob.sx2)
+    //setcontents("bli_sx3", semob.sx3)
+    //setcontents("sem_abrv", semob.abv)
+    updateImage();
+}
+
+function updateImage() {
+
+    // setcontents("bli_ltr", semob.ltr)
+    // document.getElementbyId('bli_ltr').innerHTML
+
+
+    var imgurl = "http://www.anbg.gov.au/images/flags/semaphore/"+ document.getElementById('bli_ltr').innerHTML +".gif";
+
+
+
+    document.getElementById('au_img').innerHTML = "<img class='semaphoreLetter' src='"+imgurl+"'/>";
+
+
+
+    //http://www.anbg.gov.au/images/flags/semaphore/numeric.gif
+    //http://www.anbg.gov.au/images/flags/semaphore/annul.gif
+    //http://www.anbg.gov.au/images/flags/semaphore/error.gif
+
+}
+
+function readysetfields() {
+    setTimeout(setfields, 0);
+}
+
+function highlightgrid() {
+    var high = sem_handler.amingrid && !sem_handler.inapip
+    var el = document.getElementById("braillefield")
+    if (!el) return
+    el.style.backgroundColor = (high ? "#FCC" : "#EEE")
+}
+var sem_handler = {
+    oldinit: window.onload,
+    initfunc: function() {
+        if (typeof sem_handler.oldinit == 'function') sem_handler.oldinit()
+        sem_handler.newinit()
+    },
+    newinit: function() {
+        var gridel = document.getElementById('braillefield')
+        gridel.onmouseover = function() {
+            sem_handler.amingrid = true
+            highlightgrid()
+        }
+        gridel.onmouseout = function() {
+            sem_handler.amingrid = false
+            highlightgrid()
+        }
+        gridel.ondblclick = function() {
+            if (sem_handler.inapip) return false
+            var onechecked = false
+            for (var i = 0; i++ != 9;) {
+                var element = document.forms[0]["b" + i]
+                if (!element) continue
+                if (element.checked) onechecked = true
+            }
+            for (var i = 0; i++ != 9;) {
+                var element = document.forms[0]["b" + i]
+                if (!element) continue
+                element.checked = !onechecked
+            }
+            setfields()
+        }
+        gridel.onclick = function() {
+            if (sem_handler.inapip) return false
+            togglefields()
+        }
+        for (var i = 0; i++ != 9;) {
+            var pipel = document.getElementById('bf' + i)
+            if (!pipel) continue
+            pipel.onmouseover = function() {
+                sem_handler.inapip = true
+                highlightgrid()
+            }
+            pipel.onmouseout = function() {
+                sem_handler.inapip = false
+                highlightgrid()
+            }
+            pipel.onclick = function() {
+                togglepip(this.id.substr(2))
+            }
+            pipel.ondblclick = function() {
+                togglefields()
+                this.onclick()
+            }
+        }
+    },
+    inapip: false,
+    amingrid: false
+}
+window.onload = sem_handler.initfunc
+
+
+
+</script>	
+
+</head>
+	<body>
+		<div id='header'>
+			<h4>Semaphore Interactive Table</h4>
+		</div>
+<div id='content'>
+
+	<table><tbody><tr><td valign="top" style="text-align:center;width:128px;">
+		<form action="get">
+			<table summary="Entry controls for the Braille field."><caption>Sem.</caption><tbody><tr>
+				<td><input type="checkbox" name="b1" onclick="readysetfields()" /></td>
+				<td><input type="checkbox" name="b4" onclick="readysetfields()" /></td>
+                <td><input type="checkbox" name="b7" onclick="readysetfields()" /></td>
+			</tr><tr>
+				<td><input type="checkbox" name="b2" onclick="readysetfields()" /></td>
+				<td><input type="checkbox" name="b5" onclick="readysetfields()" /></td>
+                <td><input type="checkbox" name="b8" onclick="readysetfields()" /></td>
+			</tr><tr>
+				<td><input type="checkbox" name="b3" onclick="readysetfields()" /></td>
+				<td><input type="checkbox" name="b6" onclick="readysetfields()" /></td>
+                <td><input type="checkbox" name="b9" onclick="readysetfields()" /></td>
+			</tr></tbody></table>
+		</form>
+		<table id="braillefield" summary="Echo display for the Braille field (also acts as secondary control via JavaScript)."><tbody><tr>
+			<td id="bf1" class="bfpip"></td>
+			<td id="bf4" class="bfpip"></td>
+            <td id="bf7" class="bfpip"></td>
+		</tr><tr>
+			<td id="bf2" class="bfpip"></td>
+			<td id="bf5" class="bfpip"></td>
+            <td id="bf8" class="bfpip"></td>
+		</tr><tr>
+			<td id="bf3" class="bfpip"></td>
+			<td id="bf6" class="bfpip"></td>
+            <td id="bf9" class="bfpip"></td>
+		</tr></tbody></table>
+	</td><td>
+		<table class="resultstab">
+			<label>Letter:	</label><span id="bli_ltr"></span><br/>
+			<label>Number:	</label><span id="bli_num"></span><br/>
+			<label>Punct:	</label><span id="bli_pnc"></span><br/>
+
+            <div id="au_img"></div>
+			<!--label>Part:	</label><span id="bli_prt"></span><br/>
+			<!--label>Word:	</label><span id="bli_wrd"></span><br/>
+			<label>Special:</label><span id="bli_spc"></span><br/-->
+		</table>
+	</td></tr></tbody></table>
+	<!--table class="resultstab"><tbody>
+		<label>Prefix 1:</label><span id="bli_px1"></span><br/>
+		<label>Prefix 2:</label><span id="bli_px2"></span><br/>
+		<label>Prefix 3:</label><span id="bli_px3"></span><br/>
+		<label>Suffix 1:</label><span id="bli_sx1"></span><br/>
+		<label>Suffix 2:</label><span id="bli_sx2"></span><br/>
+		<label>Suffix 3:</label><span id="bli_sx3"></span><br/>
+	</tbody></table-->
+	<!--h3>Abbreviations:</h3-->
+	
+		</div>
+		
+	</body>
+</html>
