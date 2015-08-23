@@ -735,6 +735,9 @@ document.body.addEventListener("touchmove", function (e) {
                 // Check if there was a cluster
                 if (checkcluster) {
                     if (matchlength == 3) {
+
+                        // TODO: this isn't working yet....
+                        /*
                         // theres 3 that are same type
                         // now check if order of stages is right
                         var currentRow = j;
@@ -746,11 +749,11 @@ document.body.addEventListener("touchmove", function (e) {
                         if( (tile1.stage == 1 && tile2.stage == 2 && tile3.stage == 3) || (tile1.stage == 3 && tile2.stage == 2 && tile3.stage == 1))
                         {
                             console.log("1: ",tile1.stage, ", 2: ", tile2.stage, ", 3: ",tile3.stage)
-
+                        */
                             // Found a horizontal cluster
                         clusters.push({ column: i+1-matchlength, row:j,
                                         length: matchlength, horizontal: true });
-                        }
+                        //}
                         
                     }
                     
@@ -784,6 +787,8 @@ document.body.addEventListener("touchmove", function (e) {
                 // Check if there was a cluster
                 if (checkcluster) {
                     if (matchlength >= 3) {
+                        // TODO: this isn't working yet....
+                        /*
                         // theres 3 that are same type
                         // now check if order of stages is right
                         var currentCol = i;
@@ -793,11 +798,12 @@ document.body.addEventListener("touchmove", function (e) {
 
                         if( (tile1.stage == 1 && tile2.stage == 2 && tile3.stage == 3) || (tile1.stage == 3 && tile2.stage == 2 && tile3.stage == 1))
                         {
+                            */
                             // Found a vertical cluster
                         clusters.push({ column: i, row:j+1-matchlength,
                                         length: matchlength, horizontal: false });
 
-                        }
+                        //}
 
                         
                     }
