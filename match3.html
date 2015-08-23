@@ -107,21 +107,23 @@ document.body.addEventListener("touchmove", function (e) {
     var level = {
         x: 250,         // X position
         y: 113,         // Y position
-        columns: 8,     // Number of tile columns
-        rows: 8,        // Number of tile rows
-        tilewidth: 40,  // Visual width of a tile
-        tileheight: 40, // Visual height of a tile
+        columns: 6,     // Number of tile columns
+        rows: 6,        // Number of tile rows
+        tilewidth: 50,  // Visual width of a tile
+        tileheight: 50, // Visual height of a tile
         tiles: [],      // The two-dimensional tile array
         selectedtile: { selected: false, column: 0, row: 0 }
     };
     
+
+
     // All of the different tile colors in RGB
     var tilecolors = [[255, 128, 128],
                       [128, 255, 128],
-                      [128, 128, 255],
+                     /* [128, 128, 255],
                       [255, 255, 128],
                       [255, 128, 255],
-                      [128, 255, 255],
+                      [128, 255, 255],*/
                       [255, 255, 255]];
     
     // Clusters and moves that were found
@@ -153,9 +155,9 @@ document.body.addEventListener("touchmove", function (e) {
     var gameover = false;
     
     // Gui buttons
-    var buttons = [ { x: 30, y: 240, width: 150, height: 50, text: "New Game"},
-                    { x: 30, y: 300, width: 150, height: 50, text: "Show Moves"},
-                    { x: 30, y: 360, width: 150, height: 50, text: "Enable AI Bot"}];
+    var buttons = [ { x: 30, y: 240, width: 150, height: 50, text: "New Game", font: "18px Verdana", verticalPadding: 30},
+                    { x: 345, y: 70, width: 100, height: 30, text: "Show Moves", font: "12px Arial", verticalPadding: 20},
+                    { x: 455, y: 70, width: 100, height: 30, text: "Enable AI Bot", font: "12px Arial", verticalPadding: 20}];
     
     // Initialize the game
     function init() {
@@ -170,7 +172,9 @@ document.body.addEventListener("touchmove", function (e) {
             level.tiles[i] = [];
             for (var j=0; j<level.rows; j++) {
                 // Define a tile type and a shift parameter for animation
-                level.tiles[i][j] = { type: 0, shift:0 }
+                //level.tiles[i][j] = { type: 0, shift:0 }
+                // add a stageNum
+                level.tiles[i][j] = { type: 0, shift:0, stage:0 }
             }
         }
         
@@ -391,7 +395,7 @@ document.body.addEventListener("touchmove", function (e) {
         // Draw title
         context.fillStyle = "#ffffff";
         context.font = "24px Verdana";
-        context.fillText("Match3 Example - Rembound.com", 10, 30);
+        context.fillText("Match3 Demo - Rembound.com", 10, 30);
         
         // Display fps
         context.fillStyle = "#ffffff";
@@ -408,9 +412,9 @@ document.body.addEventListener("touchmove", function (e) {
             
             // Draw button text
             context.fillStyle = "#ffffff";
-            context.font = "18px Verdana";
+            context.font = buttons[i].font; //"18px Verdana";
             var textdim = context.measureText(buttons[i].text);
-            context.fillText(buttons[i].text, buttons[i].x + (buttons[i].width-textdim.width)/2, buttons[i].y+30);
+            context.fillText(buttons[i].text, buttons[i].x + (buttons[i].width-textdim.width)/2, buttons[i].y+buttons[i].verticalPadding);
         }
     }
     
@@ -427,17 +431,23 @@ document.body.addEventListener("touchmove", function (e) {
                 // Check if there is a tile present
                 if (level.tiles[i][j].type >= 0) {
                     // Get the color of the tile
-                    var col = tilecolors[level.tiles[i][j].type];
-                    
+                    //var col = tilecolors[level.tiles[i][j].type];
+                    var tileType = level.tiles[i][j].type;
+
+                    // Get the stage number level of the tile.....
+                    var stageNum = level.tiles[i][j].stage;
+
                     // Draw the tile using the color
-                    drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
+                    drawTileNew(coord.tilex, coord.tiley, tileType, stageNum);
                 }
                 
                 // Draw the selected tile
                 if (level.selectedtile.selected) {
                     if (level.selectedtile.column == i && level.selectedtile.row == j) {
+
                         // Draw a red tile
-                        drawTile(coord.tilex, coord.tiley, 255, 0, 0);
+                        drawTileNew(coord.tilex, coord.tiley, tileType, stageNum);
+
                     }
                 }
             }
@@ -452,26 +462,37 @@ document.body.addEventListener("touchmove", function (e) {
             // First tile
             var coord1 = getTileCoordinate(currentmove.column1, currentmove.row1, 0, 0);
             var coord1shift = getTileCoordinate(currentmove.column1, currentmove.row1, (animationtime / animationtimetotal) * shiftx, (animationtime / animationtimetotal) * shifty);
-            var col1 = tilecolors[level.tiles[currentmove.column1][currentmove.row1].type];
+            //var col1 = tilecolors[level.tiles[currentmove.column1][currentmove.row1].type];
+            var tileType1 = level.tiles[currentmove.column1][currentmove.row1].type;
+
+            var tileStage1 = ""+currentmove.column1+ ","+ currentmove.row1;//tilecolors[level.tiles[currentmove.column1][currentmove.row1].stageNum];
             
             // Second tile
             var coord2 = getTileCoordinate(currentmove.column2, currentmove.row2, 0, 0);
             var coord2shift = getTileCoordinate(currentmove.column2, currentmove.row2, (animationtime / animationtimetotal) * -shiftx, (animationtime / animationtimetotal) * -shifty);
-            var col2 = tilecolors[level.tiles[currentmove.column2][currentmove.row2].type];
+            //var col2 = tilecolors[level.tiles[currentmove.column2][currentmove.row2].type];
+            var tileType2 = level.tiles[currentmove.column2][currentmove.row2].type;
+
+            var tileStage2 = ""+currentmove.column2+ ","+ currentmove.row2;//tilecolors[level.tiles[currentmove.column2][currentmove.row2].stageNum];
+
+
+            
+            
             
             // Draw a black background
             drawTile(coord1.tilex, coord1.tiley, 0, 0, 0);
             drawTile(coord2.tilex, coord2.tiley, 0, 0, 0);
+
             
             // Change the order, depending on the animation state
             if (animationstate == 2) {
                 // Draw the tiles
-                drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
-                drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
+                drawTileNew(coord1shift.tilex, coord1shift.tiley, tileType1, tileStage1);
+                drawTileNew(coord2shift.tilex, coord2shift.tiley, tileType2, tileStage2);
             } else {
                 // Draw the tiles
-                drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
-                drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
+                drawTileNew(coord2shift.tilex, coord2shift.tiley, tileType2, tileStage2);
+                drawTileNew(coord1shift.tilex, coord1shift.tiley, tileType1, tileStage1);
             }
         }
     }
@@ -483,10 +504,50 @@ document.body.addEventListener("touchmove", function (e) {
         return { tilex: tilex, tiley: tiley};
     }
     
-    // Draw a tile with a color
-    function drawTile(x, y, r, g, b) {
+    // Draw a tile with a color AND a stage number
+    function drawTileNew(x, y, tileType, stageNum) {
+
+        var r = tilecolors[tileType][0];
+        var g = tilecolors[tileType][1];
+        var b = tilecolors[tileType][2];
+
         context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
         context.fillRect(x + 2, y + 2, level.tilewidth - 4, level.tileheight - 4);
+
+
+        context.fillStyle = "#000000";
+        context.font = "12px Arial";
+
+        var tileText = stageNum;
+        var textSize = context.measureText(tileText);
+
+        //drawCenterText
+
+        context.fillText(tileText, x + (level.tilewidth/2) - (textSize.width/2), y + (level.tileheight/2));
+    }
+
+    // Draw a tile with a color
+    function drawTile(x, y, r, g, b) {
+
+        /*// Draw tile text
+        context.fillStyle = "#ffffff";
+        context.font = "12px Verdana";
+        var textdim = context.measureText("hi");
+        context.fillText("hi", coord1.tilex + (level.tilewidth.width-textdim.width)/2, coord1.tiley.y+level.tileheight/2);*/
+
+        context.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+        context.fillRect(x + 2, y + 2, level.tilewidth - 4, level.tileheight - 4);
+
+
+        context.fillStyle = "#000000";
+        context.font = "12px Arial";
+
+        var tileText = "hi";
+        var textSize = context.measureText(tileText);
+
+        //drawCenterText
+
+        context.fillText(tileText, x + (level.tilewidth/2) - (textSize.width/2), y + (level.tileheight/2));
     }
     
     // Render clusters
@@ -541,9 +602,39 @@ document.body.addEventListener("touchmove", function (e) {
         findMoves();
         findClusters(); 
     }
+
+
+    // Create a random level.... editing
+    function createLevel() {
+        var done = false;
+        
+        // Keep generating levels until it is correct
+        while (!done) {
+        
+            // Create a level with random tiles
+            for (var i=0; i<level.columns; i++) {
+                for (var j=0; j<level.rows; j++) {
+                    level.tiles[i][j].type = getRandomTile();
+                    level.tiles[i][j].stage = getRandomStage();
+                }
+            }
+            
+            // Resolve the clusters
+            resolveClusters();
+            
+            // Check if there are valid moves
+            findMoves();
+            
+            // Done when there is a valid move
+            if (moves.length > 0) {
+                done = true;
+            }
+        }
+    }
+
     
     // Create a random level
-    function createLevel() {
+    function createRandomLevel() {
         var done = false;
         
         // Keep generating levels until it is correct
@@ -567,6 +658,11 @@ document.body.addEventListener("touchmove", function (e) {
                 done = true;
             }
         }
+    }
+
+    // Get a random stage number of this tile
+    function getRandomStage() {
+        return Math.floor(Math.random() * 3)+1;
     }
     
     // Get a random tile
@@ -592,6 +688,11 @@ document.body.addEventListener("touchmove", function (e) {
             findClusters();
         }
     }
+
+
+   // function isValidMatch(tile1, tile2) {}
+
+
     
     // Find clusters in the level
     function findClusters() {
@@ -605,13 +706,24 @@ document.body.addEventListener("touchmove", function (e) {
             for (var i=0; i<level.columns; i++) {
                 var checkcluster = false;
                 
-                if (i == level.columns-1) {
+                // was minus 1 before...
+                if (i == level.columns - 1) {
                     // Last tile
                     checkcluster = true;
                 } else {
+
+                    var tile1 = level.tiles[i][j];
+                    var tile2 = level.tiles[i+1][j];
+                    //var tile3 = level.tiles[i+2][j];
+
+                    //var allSameType = (tile1.type != -1 && tile1.type == tile2.type && tile1.type == tile3.type);
+
+
+                    // tile1.stage == tile2.stage+1 
+
+
                     // Check the type of the next tile
-                    if (level.tiles[i][j].type == level.tiles[i+1][j].type &&
-                        level.tiles[i][j].type != -1) {
+                    if ((tile1.type == tile2.type && tile1.type != -1)&&(true)) {
                         // Same type as the previous tile, increase matchlength
                         matchlength += 1;
                     } else {
@@ -622,10 +734,24 @@ document.body.addEventListener("touchmove", function (e) {
                 
                 // Check if there was a cluster
                 if (checkcluster) {
-                    if (matchlength >= 3) {
-                        // Found a horizontal cluster
+                    if (matchlength == 3) {
+                        // theres 3 that are same type
+                        // now check if order of stages is right
+                        var currentRow = j;
+                        var tile1 = level.tiles[i-2][currentRow];
+                        var tile2 = level.tiles[i-1][currentRow];
+                        var tile3 = level.tiles[i][currentRow];
+
+
+                        if( (tile1.stage == 1 && tile2.stage == 2 && tile3.stage == 3) || (tile1.stage == 3 && tile2.stage == 2 && tile3.stage == 1))
+                        {
+                            console.log("1: ",tile1.stage, ", 2: ", tile2.stage, ", 3: ",tile3.stage)
+
+                            // Found a horizontal cluster
                         clusters.push({ column: i+1-matchlength, row:j,
                                         length: matchlength, horizontal: true });
+                        }
+                        
                     }
                     
                     matchlength = 1;
@@ -658,9 +784,22 @@ document.body.addEventListener("touchmove", function (e) {
                 // Check if there was a cluster
                 if (checkcluster) {
                     if (matchlength >= 3) {
-                        // Found a vertical cluster
+                        // theres 3 that are same type
+                        // now check if order of stages is right
+                        var currentCol = i;
+                        var tile1 = level.tiles[currentCol][j-2];
+                        var tile2 = level.tiles[currentCol][j-1];
+                        var tile3 = level.tiles[currentCol][j];
+
+                        if( (tile1.stage == 1 && tile2.stage == 2 && tile3.stage == 3) || (tile1.stage == 3 && tile2.stage == 2 && tile3.stage == 1))
+                        {
+                            // Found a vertical cluster
                         clusters.push({ column: i, row:j+1-matchlength,
                                         length: matchlength, horizontal: false });
+
+                        }
+
+                        
                     }
                     
                     matchlength = 1;
@@ -798,7 +937,7 @@ document.body.addEventListener("touchmove", function (e) {
         };
     }
     
-    // Check if two tiles can be swapped
+    // Check if two tiles can be swapped (direct neighbors only)
     function canSwap(x1, y1, x2, y2) {
         // Check if the tile is a direct neighbor of the selected tile
         if ((Math.abs(x1 - x2) == 1 && y1 == y2) ||
@@ -947,7 +1086,7 @@ document.body.addEventListener("touchmove", function (e) {
 
 <body>
 
-<canvas id="viewport" width="640" height="480"></canvas></div>
+<canvas id="viewport" width="580" height="480"></canvas></div>
 </body>
 
 </html> 
