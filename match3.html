@@ -14,6 +14,12 @@ https://github.com/rembound/html5-canvas-match3
 
 <title>Rembound.com Example</title>
 <script>
+
+// http://www.html5rocks.com/en/mobile/touch/
+document.body.addEventListener('touchmove', function(event) {
+  event.preventDefault();
+}, false); 
+
 // ------------------------------------------------------------------------
 // How To Make A Match-3 Game With HTML5 Canvas
 // (c) 2015 Rembound.com
