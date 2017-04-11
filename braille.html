@@ -1,1 +1,296 @@
 
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+	<head>
+		<!--link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css"-->
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		
+		<title>Braille Interactive table from Braille Interactive Table from Adam Peterson's Web Page</title>
+		<meta name="description" content="code from http://axon.cs.byu.edu/~adam/gatheredinfo/helpers/braille/braille.php"/>
+		
+<style>
+label {
+  font-weight: bold;
+}
+.bfpip {
+min-width: 28px;
+}
+/*
+ * Styles for the look of the table where the information is populated.
+ */
+table.resultstab {
+	/*width:		100%;*/
+	font-size:	2em;
+}
+table.resultstab>tbody>tr>td {
+	width:		16em;
+	color:		#C00;
+}
+table.resultstab>tbody>tr>th {
+	text-align:	right;
+	width:		5em;
+	color:		#008;
+}
+/*
+ * Styles for the table where the braille code is entered.
+ */
+#braillefield {
+	background-color:	#EEE;
+	padding:			4px;
+	border-style:		double;
+	border-spacing:		16px;
+}
+#braillefield>tbody>tr>td {
+	width:				32px;
+	height:				32px;
+	background-color:	#FFF;
+}
+
+img.semaphoreLetter {
+    width: 200px;
+}
+</style>
+<script>
+// 1 4
+// 2 5
+// 3 6
+// http://axon.cs.byu.edu/~adam/gatheredinfo/helpers/braille/braille_table.php
+
+function brailleObj(ltr, num, punct, wordpart, word, special) {
+    return {
+        ltr: ltr, // letter
+        num: num, // number
+        pnc: punct, //punctuation
+        //prt: wordpart,
+        //wrd: word, // whole word
+        //spc: special, // special, short word
+        //px1: '',
+        //px2: '',
+        //px3: '',
+        //sx1: '',
+        //sx2: '',
+        //sx3: '',
+        //abv: ''
+    }
+}
+brailleObjs = {
+    b100000: brailleObj('a', '1', '', '', '', ''),
+    b110000: brailleObj('b', '2', '', '', '', ''),
+    b100100: brailleObj('c', '3', '', '', '', ''),
+    b100110: brailleObj('d', '4', '', '', '', ''),
+    b100010: brailleObj('e', '5', '', '', '', ''),
+    b110100: brailleObj('f', '6', '', '', '', ''),
+    b110110: brailleObj('g', '7', '', '', '', ''),
+    b110010: brailleObj('h', '8', '', '', '', ''),
+    b010100: brailleObj('i', '8', '', '', '', ''),
+    b010110: brailleObj('j', '0', '', '', '', ''),
+    b101000: brailleObj('k', '', '', '', '', ''),
+    b111000: brailleObj('l', '', '', '', '', ''),
+    b101100: brailleObj('m', '', '', '', '', ''),
+    b101110: brailleObj('n', '', '', '', '', ''),
+    b101010: brailleObj('o', '', '', '', '', ''),
+    b111100: brailleObj('p', '', '', '', '', ''),
+    b111110: brailleObj('q', '', '', '', '', ''),
+    b111010: brailleObj('r', '', '', '', '', ''),
+    b011100: brailleObj('s', '', '', '', '', ''),
+    b011110: brailleObj('t', '', '', '', '', ''),
+    b101001: brailleObj('u', '', '', '', '', ''),
+    b111001: brailleObj('v', '', '', '', '', ''),
+    b010111: brailleObj('w', '', '', '', '', ''),
+    b101101: brailleObj('x', '', '', '', '', ''),
+    b101111: brailleObj('y', '', '', '', '', ''),
+    b101011: brailleObj('z', '', '', '', '', ''),
+    b010000: brailleObj('', '', ',', '', '', ''),
+    b011010: brailleObj('', '', '!', '', '', ''),
+    b011001: brailleObj('', '', '?', '', '', ''),
+    b001001: brailleObj('', '', '-', '', '', ''),
+    b001100: brailleObj('', '', '/', '', '', ''),
+    b010011: brailleObj('', '', '.', '', '', ''),
+    b010010: brailleObj('', '', ':', '', '', ''),
+    b011000: brailleObj('', '', ';', '', '', ''),
+    b001000: brailleObj('', '', '\'', '', '', '')
+}
+
+
+
+function setcontents(element, content) {
+    var el = document.getElementById(element)
+    if (!el) return
+    while (el.hasChildNodes()) {
+        el.removeChild(el.firstChild)
+    }
+    var chunks = content.split("\n")
+    for (var i = 0; i != chunks.length; ++i) {
+        if (i != 0) el.appendChild(document.createElement('br'))
+        el.appendChild(document.createTextNode(chunks[i]))
+    }
+}
+
+function togglepip(num) {
+    var element = document.forms[0]["b" + num]
+    if (!element) return
+    element.checked = !element.checked
+    setfields()
+    return
+}
+
+function togglefields() {
+    for (var i = 0; i++ != 9;)
+    togglepip(i)
+}
+
+function cbn(num) {
+    if (document.forms[0]["b" + num].checked) return '1'
+    return '0'
+}
+
+function setfields() {
+    for (var i = 6; i != 0; --i)
+    document.getElementById("bf" + i).style.backgroundColor = (cbn(i) == '1' ? "#000" : "#FFF")
+    brailleObj = brailleObjs['b' + cbn(1) + cbn(2) + cbn(3) + cbn(4) + cbn(5) + cbn(6)]
+    setcontents("bli_ltr", brailleObj.ltr)
+    setcontents("bli_num", brailleObj.num)
+    setcontents("bli_pnc", brailleObj.pnc)
+    setcontents("bli_prt", brailleObj.prt)
+    //setcontents("bli_wrd", brailleObj.wrd)
+    //setcontents("bli_spc", brailleObj.spc)
+    //setcontents("bli_px1", brailleObj.px1)
+    //setcontents("bli_px2", brailleObj.px2)
+    //setcontents("bli_px3", brailleObj.px3)
+    //setcontents("bli_sx1", brailleObj.sx1)
+    //setcontents("bli_sx2", brailleObj.sx2)
+    //setcontents("bli_sx3", brailleObj.sx3)
+    //setcontents("sem_abrv", brailleObj.abv)
+}
+
+function readysetfields() {
+    setTimeout(setfields, 0);
+}
+
+function highlightgrid() {
+    var high = sem_handler.amingrid && !sem_handler.inapip
+    var el = document.getElementById("braillefield")
+    if (!el) return
+    el.style.backgroundColor = (high ? "#FCC" : "#EEE")
+}
+var sem_handler = {
+    oldinit: window.onload,
+    initfunc: function() {
+        if (typeof sem_handler.oldinit == 'function') sem_handler.oldinit()
+        sem_handler.newinit()
+    },
+    newinit: function() {
+        var gridel = document.getElementById('braillefield')
+        gridel.onmouseover = function() {
+            sem_handler.amingrid = true
+            highlightgrid()
+        }
+        gridel.onmouseout = function() {
+            sem_handler.amingrid = false
+            highlightgrid()
+        }
+        gridel.ondblclick = function() {
+            if (sem_handler.inapip) return false
+            var onechecked = false
+            for (var i = 0; i++ != 6;) {
+                var element = document.forms[0]["b" + i]
+                if (!element) continue
+                if (element.checked) onechecked = true
+            }
+            for (var i = 0; i++ != 6;) {
+                var element = document.forms[0]["b" + i]
+                if (!element) continue
+                element.checked = !onechecked
+            }
+            setfields()
+        }
+        gridel.onclick = function() {
+            if (sem_handler.inapip) return false
+            togglefields()
+        }
+        for (var i = 0; i++ != 6;) {
+            var pipel = document.getElementById('bf' + i)
+            if (!pipel) continue
+            pipel.onmouseover = function() {
+                sem_handler.inapip = true
+                highlightgrid()
+            }
+            pipel.onmouseout = function() {
+                sem_handler.inapip = false
+                highlightgrid()
+            }
+            pipel.onclick = function() {
+                togglepip(this.id.substr(2))
+            }
+            pipel.ondblclick = function() {
+                togglefields()
+                this.onclick()
+            }
+        }
+    },
+    inapip: false,
+    amingrid: false
+}
+window.onload = sem_handler.initfunc
+
+
+
+</script>	
+
+</head>
+	<body>
+		<div id='header'>
+			<h4>Braille Interactive Table</h4>
+            <p>Note: this is hackier and not as accurate and detailed as the original one I referenced</p>
+            <a href="https://www.pharmabraille.com/pharmaceutical-braille/the-braille-alphabet/" target="_blank"> Another ref </a><br><br>
+		</div>
+<div id='content'>
+
+	<table><tbody><tr><td valign="top" style="text-align:center;width:128px;">
+		<form action="get">
+			<table summary="Entry controls for the Braille field."><caption>Braille Pips:</caption><tbody><tr>
+				<td><input type="checkbox" name="b1" onclick="readysetfields()" /></td>
+				<td><input type="checkbox" name="b4" onclick="readysetfields()" /></td>
+			</tr><tr>
+				<td><input type="checkbox" name="b2" onclick="readysetfields()" /></td>
+				<td><input type="checkbox" name="b5" onclick="readysetfields()" /></td>
+			</tr><tr>
+				<td><input type="checkbox" name="b3" onclick="readysetfields()" /></td>
+				<td><input type="checkbox" name="b6" onclick="readysetfields()" /></td>
+			</tr></tbody></table>
+		</form>
+		<table id="braillefield" summary="Echo display for the Braille field (also acts as secondary control via JavaScript)."><tbody><tr>
+			<td id="bf1" class="bfpip"></td>
+			<td id="bf4" class="bfpip"></td>
+		</tr><tr>
+			<td id="bf2" class="bfpip"></td>
+			<td id="bf5" class="bfpip"></td>
+		</tr><tr>
+			<td id="bf3" class="bfpip"></td>
+			<td id="bf6" class="bfpip"></td>
+		</tr></tbody></table>
+	</td><td>
+		<table class="resultstab">
+			<label>Letter:	</label><span id="bli_ltr"></span><br/>
+			<label>Number:	</label><span id="bli_num"></span><br/>
+			<label>Punct:	</label><span id="bli_pnc"></span><br/>
+			<!--label>Part:	</label><span id="bli_prt"></span><br/>
+			<!--label>Word:	</label><span id="bli_wrd"></span><br/>
+			<label>Special:</label><span id="bli_spc"></span><br/-->
+		</table>
+	</td></tr></tbody></table>
+	<!--table class="resultstab"><tbody>
+		<label>Prefix 1:</label><span id="bli_px1"></span><br/>
+		<label>Prefix 2:</label><span id="bli_px2"></span><br/>
+		<label>Prefix 3:</label><span id="bli_px3"></span><br/>
+		<label>Suffix 1:</label><span id="bli_sx1"></span><br/>
+		<label>Suffix 2:</label><span id="bli_sx2"></span><br/>
+		<label>Suffix 3:</label><span id="bli_sx3"></span><br/>
+	</tbody></table-->
+	<!--h3>Abbreviations:</h3-->
+	
+		</div>
+		
+	</body>
+</html>
