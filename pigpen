@@ -1,0 +1,237 @@
+
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+	<head>
+		<!--link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css"-->
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		
+		<title>Pigpen Interactive SVG Decoder</title>
+		<meta name="description" content="interactive pigpen decoder using svg"/>
+		<!-- https://jsbin.com/mawedet/edit?html,css,output for tinkering -->
+<style>
+svg {
+  border: 1px solid grey;
+  stroke: #666;
+  stroke-width: 1;
+}
+
+path:hover { opacity: 0.5;}
+
+.dot, .line {fill: hotpink;}
+
+#pigpenSZ, #pigpenAR {display: inline-block; padding: 0px 5px;}
+
+.letterLabel {font-weight: normal;}
+
+#currentLetterSZ, #currentLetterAR {font-size: 18px; font-weight: bold; }
+</style>
+<script>
+
+// prefix naming notes: v = V shape, g = grid shape, U = upper, L = lower, M = middle
+
+// A-R
+var SVGelements_AR = ["bU", "bD", "bL", "bR", "bDot" ];
+
+// S-Z
+var SVGelements_SZ = ["vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
+
+//var allSVGLetterElementIDs = ["bU", "bD", "bL", "bR", "bDot", "vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
+var allSVGLetterElementIDs = SVGelements_AR.concat(SVGelements_SZ);
+
+function toggleFill(event, element){
+
+  if (element.getAttribute("fill-opacity") != 0) {
+    element.setAttribute("fill-opacity", "0");
+  }
+  else {
+    element.setAttribute("fill-opacity", "1");
+  }
+  
+  updateLabel(element);
+  decodeLetters();
+}
+
+function saveLetter(currentLetterID){
+  document.getElementById("runningString").innerHTML += document.getElementById(currentLetterID).innerHTML;
+}
+
+// function didn't work when it was named clear()
+function clearLetter(letterRange){
+  var SVGelements = allSVGLetterElementIDs;
+  
+  if (letterRange == "AR") {
+    SVGelements = SVGelements_AR;
+  }
+  else if (letterRange == "SZ") {
+    SVGelements = SVGelements_SZ;
+  }
+  
+  for (var i = 0; i<SVGelements.length; i++) {
+    document.getElementById(SVGelements[i]).setAttribute("fill-opacity",0); 
+  }
+  updateLabel(""); 
+  decodeLetters();
+}
+
+
+function selectLetter(letterRange){
+  var SVGelements = allSVGLetterElementIDs;
+  
+  if (letterRange == "AR") SVGelements = SVGelements_AR;
+  else if (letterRange == "SZ") SVGelements = SVGelements_SZ;
+  
+  for (var i = 0; i<SVGelements.length; i++) {
+    document.getElementById(SVGelements[i]).setAttribute("fill-opacity",1); 
+  }
+  updateLabel("");
+  decodeLetters();
+}
+
+function decodeLetters(){
+  decodeLetter("AR");
+  decodeLetter("SZ");
+}
+
+function decodeLetter(letterRange){
+  
+
+  var SVGelements = SVGelements_AR;
+  var currentLetterID = "currentLetterAR";
+  
+  if (letterRange == "SZ") {
+    SVGelements = SVGelements_SZ;
+    currentLetterID = "currentLetterSZ";
+  }
+  
+  // Turn the set of values of svg elelment fill opacities
+  // into a string of binary to look up by property name
+  var currentSVGvals = "p";
+  for (var i = 0; i<SVGelements.length; i++) {
+    currentSVGvals += parseInt(document.getElementById(SVGelements[i]).getAttributeNS(null, "fill-opacity"));
+  }
+  //console.log("currentSVGvals: ", currentSVGvals)
+  
+  var pigpenLetters = {
+    // SVGelements_AR
+    p01010: { letter: "A" },
+    p01110: { letter: "B" },
+    p01100: { letter: "C" },
+    p11010: { letter: "D" },
+    p11110: { letter: "E" },
+    p11100: { letter: "F" },
+    p10010: { letter: "G" },
+    p10110: { letter: "H" },
+    p10100: { letter: "I" },
+    p01011: { letter: "J" },
+    p01111: { letter: "K" },
+    p01101: { letter: "L" },
+    p11011: { letter: "M" },
+    p11111: { letter: "N" },
+    p11101: { letter: "O" },
+    p10011: { letter: "P" },
+    p10111: { letter: "Q" },
+    p10101: { letter: "R" },
+    
+    // SVGelements_SZ
+    p11000000: { letter: "S" },
+    p10100000: { letter: "T" },
+    p01010000: { letter: "U" },
+    p00110000: { letter: "V" },
+    p11001000: { letter: "W" },
+    p10100010: { letter: "X" },
+    p01010001: { letter: "U" },
+    p00110100: { letter: "Z" },
+    
+    p11111111: { letter: "n/a" }
+  };
+
+  var decodedLetter = "n/a"; // fallback
+  if (pigpenLetters.hasOwnProperty(currentSVGvals))
+    decodedLetter = pigpenLetters[currentSVGvals];
+  
+  document.getElementById(currentLetterID).innerHTML = decodedLetter.letter;
+}
+
+
+function updateLabel(element){
+  var output = ""; 
+  
+  // clear all and select all will just pass empty string
+  // better would be checking if it is a typeof element
+  if (element != "") 
+      output = element.id + " fill opacity is " + element.getAttributeNS(null, "fill-opacity");
+  
+  document.getElementById("label").innerHTML = output;
+}
+
+
+</script>	
+
+</head>
+	<body>
+		<div id='header'>
+			<h4>Interactive SVG Pigpen Decoder</h4>
+            <p> Other pigpen decoders: </p>
+            <a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Another Pigpen decoder </a>
+            <a href="https://planetcalc.com/7842/" target="_blank"> Another Pigpen decoder </a>
+            <a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> Another Pigpen decoder </a><br><br>
+		</div>
+<div id='content'>
+
+  <button onClick="clearLetter('all')">Clear All</button>
+  <button onClick="selectLetter('all')">Select All</button>
+  <br><br>
+  
+  <b>Running string:</b>
+  <div id="runningString"></div>
+  <br>
+  
+  <div id="pigpenAR">
+    <svg width="200" height="200" viewBox="0 0 1000 1000">
+      <path id="bDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+      <path id="bU" class="line" onClick="toggleFill(event, this)" transform="translate(250, 250)" d="M 0,0 h500 v50 h-500 v-50 z" fill-opacity="0"/>   
+      <path id="bD" class="line" onClick="toggleFill(event, this)" transform="translate(250, 700)" d="M 0,0 h500 v50 h-500 v-50 z" fill-opacity="0"/>   
+      <path id="bL" class="line" onClick="toggleFill(event, this)" transform="translate(250, 250)" d="M 0,0 v500 h50 v-500 h-50 z" fill-opacity="0"/>   
+      <path id="bR" class="line" onClick="toggleFill(event, this)" transform="translate(700, 250)" d="M 0,0 v500 h50 v-500 h-50 z" fill-opacity="0"/>   
+    </svg>
+    <br>
+    <span class="letterLabel">Current Letter (A-R): </span><span id="currentLetterAR"></span>
+    <br>
+    <button onClick="clearLetter('AR')">Clear All</button>
+    <button onClick="selectLetter('AR')">Select All</button>
+    <button onClick="saveLetter('currentLetterAR')">Save Letter </button>
+  </div>
+  
+  <div id="pigpenSZ">
+    <svg width="200" height="200" viewBox="0 0 1000 1000">
+      <path id="vUpDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 325)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+      <path id="vDownDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 675)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+      <path id="vLeftDot" class="dot" onClick="toggleFill(event, this)" transform="translate(325, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+      <path id="vRightDot" class="dot" onClick="toggleFill(event, this)" transform="translate(675, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />  
+      <path id="vUL" class="line" onClick="toggleFill(event, this)" transform="translate(0, -325) rotate(135, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0"/>   
+      <path id="vUR" class="line" onClick="toggleFill(event, this)" transform="translate(0, -325) rotate(45, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+      <path id="vLL" class="line" onClick="toggleFill(event, this)" transform="translate(-325, 0) rotate(45, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+      <path id="vLR" class="line" onClick="toggleFill(event, this)" transform="translate(325, 0) rotate(135, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+    </svg>
+    <br>
+    <span class="letterLabel">Current Letter (S-Z): </span><span id="currentLetterSZ"></span>
+    <br>
+    <button onClick="clearLetter('SZ')">Clear All</button>
+    <button onClick="selectLetter('SZ')">Select All</button>
+    <button onClick="saveLetter('currentLetterSZ')">Save Letter </button>
+  </div>
+  
+  <div></div>
+  
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  
+  <div id="valueSVG"></div>
+  <div id="label"></div>
+  
+  <br><br>
+	
+		</div>
+		
+	</body>
+</html>
