@@ -49,6 +49,13 @@ table.resultstab>tbody>tr>th {
 img.semaphoreLetter {
     width: 200px;
 }
+	
+.letterLabel {font-weight: normal;}
+
+#currentLetterSemaphore, #currentLetterBraille {font-size: 18px; font-weight: bold; }
+
+#runningSempahoreString { }
+
 </style>
 <script>
 function semob(ltr, num, punct, wordpart, word, special) {
@@ -163,7 +170,8 @@ function updateImage() {
 
 
     var imgurl = "http://www.anbg.gov.au/images/flags/semaphore/"+ document.getElementById('bli_ltr').innerHTML +".gif";
-
+// hacky, improve this in future
+	document.getElementById('currentLetterSemaphore').innerHTML = document.getElementById('bli_ltr').innerHTML;
 
 
     document.getElementById('au_img').innerHTML = "<img class='semaphoreLetter' src='"+imgurl+"'/>";
@@ -247,6 +255,26 @@ var sem_handler = {
 window.onload = sem_handler.initfunc
 
 
+	function saveLetter(currentLetterID){
+  document.getElementById("runningSempahoreString").innerHTML += document.getElementById(currentLetterID).innerHTML;
+}
+
+function clearLetter(letterRange){
+  // if (letterRange == 'semaphore')...
+  // if (letterRange == 'braille')...
+  // if (letterRange == 'AR')... // pigpen A-R
+  // if (letterRange == 'SZ')... // pigpen S-Z
+  // if (letterRange == 'all')... // pigpen A-Z
+}
+
+
+function selectLetter(letterRange){
+  // if (letterRange == 'semaphore')...
+  // if (letterRange == 'braille')...
+  // if (letterRange == 'AR')... // pigpen A-R
+  // if (letterRange == 'SZ')... // pigpen S-Z
+  // if (letterRange == 'all')... // pigpen A-Z
+}
 
 </script>	
 
@@ -255,6 +283,11 @@ window.onload = sem_handler.initfunc
 		<div id='header'>
 			<h4>Semaphore Interactive Table</h4>
 		</div>
+  
+  <b>Running string:</b>
+  <div id="runningSemaphoreString"></div>
+  <br>
+		
 <div id='content'>
 
 	<table><tbody><tr><td valign="top" style="text-align:center;width:128px;">
@@ -309,6 +342,15 @@ window.onload = sem_handler.initfunc
 	<!--h3>Abbreviations:</h3-->
 	
 		</div>
+		
+<br>
+    <span class="letterLabel">Current Letter: </span><span id="currentLetterSemaphore"></span>
+    <br>
+		<!-- these next 2 functions aren't written yet -->
+    <button onClick="clearLetter('semaphore')">Clear All</button>
+    <button onClick="selectLetter('semaphore')">Select All</button>
+    <button onClick="saveLetter('currentLetterSemaphore')">Save Letter </button>
+
 		
 	</body>
 </html>
