@@ -54,7 +54,7 @@ img.semaphoreLetter {
 
 #currentLetterSemaphore, #currentLetterBraille {font-size: 18px; font-weight: bold; }
 
-#runningSempahoreString { }
+#runningSemaphoreString { }
 
 </style>
 <script>
@@ -256,7 +256,7 @@ window.onload = sem_handler.initfunc
 
 
 	function saveLetter(currentLetterID){
-  document.getElementById("runningSempahoreString").innerHTML += document.getElementById(currentLetterID).innerHTML;
+  document.getElementById("runningSemaphoreString").innerHTML += document.getElementById(currentLetterID).innerHTML;
 }
 
 function clearLetter(letterRange){
