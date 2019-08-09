@@ -73,6 +73,10 @@ function clearLetter(letterRange){
   updateLabel(""); 
   decodeLetters();
 }
+	
+function clearRunningString(stringElementID){
+document.getElementById(stringElementID).innerHTML = "";
+}
 
 
 function selectLetter(letterRange){
@@ -140,7 +144,7 @@ function decodeLetter(letterRange){
     p00110000: { letter: "V" },
     p11001000: { letter: "W" },
     p10100010: { letter: "X" },
-    p01010001: { letter: "U" },
+    p01010001: { letter: "Y" },
     p00110100: { letter: "Z" },
     
     p11111111: { letter: "n/a" }
@@ -183,8 +187,9 @@ function updateLabel(element){
   <button onClick="selectLetter('all')">Select All</button>
   <br><br>
   
-  <b>Running string:</b>
+  <b>Running Pigpen string:</b>
   <div id="runningString"></div>
+	<button onClick="clearRunningString('runningString')">Clear String</button>
   <br>
   
   <div id="pigpenAR">
