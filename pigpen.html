@@ -1,242 +1,712 @@
-
-<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
-	<head>
-		<!--link rel="stylesheet" href="stylesheets/styles.css">
+<!DOCTYPE html>
+<!--html xmlns='http://www.w3.org/1999/xhtml' lang='en'-->
+<html>
+<head>
+    <!--link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-dark.css"-->
     <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		
-		<title>Pigpen Interactive SVG Decoder</title>
-		<meta name="description" content="interactive pigpen decoder using svg"/>
-		<!-- https://jsbin.com/mawedet/edit?html,css,output for tinkering -->
-<style>
-svg {
+    <meta name="description" content="Interactive Decoders">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Interactive Decoders</title>
+    
+    <style>
+        #header, #content, #updateLabel {  }
+        svg {
+            border: 1px solid grey;
+            stroke: #666;
+            stroke-width: 1;
+        }
+        
+        path:hover {
+            opacity: 0.5;
+        }
+        
+        .dot,
+        .line {
+            fill: hotpink;
+        }
+
+        .bDot {
+            fill: blue;
+        }
+        
+        #pigpenSZ,
+        #pigpenAR, #semaphore {
+            display: inline-block;
+            padding: 0px 5px;
+        }
+        
+        .currentLetterLabel {
+            font-weight: normal;
+        }
+        .runningStringLabel { font-weight: bold; }
+        .runningString {font: pink;}
+        
+        #pigpenCurrentLetterSZ,
+        #pigpenCurrentLetterAR,
+        #semaphoreCurrentLetter {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #right-hand-up,
+#right-hand-high,
+#right-hand-middle,
+#right-hand-low,
+#right-hand-down {
+  
+}
+
+#semaphore-man { 
+  background: white;
   border: 1px solid grey;
-  stroke: #666;
-  stroke-width: 1;
 }
 
-path:hover { opacity: 0.5;}
-
-.dot, .line {fill: hotpink;}
-
-#pigpenSZ, #pigpenAR {display: inline-block; padding: 0px 5px;}
-
-.letterLabel {font-weight: normal;}
-
-#currentLetterSZ, #currentLetterAR {font-size: 18px; font-weight: bold; }
-</style>
-<script>
-
-// prefix naming notes: v = V shape, g = grid shape, U = upper, L = lower, M = middle
-
-// A-R
-var SVGelements_AR = ["bU", "bD", "bL", "bR", "bDot" ];
-
-// S-Z
-var SVGelements_SZ = ["vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
-
-//var allSVGLetterElementIDs = ["bU", "bD", "bL", "bR", "bDot", "vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
-var allSVGLetterElementIDs = SVGelements_AR.concat(SVGelements_SZ);
-
-function toggleFill(event, element){
-
-  if (element.getAttribute("fill-opacity") != 0) {
-    element.setAttribute("fill-opacity", "0");
-  }
-  else {
-    element.setAttribute("fill-opacity", "1");
-  }
-  
-  updateLabel(element);
-  decodeLetters();
-}
-
-function saveLetter(currentLetterID){
-  document.getElementById("runningString").innerHTML += document.getElementById(currentLetterID).innerHTML;
-}
-
-// function didn't work when it was named clear()
-function clearLetter(letterRange){
-  var SVGelements = allSVGLetterElementIDs;
-  
-  if (letterRange == "AR") {
-    SVGelements = SVGelements_AR;
-  }
-  else if (letterRange == "SZ") {
-    SVGelements = SVGelements_SZ;
-  }
-  
-  for (var i = 0; i<SVGelements.length; i++) {
-    document.getElementById(SVGelements[i]).setAttribute("fill-opacity",0); 
-  }
-  updateLabel(""); 
-  decodeLetters();
-}
-	
-function clearRunningString(stringElementID){
-document.getElementById(stringElementID).innerHTML = "";
-}
-
-
-function selectLetter(letterRange){
-  var SVGelements = allSVGLetterElementIDs;
-  
-  if (letterRange == "AR") SVGelements = SVGelements_AR;
-  else if (letterRange == "SZ") SVGelements = SVGelements_SZ;
-  
-  for (var i = 0; i<SVGelements.length; i++) {
-    document.getElementById(SVGelements[i]).setAttribute("fill-opacity",1); 
-  }
-  updateLabel("");
-  decodeLetters();
-}
-
-function decodeLetters(){
-  decodeLetter("AR");
-  decodeLetter("SZ");
-}
-
-function decodeLetter(letterRange){
-  
-
-  var SVGelements = SVGelements_AR;
-  var currentLetterID = "currentLetterAR";
-  
-  if (letterRange == "SZ") {
-    SVGelements = SVGelements_SZ;
-    currentLetterID = "currentLetterSZ";
-  }
-  
-  // Turn the set of values of svg elelment fill opacities
-  // into a string of binary to look up by property name
-  var currentSVGvals = "p";
-  for (var i = 0; i<SVGelements.length; i++) {
-    currentSVGvals += parseInt(document.getElementById(SVGelements[i]).getAttributeNS(null, "fill-opacity"));
-  }
-  //console.log("currentSVGvals: ", currentSVGvals)
-  
-  var pigpenLetters = {
-    // SVGelements_AR
-    p01010: { letter: "A" },
-    p01110: { letter: "B" },
-    p01100: { letter: "C" },
-    p11010: { letter: "D" },
-    p11110: { letter: "E" },
-    p11100: { letter: "F" },
-    p10010: { letter: "G" },
-    p10110: { letter: "H" },
-    p10100: { letter: "I" },
-    p01011: { letter: "J" },
-    p01111: { letter: "K" },
-    p01101: { letter: "L" },
-    p11011: { letter: "M" },
-    p11111: { letter: "N" },
-    p11101: { letter: "O" },
-    p10011: { letter: "P" },
-    p10111: { letter: "Q" },
-    p10101: { letter: "R" },
+#head, #torso, .arm, .pole { fill:#000000; } /* default */
+.arm { fill: orange;}
     
-    // SVGelements_SZ
-    p11000000: { letter: "S" },
-    p10100000: { letter: "T" },
-    p01010000: { letter: "U" },
-    p00110000: { letter: "V" },
-    p11001000: { letter: "W" },
-    p10100010: { letter: "X" },
-    p01010001: { letter: "Y" },
-    p00110100: { letter: "Z" },
-    
-    p11111111: { letter: "n/a" }
-  };
+/*
+first draws yellow square,
+then red triangle,
+then black outline of flag
+*/
+.flag-base { fill:#ffff00; }
+.flag-color { fill:#ff0000; }
+.flag-outline {
+  fill-opacity:0;
+  stroke:#000000;
+  stroke-width:1; /* default */
+}
 
-  var decodedLetter = "n/a"; // fallback
-  if (pigpenLetters.hasOwnProperty(currentSVGvals))
-    decodedLetter = pigpenLetters[currentSVGvals];
+/* generic button */
+button {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0 1rem 0;
+    padding: 0.85em 1em;
+    border: 1px solid transparent;
+    border-radius: 0;
+    font-family: helvetica;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    background-color: #1779ba;
+    color: #fefefe;
+}
+
+textarea { font-size: 14px; padding: 5px; }
+    </style>
+    <script>
+
+        // Prefix naming notes:
+        // Pigpen: b = box shape, v = V shape, U = upper, L = lower, M = middle
+
+        // A-R
+        var pigpenSVGElementIDsAR = ["bU", "bD", "bL", "bR", "bDot"];
+
+        // S-Z
+        var pigpenSVGElementIDsSZ = ["vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
+
+        //var pigpenAllSVGElementIDs = ["bU", "bD", "bL", "bR", "bDot", "vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
+        var pigpenAllSVGElementIDs = pigpenSVGElementIDsAR.concat(pigpenSVGElementIDsSZ);
+
+        var semaphoreSVGElementIDs = [ "right-hand-down", "right-hand-low", "right-hand-middle", "right-hand-high", "right-hand-up", "left-hand-up", "left-hand-high", "left-hand-middle", "left-hand-low", "left-hand-down" ];
+
+        var brailleSVGElementIDs = [ "bDot1", "bDot2", "bDot3", "bDot4", "bDot5", "bDot6" ];
+
+
+        function toggleFill(event, element) {
+            if (element.getAttribute("fill-opacity") != 0) {
+                element.setAttribute("fill-opacity", "0");
+            } else {
+                element.setAttribute("fill-opacity", "1");
+            }
+
+            updateLabel(element);
+            decodeLetters();
+        }
+
+        function saveLetter(currentLetterID) {
+          var runningStringElementID = "pigpenRunningString";
+
+          if (currentLetterID == "semaphoreCurrentLetter")
+            runningStringElementID = "semaphoreRunningString";
+
+          if (currentLetterID == "brailleCurrentLetter")
+            runningStringElementID = "brailleRunningString";
+
+          document.getElementById(runningStringElementID).innerHTML += document.getElementById(currentLetterID).innerHTML;
+        }
+        // function didn't work when it was named clear()
+        function clearLetter(letterRange) {
+            // if (letterRange == 'semaphore')...
+            // if (letterRange == 'braille')...
+            // if (letterRange == 'AR')... // pigpen A-R
+            // if (letterRange == 'SZ')... // pigpen S-Z
+            // if (letterRange == 'pigpenAll')... // pigpen A-Z (default atm)
+            
+            var SVGelements = pigpenAllSVGElementIDs;
+
+            if (letterRange == "pigpenLetterAR") {
+              SVGelements = pigpenSVGElementIDsAR;
+            } else if (letterRange == "pigpenLetterSZ") {
+              SVGelements = pigpenSVGElementIDsSZ;
+            }
+            else if (letterRange == "semaphore") {
+              SVGelements = semaphoreSVGElementIDs;
+            }
+            else if (letterRange == "braille") {
+              SVGelements = brailleSVGElementIDs;
+            }
+
+            for (var i = 0; i < SVGelements.length; i++) {
+                document.getElementById(SVGelements[i]).setAttribute("fill-opacity", 0);
+            }
+            updateLabel("");
+            decodeLetters();
+        }
+
+        function clearRunningString(stringElementID) {
+            document.getElementById(stringElementID).innerHTML = "";
+        }
+
+        function selectLetter(letterRange) {
+            var SVGelements = pigpenAllSVGElementIDs;
+
+            if (letterRange == "pigpenLetterAR") SVGelements = pigpenSVGElementIDsAR;
+            else if (letterRange == "pigpenLetterSZ") SVGelements = pigpenSVGElementIDsSZ;
+            else if (letterRange == "semaphore") SVGelements = semaphoreSVGElementIDs;
+            else if (letterRange == "braille") SVGelements = brailleSVGElementIDs;
+
+
+            for (var i = 0; i < SVGelements.length; i++) {
+                document.getElementById(SVGelements[i]).setAttribute("fill-opacity", 1);
+            }
+            updateLabel("");
+            decodeLetters();
+        }
+
+        function decodeLetters() {
+            decodeLetter("pigpenLetterAR");
+            decodeLetter("pigpenLetterSZ");
+            decodeLetter("semaphore");
+            decodeLetter("braille");
+        }
+
+        function decodeLetter(letterRange) {
+
+            var SVGelements = pigpenSVGElementIDsAR;
+            var currentLetterID = "pigpenCurrentLetterAR";
+            var svgValPrefix = "p";
+
+            if (letterRange == "pigpenLetterSZ") {
+                SVGelements = pigpenSVGElementIDsSZ;
+                currentLetterID = "pigpenCurrentLetterSZ";
+                svgValPrefix = "p";
+            }
+            else if (letterRange == "semaphore") {
+                SVGelements = semaphoreSVGElementIDs;
+                currentLetterID = "semaphoreCurrentLetter";
+                svgValPrefix = "s";
+            }
+            else if (letterRange == "braille") {
+                SVGelements = brailleSVGElementIDs;
+                currentLetterID = "brailleCurrentLetter";
+                svgValPrefix = "b";
+            }
+
+            // Turn the set of values of svg elelment fill opacities
+            // into a string of binary to look up by property name
+            var currentSVGvals = svgValPrefix;
+            for (var i = 0; i < SVGelements.length; i++) {
+                currentSVGvals += parseInt(document.getElementById(SVGelements[i]).getAttributeNS(null, "fill-opacity"));
+            }
+            //console.log("currentSVGvals: ", currentSVGvals)
+
+            var decodedLetters = {
+                // pigpenSVGElementIDsAR
+                p01010: { letter: "A" },
+                p01110: { letter: "B" },
+                p01100: { letter: "C" },
+                p11010: { letter: "D" },
+                p11110: { letter: "E" },
+                p11100: { letter: "F" },
+                p10010: { letter: "G" },
+                p10110: { letter: "H" },
+                p10100: { letter: "I" },
+                p01011: { letter: "J" },
+                p01111: { letter: "K" },
+                p01101: { letter: "L" },
+                p11011: { letter: "M" },
+                p11111: { letter: "N" },
+                p11101: { letter: "O" },
+                p10011: { letter: "P" },
+                p10111: { letter: "Q" },
+                p10101: { letter: "R" },
+
+                // pigpenSVGElementIDsSZ
+                p11000000: { letter: "S" },
+                p10100000: { letter: "T" },
+                p01010000: { letter: "U" },
+                p00110000: { letter: "V" },
+                p11001000: { letter: "W" },
+                p10100010: { letter: "X" },
+                p01010001: { letter: "Y" },
+                p00110100: { letter: "Z" },
+
+                //p11111111: { letter: "n/a" },
+
+
+                // semaphore letters
+                // note -- any one with a or up flag has variants for L/R hand,
+                // also actual art shows crossing over body
+                // not sure best way to deal with this
+                s0100000001: { letter: "A", number: "1" },
+                s0010000001: { letter: "B", number: "2" },
+                s0001000001: { letter: "C", number: "3" },
+                s0000100001: { letter: "D", number: "4" }, 
+                s0000010001: { letter: "E", number: "5" },//wrong
+                s1000000100: { letter: "F", number: "6" },
+                s1000000010: { letter: "G", number: "7" },
+                s0110000000: { letter: "H", number: "8" },
+                s0101000000: { letter: "I", number: "9" },
+                s0000100100: { letter: "J", number: "" }, // also means "alphabetic"
+                s0100010000: { letter: "K", number: "0" },
+                s0100001000: { letter: "L", number: "" },
+                s0100000100: { letter: "M", number: "" },
+                s0100000010: { letter: "N", number: "" },
+                s0011000000: { letter: "O", number: "" },
+                s0010010000: { letter: "P", number: "" },
+                s0010001000: { letter: "Q", number: "" },
+                s0010000100: { letter: "R", number: "" },
+                s0010000010: { letter: "S", number: "" },
+                s0001010000: { letter: "T", number: "" },
+                s0001001000: { letter: "U", number: "" },
+                s0000100010: { letter: "V", number: "" },
+                s0000001100: { letter: "W", number: "" },
+                s0000001010: { letter: "X", number: "" },
+                s0001000100: { letter: "Y", number: "" },
+                s0000000110: { letter: "Z", number: "" },
+                s1000000001: { letter: "space", number: "" }, // is this right?
+                // annul = lh low, rh high
+                // numerical = lh high, rh up
+                // flag image Error (LH and RH raised and lowered together)
+
+                b100000: { letter: "A", number: "1" },
+                b110000: { letter: "B", number: "2" },
+                b100100: { letter: "C", number: "3" },
+                b100110: { letter: "D", number: "4" },
+                b100010: { letter: "E", number: "5" }, 
+                b110100: { letter: "F", number: "6" },
+                b110110: { letter: "G", number: "7" },
+                b110010: { letter: "H", number: "8" },
+                b010100: { letter: "I", number: "9" },
+                b010110: { letter: "J", number: "0" },
+                b101000: { letter: "K", number: "" },
+                b111000: { letter: "L", number: "" },
+                b101100: { letter: "M", number: "" },
+                b101110: { letter: "N", number: "" },
+                b101010: { letter: "O", number: "" },
+                b111100: { letter: "P", number: "" },
+                b111110: { letter: "Q", number: "" },
+                b111010: { letter: "R", number: "" },
+                b011100: { letter: "S", number: "" },
+                b011110: { letter: "T", number: "" },
+                b101001: { letter: "U", number: "" },
+                b111001: { letter: "V", number: "" },
+                b010111: { letter: "W", number: "" },
+                b101101: { letter: "X", number: "" },
+                b101111: { letter: "Y", number: "" },
+                b101011: { letter: "Z", number: "" },
+
+                b010000: { letter: ",", number: "" },
+                b011010: { letter: "!", number: "" },
+                b011001: { letter: "?", number: "" },
+                b001001: { letter: "-", number: "" },
+                b001100: { letter: "/", number: "" },
+                b010011: { letter: ".", number: "" },
+                b010010: { letter: ":", number: "" },
+                b011000: { letter: ";", number: "" },
+                b001000: { letter: "\\", number: "" },
+                b001111: { letter: "#", number: "" }, 
+            };
+
+            //var decodedLetter = "�"; ////"n/a"; // fallback -- not working � -- also maybe use unicode code for safety
+            var decodedLetter = { letter: "�", number: "�" };
+
+            // make generic, also not working fully -- check equal to null?? exists?
+            if (decodedLetters.hasOwnProperty(currentSVGvals)) // && decodedLetters[currentSVGvals] != null
+                decodedLetter = decodedLetters[currentSVGvals];
+
+            //console.log("decodedLetter: ", decodedLetter);
+            //console.log("decodedLetter.letter: ", decodedLetter.letter);
+            document.getElementById(currentLetterID).innerHTML = decodedLetter.letter;
+        }
+
+        function updateLabel(element) {
+            // as of now, this function only updates the label if a single element changes opacity,
+            // it isn't called if select all or clear all called
+            var output = "";
+
+            // clear all and select all will just pass empty string
+            // better would be checking if it is a typeof element
+            if (element != "")
+                output = element.id + " fill opacity is " + element.getAttributeNS(null, "fill-opacity");
+
+            document.getElementById("updateLabel").innerHTML = output;
+        }
+    </script>
+    <script>
+    // simple from https://steelx.gitbooks.io/javascript-algorithms/decode-the-morse-code.html
+var MORSE_CODE = {".-": "a", "-...":"b", "-.-.": "c", "-..": "d", ".":"e", "..-.":"f", "--.":"g", "....":"h", "..":"i", ".---":"j", "-.-":"k", ".-..":"l", "--":"m", "-.":"n", "---":"o", ".--.":"p", "--.-":"q", ".-.":"r", "...":"s", "-":"t", "..-":"u", "...-":"v", ".--":"w", "-..-":"x", "-.--":"y", "--..":"z", ".----":"1", "..---":"2", "...--":"3", "....-":"4", ".....":"5", "-....":"6", "--...":"7", "---..":"8", "----.":"9", "-----":"0", "|":" "};
+
+var decodeMorse = function(morseCode){
+  var words = (morseCode).split('  ');
+  var letters = words.map((w) => w.split(' '));
+  var decoded = [];
+
+  for(var i = 0; i < letters.length; i++){
+    decoded[i] = [];
+    for(var x = 0; x < letters[i].length; x++){
+        if(MORSE_CODE[letters[i][x]]){
+            decoded[i].push( MORSE_CODE[letters[i][x]] );
+        }
+    }
+  }
   
-  document.getElementById(currentLetterID).innerHTML = decodedLetter.letter;
+  var returnValue = decoded.map(arr => arr.join('')).join(' ');
+  if (returnValue) return returnValue;
+  // todo: return unknown char if cant find a valid one
+  // t his is not robust for subsequent letters
+  else return "�";
+}
+
+function addChar(character) {
+  var textareaInputID = "morseInput";
+  document.getElementById(textareaInputID).value += character;
+  decode();
+}
+
+function clearMorseInput() {
+    var textareaInputID = "morseInput";
+  document.getElementById(textareaInputID).value = "";
+  decode();
+}
+
+function swapDitsDahs() {
+    var textareaInputID = "morseInput";
+  var originalVal = document.getElementById(textareaInputID).value;
+  var newVal = originalVal.replace(/[-]/g, 'x');
+  newVal = newVal.replace(/[\.]/g, '-');
+  newVal = newVal.replace(/[x]/g, '.');
+  document.getElementById(textareaInputID).value = newVal;
+
+  decode();
 }
 
 
-function updateLabel(element){
-  var output = ""; 
-  
-  // clear all and select all will just pass empty string
-  // better would be checking if it is a typeof element
-  if (element != "") 
-      output = element.id + " fill opacity is " + element.getAttributeNS(null, "fill-opacity");
-  
-  document.getElementById("label").innerHTML = output;
+function decode() {
+    var textareaInputID = "morseInput";
+  document.getElementById("morseOutput").innerHTML = decodeMorse(document.getElementById(textareaInputID).value);
 }
-
-
-</script>	
+  </script>
 
 </head>
-	<body>
-		<div id='header'>
-			<h4>Interactive SVG Pigpen Decoder</h4>
-            <p> Other pigpen decoders: </p>
-            <a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Another Pigpen decoder </a>
-            <a href="https://planetcalc.com/7842/" target="_blank"> Another Pigpen decoder </a>
-            <a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> Another Pigpen decoder </a><br><br>
-		</div>
-<div id='content'>
 
-  <button onClick="clearLetter('all')">Clear All</button>
-  <button onClick="selectLetter('all')">Select All</button>
-  <br><br>
-  
-  <b>Running Pigpen string:</b>
-  <div id="runningString"></div>
-	<button onClick="clearRunningString('runningString')">Clear String</button>
+<body>
+
+    <div id='header'>
+        <h4>Interactive Decoders</h4>
+        <!--<p> Other pigpen decoders: </p>
+        <ul>
+          <li><a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Another Pigpen decoder </a></li>
+          <li><a href="https://planetcalc.com/7842/" target="_blank"> Another Pigpen decoder </a></li>
+          <li><a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> Another Pigpen decoder </a></li>
+        </ul>-->
+    </div>
+    
+    <div id='content'>
+
+
+    <div id="simple-morse">
+
+                <p> Note: this is a VERY simple implementation, it is not robust, particularly subsequent letters if any letter is not recognized. See also: </p>
+
+                <ul>
+          <li><a href="https://tools.timodenk.com/morse-code-to-text" target="_blank"> Timodenk online tools morse decoder </a></li>
+          <li><a href="https://v2.cryptii.com/morsecode/text" target="_blank"> Cryptii morse decoder </a></li>
+        </ul>
+    
+  <button onClick="addChar('.')"> Dot (.) </button>
+  <button onClick="addChar('-')"> Dash (-) </button><br>
+  <button onClick="addChar(' ')"> Space ( ) </button><br>
+  <!--button onClick="addChar('/')"> Separator (/) </button><br-->
+  <textarea id="morseInput" oninput="decode()"></textarea>
   <br>
+  <button onClick="decodeMorse()">Decode</button>
+  <button onClick="clearMorseInput()">Clear</button>
+<button onClick="swapDitsDahs()">Swap -⟷.</button>
   
-  <div id="pigpenAR">
-    <svg width="200" height="200" viewBox="0 0 1000 1000">
-      <path id="bDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
-      <path id="bU" class="line" onClick="toggleFill(event, this)" transform="translate(250, 250)" d="M 0,0 h500 v50 h-500 v-50 z" fill-opacity="0"/>   
-      <path id="bD" class="line" onClick="toggleFill(event, this)" transform="translate(250, 700)" d="M 0,0 h500 v50 h-500 v-50 z" fill-opacity="0"/>   
-      <path id="bL" class="line" onClick="toggleFill(event, this)" transform="translate(250, 250)" d="M 0,0 v500 h50 v-500 h-50 z" fill-opacity="0"/>   
-      <path id="bR" class="line" onClick="toggleFill(event, this)" transform="translate(700, 250)" d="M 0,0 v500 h50 v-500 h-50 z" fill-opacity="0"/>   
-    </svg>
-    <br>
-    <span class="letterLabel">Current Letter (A-R): </span><span id="currentLetterAR"></span>
-    <br>
-    <button onClick="clearLetter('AR')">Clear All</button>
-    <button onClick="selectLetter('AR')">Select All</button>
-    <button onClick="saveLetter('currentLetterAR')">Save Letter </button>
-  </div>
+
+  <br>
+  <span class="runningStringLabel">Morse running string: </span><!--<span class="runningString" id="morseRunningString"></span>-->
+  <div id="morseOutput"></div>
+
   
-  <div id="pigpenSZ">
-    <svg width="200" height="200" viewBox="0 0 1000 1000">
-      <path id="vUpDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 325)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
-      <path id="vDownDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 675)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
-      <path id="vLeftDot" class="dot" onClick="toggleFill(event, this)" transform="translate(325, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
-      <path id="vRightDot" class="dot" onClick="toggleFill(event, this)" transform="translate(675, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />  
-      <path id="vUL" class="line" onClick="toggleFill(event, this)" transform="translate(0, -325) rotate(135, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0"/>   
-      <path id="vUR" class="line" onClick="toggleFill(event, this)" transform="translate(0, -325) rotate(45, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
-      <path id="vLL" class="line" onClick="toggleFill(event, this)" transform="translate(-325, 0) rotate(45, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
-      <path id="vLR" class="line" onClick="toggleFill(event, this)" transform="translate(325, 0) rotate(135, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
-    </svg>
-    <br>
-    <span class="letterLabel">Current Letter (S-Z): </span><span id="currentLetterSZ"></span>
-    <br>
-    <button onClick="clearLetter('SZ')">Clear All</button>
-    <button onClick="selectLetter('SZ')">Select All</button>
-    <button onClick="saveLetter('currentLetterSZ')">Save Letter </button>
-  </div>
   
-  <div></div>
-  
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  
-  <div id="valueSVG"></div>
-  <div id="label"></div>
-  
+
+</div><!-- /simple-morse -->
+
+        <hr>
+
+        <p> Other pigpen decoders: </p>
+        <ul>
+          <li><a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Crypto Pigpen decoder </a></li>
+          <li><a href="https://planetcalc.com/7842/" target="_blank"> PlanetCalc Pigpen decoder </a></li>
+          <li><a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> Dcode Pigpen decoder </a></li>
+        </ul>
+
+        <button onClick="clearLetter('pigpenAll')">Clear All Pigpen</button>
+        <button onClick="selectLetter('pigpenAll')">Select All Pigpen</button>
+        <br>
+        <br>
+
+        <span class="runningStringLabel">Pigpen running string: </span><span class="runningString" id="pigpenRunningString"></span>
+
+        <button onClick="clearRunningString('pigpenRunningString')">Clear String</button>
+        <br>
+
+        <div id="pigpenAR">
+            <svg width="200" height="200" viewBox="0 0 1000 1000">
+                <path id="bDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+                <path id="bU" class="line" onClick="toggleFill(event, this)" transform="translate(250, 250)" d="M 0,0 h500 v50 h-500 v-50 z" fill-opacity="0" />
+                <path id="bD" class="line" onClick="toggleFill(event, this)" transform="translate(250, 700)" d="M 0,0 h500 v50 h-500 v-50 z" fill-opacity="0" />
+                <path id="bL" class="line" onClick="toggleFill(event, this)" transform="translate(250, 250)" d="M 0,0 v500 h50 v-500 h-50 z" fill-opacity="0" />
+                <path id="bR" class="line" onClick="toggleFill(event, this)" transform="translate(700, 250)" d="M 0,0 v500 h50 v-500 h-50 z" fill-opacity="0" />
+            </svg>
+            <br>
+            <span class="currentLetterLabel">Current Letter (A-R): </span><span id="pigpenCurrentLetterAR"></span>
+            <br>
+            <button onClick="clearLetter('pigpenLetterAR')">Clear Letter</button>
+            <button onClick="selectLetter('pigpenLetterAR')">Select All Letter</button>
+            <button onClick="saveLetter('pigpenCurrentLetterAR')">Save Letter </button>
+        </div>
+
+        <div id="pigpenSZ">
+            <svg width="200" height="200" viewBox="0 0 1000 1000">
+                <path id="vUpDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 325)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+                <path id="vDownDot" class="dot" onClick="toggleFill(event, this)" transform="translate(500, 675)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+                <path id="vLeftDot" class="dot" onClick="toggleFill(event, this)" transform="translate(325, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+                <path id="vRightDot" class="dot" onClick="toggleFill(event, this)" transform="translate(675, 500)" d="M 0,0 m -37.5,0 a 37.5,37.5 0 1,0 75,0 a 37.5,37.5 0 1,0 -75,0 z" fill-opacity="0" />
+                <path id="vUL" class="line" onClick="toggleFill(event, this)" transform="translate(0, -325) rotate(135, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+                <path id="vUR" class="line" onClick="toggleFill(event, this)" transform="translate(0, -325) rotate(45, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+                <path id="vLL" class="line" onClick="toggleFill(event, this)" transform="translate(-325, 0) rotate(45, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+                <path id="vLR" class="line" onClick="toggleFill(event, this)" transform="translate(325, 0) rotate(135, 500,500)" d="M 750 250 v500 h-50 v-500 h50 z" fill-opacity="0" />
+            </svg>
+            <br>
+            <span class="currentLetterLabel">Current Letter (S-Z): </span><span id="pigpenCurrentLetterSZ"></span>
+            <br>
+            <button onClick="clearLetter('pigpenLetterSZ')">Clear Letter</button>
+            <button onClick="selectLetter('pigpenLetterSZ')">Select All Letter</button>
+            <button onClick="saveLetter('pigpenCurrentLetterSZ')">Save Letter</button>
+        </div>
+
+        <div></div>
+
+        <br>
+
+
+        <div id="valueSVG"></div>
+        <div id="updateLabel"></div>
+
+        <br>
+        <br>
+
+        <hr>
+
+        <!-- start semaphore -->
+
   <br><br>
-	
-		</div>
-		
-	</body>
+
+  <p> See also: </p>
+<ul>
+    <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original semaphore braille table (uses checkboxes) </a></li>
+</ul>
+  
+  <span class="runningStringLabel">Semaphore running string: </span><span class="runningString" id="semaphoreRunningString"></span>
+  <button onClick="clearRunningString('semaphoreRunningString')">Clear String</button>
+  <br>
+
+<!-- need svg that looks more similar to this: http://flystrip.com/corby/code/test.html#semaphore -->
+ <div id="semaphore">
+  <svg width="200" height="200" viewbox="0 0 600 600" id="semaphore-man">
+  
+  <g id="static-body"><!-- onClick="toggleFill(event, this)" -->
+    <path id="head" transform="translate(50,10)"   d="M 275 200 A 25 25 0 1 1  225,200 A 25 25 0 1 1  275 200 z" />
+    <rect id="torso" width="70" height="160" x="265" y="240" rx="20" ry="21.333334" />
+  </g>
+  
+    <g id="right-hand-down" onClick="toggleFill(event, this)" fill-opacity="0">
+<rect class="arm" ry="10" rx="10" y="-260" x="240" height="20" width="70" transform="matrix(-1.090978e-18,1,-1,-1.090978e-18,0,0)" />
+<rect class="pole" y="-255" x="300" height="10" width="200" transform="matrix(-7.636846e-19,1,-1,-1.55854e-18,0,0)" />
+<path class="flag-base" d="M345 410L345 500 255 500 255 410 345 410z" />
+<path class="flag-color" d="M345 500L255 500 255 410 345 500z" />
+<path class="flag-outline" d="M345 410L345 500 255 500 255 410 345 410z" />
+</g>
+
+  <g id="right-hand-low" onClick="toggleFill(event, this)" fill-opacity="0">
+    <g transform="matrix(-0.707107,0.707107,-0.707107,-0.707107,0,0)">
+      <rect class="arm" width="70" height="20" rx="10" ry="10" x="-9.9999323" y="-363.55347"/>
+      <rect class="pole" width="200" height="10" x="50.000088" y="-358.55347"/>
+    </g>
+      <path class="flag-base"  d="M 204.03804,430.31241  l -63.63963,63.63963  l -63.63963,-63.63963  l 63.63963,-63.63963 z "/>
+      <path class="flag-color"  d="M 140.39841,493.95205  l -63.63963,-63.63963  l 63.63963,-63.63963 z "/>
+      <path class="flag-outline"  d="M 204.03804,430.31241  l -63.63963,63.63963  l -63.63963,-63.63963  l 63.63963,-63.63963 z "/>
+  </g>
+    
+    
+    <g id="right-hand-middle" onClick="toggleFill(event, this)" fill-opacity="0">
+    <g transform="scale(-1,-1)" >
+      <rect class="arm" width="70" height="20" rx="10" ry="10" x="-260" y="-260"/>
+      <rect class="pole" width="200" height="10" x="-200" y="-255"/>
+    </g>
+      <path class="flag-base" d="M 90,345 h-90 v-90 h90 z "/>
+      <path class="flag-color" d="M 0,345 v-90 h90 z "/>
+      <path class="flag-outline" d="M 90,345 h-90 v-90 h90 z "/>
+  </g>
+    
+  <g id="right-hand-high" onClick="toggleFill(event, this)" fill-opacity="0">
+    <g transform="matrix(-0.707107,-0.707107,0.707107,-0.707107,0,0)">
+      <rect class="arm" width="70" height="20" rx="10" ry="10" x="-363.55331" y="-10.000073"/>
+      <rect class="pole" width="200" height="10" x="-303.55331" y="-5.0000725"/>
+    </g>
+      <path class="flag-base"  d="M 69.687615,204.03804  l -63.63963,-63.63963  l 63.63963,-63.63963  l 63.63963,63.63963 z "/>
+      <path class="flag-color"  d="M 6.047985,140.39841   l 63.63963,-63.63963  l 63.63963,63.63963 z "/>
+      <path class="flag-outline"  d="M 69.687615,204.03804   l -63.63963,-63.63963  l 63.63963,-63.63963  l 63.63963,63.63963 z"/>
+  </g>
+    
+      <g id="right-hand-up" onClick="toggleFill(event, this)" fill-opacity="0">
+    <g transform="matrix(0,-1,1,0,0,0)" >
+      <rect class="arm" width="70" height="20" rx="10" ry="10" x="-260" y="240"/>
+      <rect class="pole"width="200" height="10" x="-200" y="245"/>
+    </g>
+    <path class="flag-base" d="M 155,90 v-90 h90 v90 z "/>
+    <path class="flag-color" d="M 155,0 h90 v90 z "/>
+    <path class="flag-outline" d="M 155,90 v-90 h90 v90 z "/>
+  </g>
+    
+    <g id="left-hand-up" onClick="toggleFill(event, this)" fill-opacity="0">
+  <g transform="matrix(1.111307e-18,-1,1,1.111307e-18,0,0)">
+    <rect class="arm" width="70" height="20" x="-260" y="340" rx="10" ry="10" />
+    <rect class="pole" width="200" height="10" x="-200" y="345" />
+  </g>
+  <path class="flag-base" d="M445 90L355 90 355-3.8857806e-16 445-2.7755576e-16 445 90z" />
+  <path class="flag-color" d="M355 90L355-3.8857806e-16 445-2.7755576e-16 355 90z" />
+  <path class="flag-outline" d="M445 90L355 90 355-3.8857806e-16 445-2.7755576e-16 445 90z" />
+</g>
+    
+    <g id="left-hand-high" onClick="toggleFill(event, this)" fill-opacity="0">
+  <g transform="matrix(0.707107,-0.707107,0.707107,0.707107,0,0)">
+    <rect class="arm" width="70" height="20" x="60.710747" y="414.26401" rx="10" ry="10" />
+    <rect class="pole" width="200" height="10" x="120.71076" y="419.26401" />
+  </g>
+ <path class="flag-base" d="M530.31228 204.03794L466.67265 140.39831 530.31228 76.758685 593.95191 140.39831 530.31228 204.03794z" />
+  <path class="flag-color" d="M466.67265 140.39831L530.31228 76.758685 593.95191 140.39831 466.67265 140.39831z" />
+  <path class="flag-outline" d="M530.31228 204.03794L466.67265 140.39831 530.31228 76.758685 593.95191 140.39831 530.31228 204.03794z" />
+</g>
+  
+    <g id="left-hand-middle" onClick="toggleFill(event, this)" fill-opacity="0">
+  <rect class="arm" ry="10" rx="10" y="240" x="340" height="20" width="70" />
+  <rect class="pole" y="245" x="400" height="10" width="200" />
+  <path class="flag-base" d="M510 345L510 255 600 255 600 345 510 345z" />
+  <path class="flag-color" d="M510 255L600 255 600 345 510 255z" />
+  <path class="flag-outline" d="M510 345L510 255 600 255 600 345 510 345z" />
+</g>
+    
+    <g id="left-hand-low" onClick="toggleFill(event, this)" fill-opacity="0">
+  <g transform="matrix(0.707107,0.707107,-0.707107,0.707107,0,0)">
+    <rect class="arm" width="70" height="20" x="414.26416" y="-80.71077" rx="10" ry="10"  />
+    <rect class="pole" width="200" height="10" x="474.26434" y="-75.710793" />
+  </g>
+  <path class="flag-base" d="M395.96209 430.31228L459.60172 366.67265 523.24135 430.31228 459.60172 493.95191 395.96209 430.31228z" />
+  <path class="flag-color" d="M459.60172 366.67265L523.24135 430.31228 459.60172 493.95191 459.60172 366.67265z" />
+  <path class="flag-outline" d="M395.96209 430.31228L459.60172 366.67265 523.24135 430.31228 459.60172 493.95191 395.96209 430.31228z" />
+</g>
+    
+  <g id="left-hand-down" onClick="toggleFill(event, this)" fill-opacity="0">
+    <g transform="matrix(0,1,-1,0,0,0)" >
+      <rect class="arm" width="70" height="20" rx="10" ry="10" x="240" y="-360"/>
+      <rect class="pole" width="200" height="10" x="300" y="-355"/>
+    </g>
+    <path class="flag-base" d="M 255,410 h90 v90 h-90 z "/>
+    <path class="flag-color" d="M 345,410 v90 h-90 z "/>
+    <path class="flag-outline" d="M 255,410 h90 v90 h-90 z "/>
+  </g>
+
+</svg>
+
+
+  <br>
+    <span class="currentLetterLabel">Current Letter: </span><span id="semaphoreCurrentLetter"></span>
+    <br>
+    <button onClick="clearLetter('semaphore')">Clear All</button>
+    <button onClick="selectLetter('semaphore')">Select All</button>
+    <button onClick="saveLetter('semaphoreCurrentLetter')">Save Letter</button>
+  </div>
+
+  <!-- end semaphore -->
+
+<hr>
+
+        
+
+<div id="braille">
+
+<p> See also: </p>
+<ul>
+    <li><a href="http://lizzb.github.io/puzz/braille.html" target="_blank"> Original interactive braille table (uses checkboxes) </a></li>
+</ul>
+
+        <span class="runningStringLabel">Braille running string: </span><span class="runningString" id="brailleRunningString"></span>
+        <button onClick="clearRunningString('brailleRunningString')">Clear String</button>
+        <br>
+
+<!-- braille pips labelled like this: https://www.pharmabraille.com/pharmaceutical-braille/the-braille-alphabet/-->
+<!--
+  1 4
+  2 5
+  3 6
+-->
+
+
+  <svg width="200" height="200" viewBox="0 0 64 64">
+    <!--rect x="0" y="0" width="64" height="64" fill="none" stroke-width="1" stroke="violet"></rect-->
+    <path id="bDot1" onClick="toggleFill(event, this)" fill-opacity="0" d="M 24,16 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0 z"></path> <!-- 1: top left -->
+    <path id="bDot2" onClick="toggleFill(event, this)" fill-opacity="0" d="M 24,32 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0 z"></path><!-- 2: middle left -->
+    <path id="bDot3" onClick="toggleFill(event, this)" fill-opacity="0" d="M 24,48 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0 z"></path><!-- 3: lower left -->
+    <path id="bDot4" onClick="toggleFill(event, this)" fill-opacity="0" d="M 40,16 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0 z"></path><!-- 4: top right -->
+    <path id="bDot5" onClick="toggleFill(event, this)" fill-opacity="0" d="M 40,32 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0 z"></path><!-- 5: middle right -->
+    <path id="bDot6" onClick="toggleFill(event, this)" fill-opacity="0" d="M 40,48 m -5,0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0 z"></path><!-- 6: lower right --> 
+  </svg>
+
+  <br>
+    <span class="currentLetterLabel">Current Letter: </span><span id="brailleCurrentLetter"></span>
+    <br>
+    <button onClick="clearLetter('braille')">Clear All</button>
+    <button onClick="selectLetter('braille')">Select All</button>
+    <button onClick="saveLetter('brailleCurrentLetter')">Save Letter</button>
+
+</div>
+
+</script>
+
+    </div><!-- / content -->
+
+    
+
+</body>
+
 </html>
