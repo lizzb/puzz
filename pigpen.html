@@ -85,11 +85,11 @@ button {
     display: inline-block;
     vertical-align: middle;
     margin: 0 0 1rem 0;
-    padding: 0.85em 1em;
+    padding: 0.65em 1em;
     border: 1px solid transparent;
     border-radius: 0;
     font-family: helvetica;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     line-height: 1;
     text-align: center;
     cursor: pointer;
@@ -431,7 +431,10 @@ function decode() {
     <div id='content'>
 
 
+
     <div id="simple-morse">
+
+        <h4>Morse</h4>
 
                 <p> Note: this is a VERY simple implementation, it is not robust, particularly subsequent letters if any letter is not recognized. See also: </p>
 
@@ -462,22 +465,10 @@ function decode() {
 
         <hr>
 
-        <p> Other pigpen decoders: </p>
-        <ul>
-          <li><a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Crypto Pigpen decoder </a></li>
-          <li><a href="https://planetcalc.com/7842/" target="_blank"> PlanetCalc Pigpen decoder </a></li>
-          <li><a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> Dcode Pigpen decoder </a></li>
-        </ul>
+        <div id="pigpen">
 
-        <button onClick="clearLetter('pigpenAll')">Clear All Pigpen</button>
-        <button onClick="selectLetter('pigpenAll')">Select All Pigpen</button>
-        <br>
-        <br>
+        <h4>Pigpen</h4>
 
-        <span class="runningStringLabel">Pigpen running string: </span><span class="runningString" id="pigpenRunningString"></span>
-
-        <button onClick="clearRunningString('pigpenRunningString')">Clear String</button>
-        <br>
 
         <div id="pigpenAR">
             <svg width="200" height="200" viewBox="0 0 1000 1000">
@@ -490,9 +481,9 @@ function decode() {
             <br>
             <span class="currentLetterLabel">Current Letter (A-R): </span><span id="pigpenCurrentLetterAR"></span>
             <br>
-            <button onClick="clearLetter('pigpenLetterAR')">Clear Letter</button>
-            <button onClick="selectLetter('pigpenLetterAR')">Select All Letter</button>
-            <button onClick="saveLetter('pigpenCurrentLetterAR')">Save Letter </button>
+            <button onClick="clearLetter('pigpenLetterAR')">Clear<br>Letter</button>
+            <button onClick="selectLetter('pigpenLetterAR')">Select<br>All</button>
+            <button onClick="saveLetter('pigpenCurrentLetterAR')">Save<br>Letter </button>
         </div>
 
         <div id="pigpenSZ">
@@ -509,15 +500,34 @@ function decode() {
             <br>
             <span class="currentLetterLabel">Current Letter (S-Z): </span><span id="pigpenCurrentLetterSZ"></span>
             <br>
-            <button onClick="clearLetter('pigpenLetterSZ')">Clear Letter</button>
-            <button onClick="selectLetter('pigpenLetterSZ')">Select All Letter</button>
-            <button onClick="saveLetter('pigpenCurrentLetterSZ')">Save Letter</button>
+            <button onClick="clearLetter('pigpenLetterSZ')">Clear<br>Letter</button>
+            <button onClick="selectLetter('pigpenLetterSZ')">Select<br>All</button>
+            <button onClick="saveLetter('pigpenCurrentLetterSZ')">Save<br>Letter</button>
         </div>
 
-        <div></div>
+<br>
+        <br>
+
+        <button onClick="clearLetter('pigpenAll')">Clear All Pigpen</button>
+        <button onClick="selectLetter('pigpenAll')">Select All Pigpen</button>
+        <br>
+        <br>
+
+        <span class="runningStringLabel">Pigpen running string: </span><span class="runningString" id="pigpenRunningString"></span>
+
+        <br><button onClick="clearRunningString('pigpenRunningString')">Clear String</button>
+        <br>
+
+        <p> See also: </p>
+        <ul>
+          <li><a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Crypto Pigpen decoder </a></li>
+          <li><a href="https://planetcalc.com/7842/" target="_blank"> PlanetCalc Pigpen decoder </a></li>
+          <li><a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> Dcode Pigpen decoder </a></li>
+        </ul>
 
         <br>
 
+</div> <!-- /pigpen -->
 
         <div id="valueSVG"></div>
         <div id="updateLabel"></div>
@@ -525,23 +535,17 @@ function decode() {
         <br>
         <br>
 
+
+
         <hr>
 
         <!-- start semaphore -->
 
-  <br><br>
-
-  <p> See also: </p>
-<ul>
-    <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original semaphore braille table (uses checkboxes) </a></li>
-</ul>
-  
-  <span class="runningStringLabel">Semaphore running string: </span><span class="runningString" id="semaphoreRunningString"></span>
-  <button onClick="clearRunningString('semaphoreRunningString')">Clear String</button>
-  <br>
-
 <!-- need svg that looks more similar to this: http://flystrip.com/corby/code/test.html#semaphore -->
  <div id="semaphore">
+
+    <h4>Semaphore</h4>
+
   <svg width="200" height="200" viewbox="0 0 600 600" id="semaphore-man">
   
   <g id="static-body"><!-- onClick="toggleFill(event, this)" -->
@@ -655,9 +659,24 @@ function decode() {
     <button onClick="clearLetter('semaphore')">Clear All</button>
     <button onClick="selectLetter('semaphore')">Select All</button>
     <button onClick="saveLetter('semaphoreCurrentLetter')">Save Letter</button>
-  </div>
+  
 
-  <!-- end semaphore -->
+<br><br>
+
+<span class="runningStringLabel">Semaphore running string: </span><span class="runningString" id="semaphoreRunningString"></span>
+  <br><button onClick="clearRunningString('semaphoreRunningString')">Clear String</button>
+  <br>
+
+  <p> See also: </p>
+<ul>
+    <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original semaphore braille table (uses checkboxes) </a></li>
+</ul>
+  
+  
+
+
+  </div><!-- /semaphore -->
+
 
 <hr>
 
@@ -665,14 +684,7 @@ function decode() {
 
 <div id="braille">
 
-<p> See also: </p>
-<ul>
-    <li><a href="http://lizzb.github.io/puzz/braille.html" target="_blank"> Original interactive braille table (uses checkboxes) </a></li>
-</ul>
-
-        <span class="runningStringLabel">Braille running string: </span><span class="runningString" id="brailleRunningString"></span>
-        <button onClick="clearRunningString('brailleRunningString')">Clear String</button>
-        <br>
+    <h4>Braille</h4>
 
 <!-- braille pips labelled like this: https://www.pharmabraille.com/pharmaceutical-braille/the-braille-alphabet/-->
 <!--
@@ -699,7 +711,17 @@ function decode() {
     <button onClick="selectLetter('braille')">Select All</button>
     <button onClick="saveLetter('brailleCurrentLetter')">Save Letter</button>
 
-</div>
+<p> See also: </p>
+<ul>
+    <li><a href="http://lizzb.github.io/puzz/braille.html" target="_blank"> Original interactive braille table (uses checkboxes) </a></li>
+</ul>
+
+        <span class="runningStringLabel">Braille running string: </span><span class="runningString" id="brailleRunningString"></span>
+        <br><button onClick="clearRunningString('brailleRunningString')">Clear String</button>
+        <br>
+
+
+</div><!-- /braille -->
 
 </script>
 
