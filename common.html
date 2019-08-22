@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<!-- Datatables Visibility Toggle Buttons example: https://datatables.net/extensions/buttons/examples/column_visibility/columnsToggle.html -->
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Common Alphabet Encodings using Datatables</title>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
+
+	<style>
+	img { height: 70px; }
+	body { font-family: sans-serif;}
+	th { font-size: 10px; }
+	td { text-align: center; }
+	td.letter { font-family: "Lucida Console", Monaco, monospace; font-size: 18px; }
+	td.decimal, td.binary, td.ternary, td.hex { font-family: "Lucida Console", Monaco, monospace; font-size: 14px; }
+	td.nato { font-size: 16px; }
+	td.morse { font-weight: bold; font-size: 24px; }
+
+	</style>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.colVis.min.js"></script>
+
+
+	<script>
+	  $(document).ready(function() {
+	    $('#example').DataTable( {
+	        dom: 'Bfrtip',
+	        paging: false,
+	        buttons: [
+	            'columnsToggle'
+	        ]
+	    } );
+	} );
+	</script>
+
+</head>
+<body>
+
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Letter</th>
+                <th>Decimal</th>
+                <th>Binary</th>
+                <th>Ternary</th>
+                <th>Hex</th>
+                <th>NATO</th>
+                <th>Morse</th>
+                <th>Braille</th>
+                <th>Semaphore</th>
+                <th>Nautical</th>
+                <th>Pigpen</th>
+                <th>ASL</th>
+            </tr>
+        </thead>
+        <tbody>
+
+    <tr>
+      <td class="letter">A</td>
+      <td class="decimal">1</td>
+      <td class="binary">00001</td>
+      <td class="ternary">001</td>
+      <td class="hex">01</td>
+      <td class="nato">Alfa</td>
+      <td class="morse">·&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Braille_A1.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/a-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/a-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/3828467_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Sign_language_A.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">B</td>
+      <td class="decimal">2</td>
+      <td class="binary">00010</td>
+      <td class="ternary">002</td>
+      <td class="hex">02</td>
+      <td class="nato">Bravo</td>
+      <td class="morse">−&nbsp;·&nbsp;·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Braille_B2.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/b-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/b-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/8565785_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Sign_language_B.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">C</td>
+      <td class="decimal">3</td>
+      <td class="binary">00011</td>
+      <td class="ternary">010</td>
+      <td class="hex">03</td>
+      <td class="nato">Charlie</td>
+      <td class="morse">−&nbsp;·&nbsp;−&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Braille_C3.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/c-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/c-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/5793502_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Sign_language_C.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">D</td>
+      <td class="decimal">4</td>
+      <td class="binary">00100</td>
+      <td class="ternary">011</td>
+      <td class="hex">04</td>
+      <td class="nato">Delta</td>
+      <td class="morse">−&nbsp;·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Braille_D4.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/d-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/d-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/405493_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Sign_language_D.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">E</td>
+      <td class="decimal">5</td>
+      <td class="binary">00101</td>
+      <td class="ternary">012</td>
+      <td class="hex">05</td>
+      <td class="nato">Echo</td>
+      <td class="morse">·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Braille_E5.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/e-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/e-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/5315627_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Sign_language_E.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">F</td>
+      <td class="decimal">6</td>
+      <td class="binary">00110</td>
+      <td class="ternary">020</td>
+      <td class="hex">06</td>
+      <td class="nato">Foxtrot</td>
+      <td class="morse">·&nbsp;·&nbsp;−&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Braille_F6.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/f-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/f-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/3069397_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Sign_language_F.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">G</td>
+      <td class="decimal">7</td>
+      <td class="binary">00111</td>
+      <td class="ternary">021</td>
+      <td class="hex">07</td>
+      <td class="nato">Golf</td>
+      <td class="morse">−&nbsp;−&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Braille_G7.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/g-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/g-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/9732727_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Sign_language_G.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">H</td>
+      <td class="decimal">8</td>
+      <td class="binary">01000</td>
+      <td class="ternary">022</td>
+      <td class="hex">08</td>
+      <td class="nato">Hotel</td>
+      <td class="morse">·&nbsp;·&nbsp;·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Braille_H8.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/h-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/h-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/2206334_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Sign_language_H.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">I</td>
+      <td class="decimal">9</td>
+      <td class="binary">01001</td>
+      <td class="ternary">100</td>
+      <td class="hex">09</td>
+      <td class="nato">India</td>
+      <td class="morse">·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Braille_I9.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/i-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/i-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/5436202_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Sign_language_I.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">J</td>
+      <td class="decimal">10</td>
+      <td class="binary">01010</td>
+      <td class="ternary">101</td>
+      <td class="hex">0A</td>
+      <td class="nato">Juliett</td>
+      <td class="morse">·&nbsp;−&nbsp;− −</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Braille_J0.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/j-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/j-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/531725_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Sign_language_J.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">K</td>
+      <td class="decimal">11</td>
+      <td class="binary">01011</td>
+      <td class="ternary">102</td>
+      <td class="hex">0B</td>
+      <td class="nato">Kilo</td>
+      <td class="morse">−&nbsp;·&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Braille_K.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/k-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/k-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/7619_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Sign_language_K.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">L</td>
+      <td class="decimal">12</td>
+      <td class="binary">01100</td>
+      <td class="ternary">110</td>
+      <td class="hex">0C</td>
+      <td class="nato">Lima</td>
+      <td class="morse">·&nbsp;−&nbsp;·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Braille_L.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/l-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/l-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/1544996_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Sign_language_L.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">M</td>
+      <td class="decimal">13</td>
+      <td class="binary">01101</td>
+      <td class="ternary">111</td>
+      <td class="hex">0D</td>
+      <td class="nato">Mike</td>
+      <td class="morse">−&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Braille_M.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/m-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/m-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/6407002_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Sign_language_M.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">N</td>
+      <td class="decimal">14</td>
+      <td class="binary">01110</td>
+      <td class="ternary">112</td>
+      <td class="hex">0E</td>
+      <td class="nato">November</td>
+      <td class="morse">−&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Braille_N.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/n-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/n-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/1752433_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Sign_language_N.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">O</td>
+      <td class="decimal">15</td>
+      <td class="binary">01111</td>
+      <td class="ternary">120</td>
+      <td class="hex">0F</td>
+      <td class="nato">Oscar</td>
+      <td class="morse">−&nbsp;− −</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Braille_O.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/o-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/o-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/3990919_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Sign_language_O.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">P</td>
+      <td class="decimal">16</td>
+      <td class="binary">10000</td>
+      <td class="ternary">121</td>
+      <td class="hex">10</td>
+      <td class="nato">Papa</td>
+      <td class="morse">·&nbsp;−&nbsp;−&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Braille_P.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/p-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/p-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/9153193_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Sign_language_P.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">Q</td>
+      <td class="decimal">17</td>
+      <td class="binary">10001</td>
+      <td class="ternary">122</td>
+      <td class="hex">11</td>
+      <td class="nato">Quebec</td>
+      <td class="morse">−&nbsp;−&nbsp;·&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Braille_Q.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/q-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/q-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/9245542.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Sign_language_Q.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">R</td>
+      <td class="decimal">18</td>
+      <td class="binary">10010</td>
+      <td class="ternary">200</td>
+      <td class="hex">12</td>
+      <td class="nato">Romeo</td>
+      <td class="morse">·&nbsp;−&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Braille_R.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/r-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/r-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/5876277_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Sign_language_R.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">S</td>
+      <td class="decimal">19</td>
+      <td class="binary">10011</td>
+      <td class="ternary">201</td>
+      <td class="hex">13</td>
+      <td class="nato">Sierra</td>
+      <td class="morse">·&nbsp;·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Braille_S.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/s-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/s-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/8339782_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Sign_language_S.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">T</td>
+      <td class="decimal">20</td>
+      <td class="binary">10100</td>
+      <td class="ternary">202</td>
+      <td class="hex">14</td>
+      <td class="nato">Tango</td>
+      <td class="morse">−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Braille_T.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/t-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/t-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/9740279_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Sign_language_T.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">U</td>
+      <td class="decimal">21</td>
+      <td class="binary">10101</td>
+      <td class="ternary">210</td>
+      <td class="hex">15</td>
+      <td class="nato">Uniform</td>
+      <td class="morse">·&nbsp;·&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Braille_U.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/u-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/u-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/3051931_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Sign_language_U.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">V</td>
+      <td class="decimal">22</td>
+      <td class="binary">10110</td>
+      <td class="ternary">211</td>
+      <td class="hex">16</td>
+      <td class="nato">Victor</td>
+      <td class="morse">·&nbsp;·&nbsp;·&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Braille_V.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/v-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/v-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/1037786_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Sign_language_V.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">W</td>
+      <td class="decimal">23</td>
+      <td class="binary">10111</td>
+      <td class="ternary">212</td>
+      <td class="hex">17</td>
+      <td class="nato">Whiskey</td>
+      <td class="morse">·&nbsp;−&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/37/Braille_W.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/w-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/w-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/6201963_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Sign_language_W.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">X</td>
+      <td class="decimal">24</td>
+      <td class="binary">11000</td>
+      <td class="ternary">220</td>
+      <td class="hex">18</td>
+      <td class="nato">X-ray</td>
+      <td class="morse">−&nbsp;·&nbsp;·&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Braille_X.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/x-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/x-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/6331941_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Sign_language_X.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">Y</td>
+      <td class="decimal">25</td>
+      <td class="binary">11001</td>
+      <td class="ternary">221</td>
+      <td class="hex">19</td>
+      <td class="nato">Yankee</td>
+      <td class="morse">−&nbsp;·&nbsp;−&nbsp;−</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Braille_Y.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/y-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/y-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/5302584_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Sign_language_Y.svg"></td>
+    </tr>
+    <tr>
+      <td class="letter">Z</td>
+      <td class="decimal">26</td>
+      <td class="binary">11010</td>
+      <td class="ternary">222</td>
+      <td class="hex">1A</td>
+      <td class="nato">Zulu</td>
+      <td class="morse">−&nbsp;−&nbsp;·&nbsp;·</td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Braille_Z.svg"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/semaphore/z-icon.gif"></td>
+      <td><img src="http://www.anbg.gov.au/images/flags/signal/z-icon.gif"></td>
+      <td><img src="http://crypto.interactive-maths.com/uploads/1/1/3/4/11345755/5373597_orig.gif"></td>
+      <td><img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Sign_language_Z.svg"></td>
+    </tr>            
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Decimal</th>
+                <th>Letter</th>
+                <th>Binary</th>
+                <th>Ternary</th>
+                <th>Hex</th>
+                <th>NATO</th>
+                <th>Morse</th>
+                <th>Braille</th>
+                <th>Pigpen</th>
+                <th>Semaphore</th>
+                <th>Nautical</th>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+</html>
