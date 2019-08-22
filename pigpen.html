@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--html xmlns='http://www.w3.org/1999/xhtml' lang='en'-->
 <html>
@@ -113,7 +114,11 @@ textarea { font-size: 14px; padding: 5px; }
         //var pigpenAllSVGElementIDs = ["bU", "bD", "bL", "bR", "bDot", "vUL", "vUR", "vLL", "vLR", "vUpDot", "vDownDot", "vLeftDot", "vRightDot"];
         var pigpenAllSVGElementIDs = pigpenSVGElementIDsAR.concat(pigpenSVGElementIDsSZ);
 
-        var semaphoreSVGElementIDs = [ "right-hand-down", "right-hand-low", "right-hand-middle", "right-hand-high", "right-hand-up", "left-hand-up", "left-hand-high", "left-hand-middle", "left-hand-low", "left-hand-down" ];
+        // this corresponds to the colorful semaphore man
+        //var semaphoreSVGElementIDs = [ "right-hand-down", "right-hand-low", "right-hand-middle", "right-hand-high", "right-hand-up", "left-hand-up", "left-hand-high", "left-hand-middle", "left-hand-low", "left-hand-down" ];
+
+        var semaphoreSVGElementIDs = [ "sDot1", "sDot2", "sDot3", "sDot4", "sDot5", "sDot6", "sDot7", "sDot8" ];
+
 
         var brailleSVGElementIDs = [ "bDot1", "bDot2", "bDot3", "bDot4", "bDot5", "bDot6" ];
 
@@ -290,10 +295,41 @@ textarea { font-size: 14px; padding: 5px; }
                 s0000001010: { letter: "X", number: "" },
                 s0001000100: { letter: "Y", number: "" },
                 s0000000110: { letter: "Z", number: "" },
-                s1000000001: { letter: "space", number: "" }, // is this right?
+                s1000000001: { letter: "space", number: "" }, // is this right? // no space for semaphore i dont think? not sure
+
                 // annul = lh low, rh high
                 // numerical = lh high, rh up
                 // flag image Error (LH and RH raised and lowered together)
+
+                // semaphore with dots (replacement for colorful flag one)
+                s11000000: { letter: "A", number: "1" }, //12
+                s10100000: { letter: "B", number: "2" }, //13
+                s10010000: { letter: "C", number: "3" }, //14
+                s10001000: { letter: "D", number: "4" }, //15
+                s10000100: { letter: "E", number: "5" }, //16
+                s10000010: { letter: "F", number: "6" }, //17
+                s10000001: { letter: "G", number: "7" }, //18
+                s01100000: { letter: "H", number: "8" }, //23
+                s01010000: { letter: "I", number: "9" }, //24  //image not working, need to use: http://www.anbg.gov.au/images/flags/semaphore/i-icon.gif
+                s00001010: { letter: "J", number: "" }, //57 // also means "alphabetic"
+                s01001000: { letter: "K", number: "0" }, //25
+                s01000100: { letter: "L", number: "" }, //26
+                s01000010: { letter: "M", number: "" }, //27
+                s01000001: { letter: "N", number: "" }, //28
+                s00110000: { letter: "O", number: "" }, //34
+                s00101000: { letter: "P", number: "" }, //35
+                s00100100: { letter: "Q", number: "" }, //36
+                s00100010: { letter: "R", number: "" }, //37
+                s00100001: { letter: "S", number: "" }, //38
+                s00011000: { letter: "T", number: "" }, //45
+                s00010100: { letter: "U", number: "" }, //46
+                s00001001: { letter: "V", number: "" }, //58
+                s00000110: { letter: "W", number: "" }, //67
+                s00000101: { letter: "X", number: "" }, //68
+                s00010010: { letter: "Y", number: "" }, //47
+                s00000011: { letter: "Z", number: "" }, //78
+                s00010001: { letter: "annul", number: "" },
+
 
                 b100000: { letter: "A", number: "1" },
                 b110000: { letter: "B", number: "2" },
@@ -651,6 +687,20 @@ function decode() {
   </g>
 
 </svg>
+
+ <svg width="200" height="200" viewBox="325 200 350 450" id="semaphore-dots">
+ 
+    <path id="sDot1" onClick="toggleFill(event, this)" fill-opacity="0" d="M 484,514 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 1: down -->
+        <path id="sDot2" onClick="toggleFill(event, this)" fill-opacity="0" d="M 402.683,480.317 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 2: lower left --> 
+    <path id="sDot3" onClick="toggleFill(event, this)" fill-opacity="0" d="M 369,399 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 3: middle left --> 
+    <path id="sDot4" onClick="toggleFill(event, this)" fill-opacity="0" d="M 402.683,317.683 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 4: upper left --> 
+<path id="sDot5" onClick="toggleFill(event, this)" fill-opacity="0" d="M 484,284 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path> <!-- 5: up -->
+    <path id="sDot6" onClick="toggleFill(event, this)" fill-opacity="0" d="M 565.317,317.683 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 6: upper right -->
+    <path id="sDot7" onClick="toggleFill(event, this)" fill-opacity="0" d="M 599,399 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 7: middle right -->
+    <path id="sDot8" onClick="toggleFill(event, this)" fill-opacity="0" d="M 565.317,480.317 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 8: lower right -->
+  </svg>
+
+<!-- http://flystrip.com/corby/code/test.html#semaphore -->
 
 
   <br>
