@@ -39,6 +39,17 @@
 	        ]
 	    } );
 	} );
+		
+	  $(document).ready(function() {
+	    $('#example2').DataTable( {
+	        dom: 'Bfrtip',
+	        paging: false,
+	        buttons: [
+	            'columnsToggle'
+	        ]
+	    } );
+	} );		
+		
 	</script>
 
 </head>
@@ -445,6 +456,383 @@
             </tr>
         </tfoot>
     </table>
+	
+	<hr />
+	<table id="example2" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Flag</th>
+                <th>State</th>
+                <th>Abbreviation</th>
+                <th>Capital</th>
+                <th>Nickname</th>
+            </tr>
+        </thead>
+        <tbody>
+
+<tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_alabama.gif' /></td>
+      <td>Alabama</td>
+      <td>AL</td>
+      <td>Montgomery</td>
+      <td>The Yellowhammer State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_alaska.gif' /></td>
+      <td>Alaska</td>
+      <td>AK</td>
+      <td>Juneau</td>
+      <td>The Last Frontier</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_arizona.gif' /></td>
+      <td>Arizona</td>
+      <td>AZ</td>
+      <td>Phoenix</td>
+      <td>The Grand Canyon State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_arkansas.gif' /></td>
+      <td>Arkansas</td>
+      <td>AR</td>
+      <td>Little Rock</td>
+      <td>The Natural State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_california.gif' /></td>
+      <td>California</td>
+      <td>CA</td>
+      <td>Sacramento</td>
+      <td>The Golden State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_colorado.gif' /></td>
+      <td>Colorado</td>
+      <td>CO</td>
+      <td>Denver</td>
+      <td>The Centennial State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_connecticut.gif' /></td>
+      <td>Connecticut</td>
+      <td>CT</td>
+      <td>Hartford</td>
+      <td>The Constitution State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_delaware.gif' /></td>
+      <td>Delaware</td>
+      <td>DE</td>
+      <td>Dover</td>
+      <td>The First State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_florida.gif' /></td>
+      <td>Florida</td>
+      <td>FL</td>
+      <td>Tallahassee</td>
+      <td>The Sunshine State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_georgia.gif' /></td>
+      <td>Georgia</td>
+      <td>GA</td>
+      <td>Atlanta</td>
+      <td>The Peach State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_hawaii.gif' /></td>
+      <td>Hawaii</td>
+      <td>HI</td>
+      <td>Honolulu</td>
+      <td>The Aloha State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_idaho.gif' /></td>
+      <td>Idaho</td>
+      <td>ID</td>
+      <td>Boise</td>
+      <td>The Gem State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_illinois.gif' /></td>
+      <td>Illinois</td>
+      <td>IL</td>
+      <td>Springfield</td>
+      <td>Land of Lincoln</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_indiana.gif' /></td>
+      <td>Indiana</td>
+      <td>IN</td>
+      <td>Indianapolis</td>
+      <td>The Hoosier State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_iowa.gif' /></td>
+      <td>Iowa</td>
+      <td>IA</td>
+      <td>Des Moines</td>
+      <td>The Hawkeye State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_kansas.gif' /></td>
+      <td>Kansas</td>
+      <td>KS</td>
+      <td>Topeka</td>
+      <td>The Sunflower State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_kentucky.gif' /></td>
+      <td>Kentucky</td>
+      <td>KY</td>
+      <td>Frankfort</td>
+      <td>The Bluegrass State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_louisiana.gif' /></td>
+      <td>Louisiana</td>
+      <td>LA</td>
+      <td>Baton Rouge</td>
+      <td>The Pelican State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_maine.gif' /></td>
+      <td>Maine</td>
+      <td>ME</td>
+      <td>Augusta</td>
+      <td>The Pine Tree State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_maryland.gif' /></td>
+      <td>Maryland</td>
+      <td>MD</td>
+      <td>Annapolis</td>
+      <td>The Old Line State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_massachusetts.gif' /></td>
+      <td>Massachusetts</td>
+      <td>MA</td>
+      <td>Boston</td>
+      <td>The Bay State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_michigan.gif' /></td>
+      <td>Michigan</td>
+      <td>MI</td>
+      <td>Lansing</td>
+      <td>The Great Lakes State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_minnesota.gif' /></td>
+      <td>Minnesota</td>
+      <td>MN</td>
+      <td>Saint Paul</td>
+      <td>The North Star State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_mississippi.gif' /></td>
+      <td>Mississippi</td>
+      <td>MS</td>
+      <td>Jackson</td>
+      <td>The Magnolia State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_missouri.gif' /></td>
+      <td>Missouri</td>
+      <td>MO</td>
+      <td>Jefferson City</td>
+      <td>The Show Me State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_montana.gif' /></td>
+      <td>Montana</td>
+      <td>MT</td>
+      <td>Helena</td>
+      <td>The Treasure State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_nebraska.gif' /></td>
+      <td>Nebraska</td>
+      <td>NE</td>
+      <td>Lincoln</td>
+      <td>The Cornhusker State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_nevada.gif' /></td>
+      <td>Nevada</td>
+      <td>NV</td>
+      <td>Carson City</td>
+      <td>The Silver State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_newhampshire.gif' /></td>
+      <td>New Hampshire</td>
+      <td>NH</td>
+      <td>Concord</td>
+      <td>The Granite State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_newjersey.gif' /></td>
+      <td>New Jersey</td>
+      <td>NJ</td>
+      <td>Trenton</td>
+      <td>The Garden State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_newmexico.gif' /></td>
+      <td>New Mexico</td>
+      <td>NM</td>
+      <td>Santa Fe</td>
+      <td>The Land of Enchantment</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_newyork.gif' /></td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>Albany</td>
+      <td>The Empire State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_northcarolina.gif' /></td>
+      <td>North Carolina</td>
+      <td>NC</td>
+      <td>Raleigh</td>
+      <td>The Tar Heel State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_northdakota.gif' /></td>
+      <td>North Dakota</td>
+      <td>ND</td>
+      <td>Bismarck</td>
+      <td>The Peace Garden State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_ohio.gif' /></td>
+      <td>Ohio</td>
+      <td>OH</td>
+      <td>Columbus</td>
+      <td>The Buckeye State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_oklahoma.gif' /></td>
+      <td>Oklahoma</td>
+      <td>OK</td>
+      <td>Oklahoma City</td>
+      <td>The Sooner State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_oregon.gif' /></td>
+      <td>Oregon</td>
+      <td>OR</td>
+      <td>Salem</td>
+      <td>The Beaver State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_pennsylvania.gif' /></td>
+      <td>Pennsylvania</td>
+      <td>PA</td>
+      <td>Harrisburg</td>
+      <td>The Keystone State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_rhode island.gif' /></td>
+      <td>Rhode Island</td>
+      <td>RI</td>
+      <td>Providence</td>
+      <td>The Ocean State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_southcarolina.gif' /></td>
+      <td>South Carolina</td>
+      <td>SC</td>
+      <td>Columbia</td>
+      <td>The Palmetto State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_southdakota.gif' /></td>
+      <td>South Dakota</td>
+      <td>SD</td>
+      <td>Pierre</td>
+      <td>Mount Rushmore State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_tennessee.gif' /></td>
+      <td>Tennessee</td>
+      <td>TN</td>
+      <td>Nashville</td>
+      <td>The Volunteer State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_texas.gif' /></td>
+      <td>Texas</td>
+      <td>TX</td>
+      <td>Austin</td>
+      <td>The Lone Star State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_utah.gif' /></td>
+      <td>Utah</td>
+      <td>UT</td>
+      <td>Salt Lake City</td>
+      <td>The Beehive State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_vermont.gif' /></td>
+      <td>Vermont</td>
+      <td>VT</td>
+      <td>Montpelier</td>
+      <td>The Green Mountain State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_virginia.gif' /></td>
+      <td>Virginia</td>
+      <td>VA</td>
+      <td>Richmond</td>
+      <td>The Old Dominion State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_washington.gif' /></td>
+      <td>Washington</td>
+      <td>WA</td>
+      <td>Olympia</td>
+      <td>The Evergreen State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_west virginia.gif' /></td>
+      <td>West Virginia</td>
+      <td>WV</td>
+      <td>Charleston</td>
+      <td>The Mountain State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_wisconsin.gif' /></td>
+      <td>Wisconsin</td>
+      <td>WI</td>
+      <td>Madison</td>
+      <td>The Badger State</td>
+    </tr>
+    <tr>
+      <td><img class='stateflag' src='http://www.netstate.com/states/images/flag_wyoming.gif' /></td>
+      <td>Wyoming</td>
+      <td>WY</td>
+      <td>Cheyenne</td>
+      <td>The Equality State</td>
+    </tr>   
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Flag</th>
+                <th>State</th>
+                <th>Abbreviation</th>
+                <th>Capital</th>
+                <th>Nickname</th>
+            </tr>
+        </tfoot>
+    </table>
+
 
 </body>
 </html>
