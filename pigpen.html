@@ -107,8 +107,17 @@ button {
     background-color: #1779ba;
     color: #fefefe;
 }
+        
+        td.label { text-align: right; }
+#converted_unicode,
+#converted_unicode3,
+#converted_unicode16 { text-decoration: underline; }
+        
 
 textarea { font-size: 14px; padding: 5px; }
+        
+        #binaryInput, #ternaryInput, #hexInput {font-size: 12px; }
+        
     </style>
     <script>
 
@@ -404,6 +413,91 @@ textarea { font-size: 14px; padding: 5px; }
 
             document.getElementById("updateLabel").innerHTML = output;
         }
+    </script>
+    <script>
+        function clearInput(inputElementID) {
+  document.getElementById(inputElementID).value = "";
+
+  // default for element.id == binaryInput
+  var convertedDecimalID = "converted_decimal";
+  var convertedAlphaNumericID = "converted_alphaNumeric";
+  var convertedUnicodeID = "converted_unicode";
+  
+  if (inputElementID == "ternaryInput") {
+    convertedDecimalID = "converted_decimal3";
+    convertedAlphaNumericID = "converted_alphaNumeric3";
+    convertedUnicodeID = "converted_unicode3";
+  }
+  else if (inputElementID == "hexInput") {
+    convertedDecimalID = "converted_decimal16";
+    convertedAlphaNumericID = "converted_alphaNumeric16";
+    convertedUnicodeID = "converted_unicode16";
+  }
+  
+  document.getElementById(convertedDecimalID).innerHTML = "";
+  document.getElementById(convertedAlphaNumericID).innerHTML = "";
+  document.getElementById(convertedUnicodeID).innerHTML = "";
+}
+function convertToText(element, inputBase){
+  
+  // default for element.id == binaryInput
+  var convertedDecimalID = "converted_decimal";
+  var convertedAlphaNumericID = "converted_alphaNumeric";
+  var convertedUnicodeID = "converted_unicode";
+  
+  if (element.id == "ternaryInput") {
+    convertedDecimalID = "converted_decimal3";
+    convertedAlphaNumericID = "converted_alphaNumeric3";
+    convertedUnicodeID = "converted_unicode3";
+  }
+  else if (element.id == "hexInput") {
+    convertedDecimalID = "converted_decimal16";
+    convertedAlphaNumericID = "converted_alphaNumeric16";
+    convertedUnicodeID = "converted_unicode16";
+  }
+
+  // Convert input string into array of numbers
+  var valToConvert = element.value;
+  valsArray = valToConvert.split(' ');
+  
+  var alphanumericStr = "�ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var alphanumericArr = alphanumericStr.split("");
+  var alphaNumericOutput = [];
+  var decimalOutput = [];
+  var unicodeOutput = [];
+  var numberToConvert = 0;
+  for (var i=0; i<valsArray.length; i++) {
+    
+    // Get rid of annoying trailing unknowns with spaces
+    if (valsArray[i] === "") continue;
+    
+    numberToConvert = parseInt(valsArray[i], inputBase).toString(10);
+    
+    // Convert numbers from initial to desired base
+    if (numberToConvert && !isNaN(numberToConvert)) {
+      decimalOutput.push(numberToConvert);
+    }
+    else decimalOutput.push("�");
+    
+    // Use decimal value to convert to alphanumeric
+    if (alphanumericArr[numberToConvert]) {
+      alphaNumericOutput.push(alphanumericArr[numberToConvert]);
+    }
+    else alphaNumericOutput.push("�");
+    
+    // Use decimal value to convert to Unicode
+    if (numberToConvert && String.fromCharCode(numberToConvert)) {
+      unicodeOutput.push(String.fromCharCode(numberToConvert));
+    }
+    else unicodeOutput.push("�");
+
+  }
+  
+  document.getElementById(convertedDecimalID).innerHTML = decimalOutput.join(" ");
+  document.getElementById(convertedAlphaNumericID).innerHTML = alphaNumericOutput.join(" ");
+  document.getElementById(convertedUnicodeID).innerHTML = unicodeOutput.join(" ");
+
+}
     </script>
     <script>
     // simple from https://steelx.gitbooks.io/javascript-algorithms/decode-the-morse-code.html
@@ -783,7 +877,97 @@ function decode() {
 
 </div><!-- /braille -->
 
-</script>
+<div id="base-conversion">
+    
+    <h4>Base Conversions</h4>
+    
+        <br><br><br>
+  
+  <h4>Binary</h4>
+  
+<table>
+  <tr>
+	<td class="label">Alphanumeric:</td>
+	<td><span id="converted_alphaNumeric">�</td>
+  </tr>
+  <tr>
+	<td class="label">Unicode:</td>
+    <td><span id="converted_unicode"></span></td>
+  </tr>
+  <tr>
+	<td class="label">Decimal:</td>
+    <td><span id="converted_decimal">0</span></td>
+  </tr>
+  <tr>
+	<td class="label">Binary:</td>
+    <td><textarea id="binaryInput" value="0" oninput="convertToText(this, 2)" size="24"></textarea>
+      <button onclick="clearInput('binaryInput')">X</button></td>
+  </tr>
+</table>
+  
+ 
+  <br>
+  
+  <h4>Ternary</h4>
+  
+  <table>
+  <tr>
+	<td class="label">Alphanumeric:</td>
+	<td><span id="converted_alphaNumeric3">�</td>
+  </tr>
+    <tr>
+	<td class="label">Unicode:</td>
+    <td><span id="converted_unicode3"></span></td>
+  </tr>
+  <tr>
+	<td class="label">Decimal:</td>
+    <td><span id="converted_decimal3">0</span></td>
+  </tr>
+  <tr>
+	<td class="label">Ternary:</td>
+    <td><textarea id="ternaryInput" value="0" oninput="convertToText(this, 3)" size="24"></textarea>
+      <button onclick="clearInput('ternaryInput')">X</button></td>
+  </tr>
+</table>
+  
+  
+    <br>
+  
+  <h4>Hex</h4>
+  
+  <table>
+  
+    <tr>
+	<td class="label">Alphanumeric:</td>
+	<td><span id="converted_alphaNumeric16">�</td>
+  </tr>
+    <tr>
+	<td class="label">Unicode:</td>
+    <td><span id="converted_unicode16"></span></td>
+  </tr>
+  <tr>
+	<td class="label">Decimal:</td>
+    <td><span id="converted_decimal16">0</span></td>
+  </tr>
+  <tr>
+	<td class="label">Hexadecimal:</td>
+    <td><textarea id="hexInput" value="0" oninput="convertToText(this, 16)" size="24"></textarea>
+      <button onclick="clearInput('hexInput')">X</button></td>
+  </tr>
+    
+</table>
+  
+  <br><br><br><!-- https://jsbin.com/depesen/edit?html,css,js,console,output -->
+    
+    
+    <p> See also: </p>
+<ul>
+    <li><a href="http://www.cut-the-knot.org/binary.shtml" target="_blank">Cut The Knot Base Converter</a></li>
+    <li><a href="http://software.ellerton.net/txt2bin/" target="_blank">ASCII/Unicode + Base Converter</a></li>
+</ul>
+        <br>
+    
+        </div><!-- / base-conversion -->
 
     </div><!-- / content -->
 
