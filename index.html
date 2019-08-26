@@ -2,10 +2,20 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146335872-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-146335872-2');
+</script>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Blog Template · Bootstrap</title>
+    <title>lizzb Puzzle Toolkit</title><!-- from Blog Template · Bootstrap -->
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,17 +32,42 @@
             stroke: #666;
             stroke-width: 1;
         }
+      path:hover {
+            opacity: 0.5;
+        }
 
         #pigpenSZ,
         #pigpenAR {
             display: inline-block;
             padding: 0px 5px;
         }
-      .morseButton { /*btn btn-info btn-lg*/ }
+      .morseButton { /*btn btn-info btn-lg*/ margin: 5px; font-size: 1em; }
 
         .clearRunningString, .clearNumberString, .clearAllSVG, .selectAllSVG, .clearMorseString { /* btn btn-sm btn-outline-secondary */ }
         .saveLetter { /* btn btn-primary */ }
         .lookFor { font-weight: bold; color: hotpink; }
+      
+      /* .clearMorseString
+.svgControls
+#braille, #pigpen, #semaphore, #simple-morse */
+      .currentLetterLabel {
+            font-weight: normal;
+        }
+        .runningStringLabel { font-weight: bold; }
+        .runningString {font: pink;}
+        
+        #pigpenCurrentLetterSZ,
+        #pigpenCurrentLetterAR,
+        #semaphoreCurrentLetter {
+            font-size: 18px;
+            font-weight: bold;
+        }
+      td.label { text-align: right; }
+      #converted_unicode,
+      #converted_unicode3,
+      #converted_unicode16 { text-decoration: underline; }
+      #binaryInput, #ternaryInput, #hexInput {font-size: 12px; }
+      textarea { font-size: 14px; padding: 5px; }
 
 
     </style>
@@ -200,39 +235,6 @@
             p00110100: { letter: "Z" },
 
             //p11111111: { letter: "n/a" },
-
-
-            // semaphore letters -- not used, these are for the little man
-            // note -- any one with a or up flag has variants for L/R hand,
-            // also actual art shows crossing over body
-            // not sure best way to deal with this
-            s0100000001: { letter: "A", number: "1" },
-            s0010000001: { letter: "B", number: "2" },
-            s0001000001: { letter: "C", number: "3" },
-            s0000100001: { letter: "D", number: "4" }, 
-            s0000010001: { letter: "E", number: "5" },//wrong
-            s1000000100: { letter: "F", number: "6" },
-            s1000000010: { letter: "G", number: "7" },
-            s0110000000: { letter: "H", number: "8" },
-            s0101000000: { letter: "I", number: "9" },
-            s0000100100: { letter: "J", number: "" }, // also means "alphabetic"
-            s0100010000: { letter: "K", number: "0" },
-            s0100001000: { letter: "L", number: "" },
-            s0100000100: { letter: "M", number: "" },
-            s0100000010: { letter: "N", number: "" },
-            s0011000000: { letter: "O", number: "" },
-            s0010010000: { letter: "P", number: "" },
-            s0010001000: { letter: "Q", number: "" },
-            s0010000100: { letter: "R", number: "" },
-            s0010000010: { letter: "S", number: "" },
-            s0001010000: { letter: "T", number: "" },
-            s0001001000: { letter: "U", number: "" },
-            s0000100010: { letter: "V", number: "" },
-            s0000001100: { letter: "W", number: "" },
-            s0000001010: { letter: "X", number: "" },
-            s0001000100: { letter: "Y", number: "" },
-            s0000000110: { letter: "Z", number: "" },
-            s1000000001: { letter: "space", number: "" }, // is this right? // no space for semaphore i dont think? not sure
 
             // annul = lh low, rh high
             // numerical = lh high, rh up
@@ -627,15 +629,15 @@
         <!--<span class="runningString" id="morseRunningString"></span>-->
         <div id="morseOutput"></div>
 
-        <p>Note: this is a VERY simple implementation, it is not robust, particularly subsequent letters if any letter is not recognized. See also:</p>
+        <p>See also:</p>
         <ul>
           <li><a href="https://tools.timodenk.com/morse-code-to-text" target="_blank"> Timodenk online tools morse decoder </a></li>
           <li><a href="https://v2.cryptii.com/morsecode/text" target="_blank"> Cryptii morse decoder </a></li>
           <li><a href="https://www.dcode.fr/morse-code" target="_blank"> dCode.fr morse decoder </a></li>
           
         </ul>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+        <!--<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>-->
       </div><!-- /.blog-post -->
 
       <hr>
@@ -663,113 +665,6 @@
           <button class="btn btn-sm btn-outline-secondary clearAllSVG" onClick="clearLetter('semaphore')">Clear All</button>
           <button class="btn btn-sm btn-outline-secondary selectAllSVG" onClick="selectLetter('semaphore')">Select All</button>
           <br>
-
-          <!-- semaphore man with arms and flags -- not used -->
-          <!--
-          <svg width="200" height="200" viewbox="0 0 600 600" id="semaphore-man">
-          
-            <g id="static-body">
-              <path id="head" transform="translate(50,10)"   d="M 275 200 A 25 25 0 1 1  225,200 A 25 25 0 1 1  275 200 z" />
-              <rect id="torso" width="70" height="160" x="265" y="240" rx="20" ry="21.333334" />
-            </g>
-
-            <g id="right-hand-down" onClick="toggleFill(event, this)" fill-opacity="0">
-              <rect class="arm" ry="10" rx="10" y="-260" x="240" height="20" width="70" transform="matrix(-1.090978e-18,1,-1,-1.090978e-18,0,0)" />
-              <rect class="pole" y="-255" x="300" height="10" width="200" transform="matrix(-7.636846e-19,1,-1,-1.55854e-18,0,0)" />
-              <path class="flag-base" d="M345 410L345 500 255 500 255 410 345 410z" />
-              <path class="flag-color" d="M345 500L255 500 255 410 345 500z" />
-              <path class="flag-outline" d="M345 410L345 500 255 500 255 410 345 410z" />
-            </g>
-
-            <g id="right-hand-low" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(-0.707107,0.707107,-0.707107,-0.707107,0,0)">
-                <rect class="arm" width="70" height="20" rx="10" ry="10" x="-9.9999323" y="-363.55347"/>
-                <rect class="pole" width="200" height="10" x="50.000088" y="-358.55347"/>
-              </g>
-              <path class="flag-base"  d="M 204.03804,430.31241  l -63.63963,63.63963  l -63.63963,-63.63963  l 63.63963,-63.63963 z "/>
-              <path class="flag-color"  d="M 140.39841,493.95205  l -63.63963,-63.63963  l 63.63963,-63.63963 z "/>
-              <path class="flag-outline"  d="M 204.03804,430.31241  l -63.63963,63.63963  l -63.63963,-63.63963  l 63.63963,-63.63963 z "/>
-            </g>
-            
-            <g id="right-hand-middle" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="scale(-1,-1)" >
-                <rect class="arm" width="70" height="20" rx="10" ry="10" x="-260" y="-260"/>
-                <rect class="pole" width="200" height="10" x="-200" y="-255"/>
-              </g>
-                <path class="flag-base" d="M 90,345 h-90 v-90 h90 z "/>
-                <path class="flag-color" d="M 0,345 v-90 h90 z "/>
-                <path class="flag-outline" d="M 90,345 h-90 v-90 h90 z "/>
-            </g>
-            
-            <g id="right-hand-high" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(-0.707107,-0.707107,0.707107,-0.707107,0,0)">
-                <rect class="arm" width="70" height="20" rx="10" ry="10" x="-363.55331" y="-10.000073"/>
-                <rect class="pole" width="200" height="10" x="-303.55331" y="-5.0000725"/>
-              </g>
-              <path class="flag-base"  d="M 69.687615,204.03804  l -63.63963,-63.63963  l 63.63963,-63.63963  l 63.63963,63.63963 z "/>
-              <path class="flag-color"  d="M 6.047985,140.39841   l 63.63963,-63.63963  l 63.63963,63.63963 z "/>
-              <path class="flag-outline"  d="M 69.687615,204.03804   l -63.63963,-63.63963  l 63.63963,-63.63963  l 63.63963,63.63963 z"/>
-            </g>
-            
-            <g id="right-hand-up" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(0,-1,1,0,0,0)" >
-                <rect class="arm" width="70" height="20" rx="10" ry="10" x="-260" y="240"/>
-                <rect class="pole"width="200" height="10" x="-200" y="245"/>
-              </g>
-              <path class="flag-base" d="M 155,90 v-90 h90 v90 z "/>
-              <path class="flag-color" d="M 155,0 h90 v90 z "/>
-              <path class="flag-outline" d="M 155,90 v-90 h90 v90 z "/>
-            </g>
-            
-            <g id="left-hand-up" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(1.111307e-18,-1,1,1.111307e-18,0,0)">
-                <rect class="arm" width="70" height="20" x="-260" y="340" rx="10" ry="10" />
-                <rect class="pole" width="200" height="10" x="-200" y="345" />
-              </g>
-              <path class="flag-base" d="M445 90L355 90 355-3.8857806e-16 445-2.7755576e-16 445 90z" />
-              <path class="flag-color" d="M355 90L355-3.8857806e-16 445-2.7755576e-16 355 90z" />
-              <path class="flag-outline" d="M445 90L355 90 355-3.8857806e-16 445-2.7755576e-16 445 90z" />
-            </g>
-            
-            <g id="left-hand-high" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(0.707107,-0.707107,0.707107,0.707107,0,0)">
-                <rect class="arm" width="70" height="20" x="60.710747" y="414.26401" rx="10" ry="10" />
-                <rect class="pole" width="200" height="10" x="120.71076" y="419.26401" />
-              </g>
-              <path class="flag-base" d="M530.31228 204.03794L466.67265 140.39831 530.31228 76.758685 593.95191 140.39831 530.31228 204.03794z" />
-              <path class="flag-color" d="M466.67265 140.39831L530.31228 76.758685 593.95191 140.39831 466.67265 140.39831z" />
-              <path class="flag-outline" d="M530.31228 204.03794L466.67265 140.39831 530.31228 76.758685 593.95191 140.39831 530.31228 204.03794z" />
-            </g>
-          
-            <g id="left-hand-middle" onClick="toggleFill(event, this)" fill-opacity="0">
-              <rect class="arm" ry="10" rx="10" y="240" x="340" height="20" width="70" />
-              <rect class="pole" y="245" x="400" height="10" width="200" />
-              <path class="flag-base" d="M510 345L510 255 600 255 600 345 510 345z" />
-              <path class="flag-color" d="M510 255L600 255 600 345 510 255z" />
-              <path class="flag-outline" d="M510 345L510 255 600 255 600 345 510 345z" />
-            </g>
-            
-            <g id="left-hand-low" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(0.707107,0.707107,-0.707107,0.707107,0,0)">
-                <rect class="arm" width="70" height="20" x="414.26416" y="-80.71077" rx="10" ry="10"  />
-                <rect class="pole" width="200" height="10" x="474.26434" y="-75.710793" />
-              </g>
-              <path class="flag-base" d="M395.96209 430.31228L459.60172 366.67265 523.24135 430.31228 459.60172 493.95191 395.96209 430.31228z" />
-              <path class="flag-color" d="M459.60172 366.67265L523.24135 430.31228 459.60172 493.95191 459.60172 366.67265z" />
-              <path class="flag-outline" d="M395.96209 430.31228L459.60172 366.67265 523.24135 430.31228 459.60172 493.95191 395.96209 430.31228z" />
-            </g>
-            
-            <g id="left-hand-down" onClick="toggleFill(event, this)" fill-opacity="0">
-              <g transform="matrix(0,1,-1,0,0,0)" >
-                <rect class="arm" width="70" height="20" rx="10" ry="10" x="240" y="-360"/>
-                <rect class="pole" width="200" height="10" x="300" y="-355"/>
-              </g>
-              <path class="flag-base" d="M 255,410 h90 v90 h-90 z "/>
-              <path class="flag-color" d="M 345,410 v90 h-90 z "/>
-              <path class="flag-outline" d="M 255,410 h90 v90 h-90 z "/>
-            </g>
-          </svg>
-          -->
 
           <svg width="200" height="200" viewBox="325 200 350 450" id="semaphore-dots">
             <path id="sDot1" onClick="toggleFill(event, this)" fill-opacity="0" d="M 484,514 m -30,0 a 30,30 0 1,0 60,0 a 30,30 0 1,0 -60,0 z"></path><!-- 1: down -->
@@ -803,7 +698,7 @@
           <li><a href="http://flystrip.com/corby/code/test.html#semaphore" target="_blank"> Corby Semaphore decoder </a></li>
           <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original semaphore braille table (uses checkboxes) </a></li>
         </ul>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <!--<p></p>-->
       </div><!-- /.blog-post #semaphore -->
 
       <hr>
@@ -885,7 +780,7 @@
           <li><a href="https://planetcalc.com/7842/" target="_blank"> PlanetCalc Pigpen decoder </a></li>
           <li><a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> dCode.fr Pigpen decoder </a></li>
         </ul>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <!--<p></p>-->
       </div><!-- /.blog-post #pigpen -->
 
 
@@ -933,7 +828,7 @@
         <ul>
           <li><a href="http://lizzb.github.io/puzz/braille.html" target="_blank"> Original interactive braille table (uses checkboxes) </a></li>
         </ul>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+        <!--<p></p>-->
       </div><!-- /.blog-post #pigpen -->
 
       <!--
