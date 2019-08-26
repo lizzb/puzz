@@ -13,7 +13,9 @@
 </script>
     
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+
 
     <title>lizzb's Puzzle Toolkit</title><!-- from Blog Template · Bootstrap -->
 
@@ -532,7 +534,7 @@
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-primary">Helper Tools</strong>
           <h3 class="mb-0">Words and Letters</h3>
-          <div class="mb-1 text-muted">Nov 12</div>
+          <div class="mb-1 text-muted">Anagrams, Homophones, Patterns, etc.</div>
           <!--<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
           <a href="#" class="stretched-link">Continue reading</a>-->
           <ul>
@@ -554,7 +556,7 @@
         <div class="col p-4 d-flex flex-column position-static">
           <strong class="d-inline-block mb-2 text-success">Helper Tools</strong>
           <h3 class="mb-0">Crossword Clues</h3>
-          <div class="mb-1 text-muted">Nov 12</div>
+          <!--<div class="mb-1 text-muted">Nov 12</div>-->
           <ul>
             <li><a href="https://www.onelook.com/thesaurus/" class="stretched-link">Onelook Reverse Dictionary</a></li>
             <li><a href="http://www.oneacross.com/" class="stretched-link">OneAcross</a></li>
@@ -617,7 +619,7 @@
         <button class="btn btn-info btn-lg morseButton" onClick="addChar(' ')"> Space ( ) </button><br>
         <!--button onClick="addChar('/')"> Separator (/) </button><br-->
         <textarea id="morseInput" oninput="decode()"></textarea>
-        <button class="btn btn-sm btn-outline-secondary clearMorseString" onclick="clearInput('ternaryInput')">X</button>
+        <button class="btn btn-sm btn-outline-secondary clearMorseString" onclick="clearMorseInput()">X</button>
 
         <br>
         <!--<button onClick="decodeMorse()">Decode</button>-->
