@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -49,9 +50,7 @@
         .saveLetter { /* btn btn-primary */ }
         .lookFor { font-weight: bold; color: hotpink; }
       
-      /* .clearMorseString
-.svgControls
-#braille, #pigpen, #semaphore, #simple-morse */
+      /* .clearMorseString .svgControls #braille, #pigpen, #semaphore, #simple-morse */
       .currentLetterLabel {
             font-weight: normal;
         }
@@ -64,13 +63,20 @@
             font-size: 18px;
             font-weight: bold;
         }
-      td.label { text-align: right; }
+      td.label { text-align: right; } /* used for binary conversion labels */
       #converted_unicode,
       #converted_unicode3,
       #converted_unicode16 { text-decoration: underline; }
       #binaryInput, #ternaryInput, #hexInput {font-size: 12px; }
       textarea { font-size: 14px; padding: 5px; }
 
+      .rot-label { font-weight: bold; width: 75px; }
+
+      img {width: 85%; padding-bottom: 20px;}
+
+      h3.blog-subheader {padding-top: 20px;} /* used for groupings in reference section */
+
+      .seeAlso {margin-top: 5px;}
 
     </style>
 
@@ -338,27 +344,32 @@
     </script>
     <script>
         function clearInput(inputElementID) {
+          // default rotInput
           document.getElementById(inputElementID).value = "";
 
-          // default for element.id == binaryInput
-          var convertedDecimalID = "converted_decimal";
-          var convertedAlphaNumericID = "converted_alphaNumeric";
-          var convertedUnicodeID = "converted_unicode";
-          
-          if (inputElementID == "ternaryInput") {
-            convertedDecimalID = "converted_decimal3";
-            convertedAlphaNumericID = "converted_alphaNumeric3";
-            convertedUnicodeID = "converted_unicode3";
-          }
-          else if (inputElementID == "hexInput") {
-            convertedDecimalID = "converted_decimal16";
-            convertedAlphaNumericID = "converted_alphaNumeric16";
-            convertedUnicodeID = "converted_unicode16";
-          }
-          
-          document.getElementById(convertedDecimalID).innerHTML = "";
-          document.getElementById(convertedAlphaNumericID).innerHTML = "";
-          document.getElementById(convertedUnicodeID).innerHTML = "";
+          // need to clear multiple fields for the base conversion section
+          if (inputElementID == "binaryInput" || inputElementID == "ternaryInput" || inputElementID == "hexInput") {
+
+            // default for element.id == binaryInput
+            var convertedDecimalID = "converted_decimal";
+            var convertedAlphaNumericID = "converted_alphaNumeric";
+            var convertedUnicodeID = "converted_unicode";
+            
+            if (inputElementID == "ternaryInput") {
+              convertedDecimalID = "converted_decimal3";
+              convertedAlphaNumericID = "converted_alphaNumeric3";
+              convertedUnicodeID = "converted_unicode3";
+            }
+            else if (inputElementID == "hexInput") {
+              convertedDecimalID = "converted_decimal16";
+              convertedAlphaNumericID = "converted_alphaNumeric16";
+              convertedUnicodeID = "converted_unicode16";
+            }
+            
+            document.getElementById(convertedDecimalID).innerHTML = "";
+            document.getElementById(convertedAlphaNumericID).innerHTML = "";
+            document.getElementById(convertedUnicodeID).innerHTML = "";
+          }          
         }
 
         function convertToText(element, inputBase){
@@ -420,6 +431,39 @@
           document.getElementById(convertedAlphaNumericID).innerHTML = alphaNumericOutput.join(" ");
           document.getElementById(convertedUnicodeID).innerHTML = unicodeOutput.join(" ");
 
+        }
+
+        function decodeROT(element){
+          
+          // Convert input string into array of characters
+          var valToConvert = element.value;
+          valsArray = valToConvert.split("");
+
+          var alphabetStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          var alphabetArr = alphabetStr.split("");
+
+          var outputArray = [];
+          for (var i=1; i<26; i++) {
+            outputArray = [];
+            for (var j=0; j<valsArray.length; j++)
+            {
+              var originalLetter = valsArray[j];
+              var originalIndex = alphabetArr.indexOf(originalLetter.toUpperCase());
+              if (originalIndex >= 0) {
+                var newLetterIndex = (originalIndex + i) % 26;
+                var convertedLetter = alphabetArr[newLetterIndex];
+                outputArray.push(convertedLetter);
+              }
+              else {
+                // if the letter wasn't found (e.g. numbers), return original
+                // also style original letter to differentiate that it wasnt converted
+                outputArray.push('<u>'+originalLetter+'</u>');
+              }
+            }
+
+            var convertedROTElementID = "converted_rot" + i;
+            document.getElementById(convertedROTElementID).innerHTML = outputArray.join("");
+          }
         }
 
     </script>
@@ -502,14 +546,16 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
+      <!-- Decoders -->
       <a class="p-2 text-muted" href="#simple-morse">Morse</a>
       <a class="p-2 text-muted" href="#semaphore">Semaphore</a>
       <a class="p-2 text-muted" href="#pigpen">Pigpen</a>
       <a class="p-2 text-muted" href="#braille">Braille</a>
       <a class="p-2 text-muted" href="#base-conversion">Base Conversion</a>
-      <!--<a class="p-2 text-muted" href="#">Business</a>
-      <a class="p-2 text-muted" href="#">Politics</a>
-      <a class="p-2 text-muted" href="#">Opinion</a>
+      <!-- Reference -->
+      <a class="p-2 text-muted" href="#ciphers">Ciphers</a>
+      <a class="p-2 text-muted" href="#other">Other</a>
+      <!--<a class="p-2 text-muted" href="#">Opinion</a>
       <a class="p-2 text-muted" href="#">Science</a>
       <a class="p-2 text-muted" href="#">Health</a>
       <a class="p-2 text-muted" href="#">Style</a>
@@ -538,10 +584,13 @@
           <!--<p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
           <a href="#" class="stretched-link">Continue reading</a>-->
           <ul>
-            <li><a href="https://wordsmith.org/anagram/" class="stretched-link">I, Rearrangement Servant</a></li>
-            <li><a href="https://www.onelook.com" class="stretched-link">Onelook Dictionary</a></li>         
-            <li><a href="https://www.rhymezone.com/" class="stretched-link">RhymeZone</a></li>    
-            <li><a href="https://www.quinapalus.com/cgi-bin/qat" class="stretched-link">QAT</a></li>  
+            <li><a href="http://lizzb.github.io/puzz/common" class="">Common Letter Encodings</a></li>
+            <li><a href="https://wordsmith.org/anagram/" class="">I, Rearrangement Servant</a>, <a href="http://www.ssynth.co.uk/~gay/anagram.html" class="">Andy's Anagram Solver</a></li>
+            <li><a href="https://www.onelook.com" class="">Onelook Dictionary</a></li>         
+            <li><a href="https://www.rhymezone.com/" class="">RhymeZone</a></li>    
+            <li><a href="https://www.quinapalus.com/cgi-bin/qat" class="">QAT</a></li>  
+
+            <!-- TODO: need to adjust these components to scale to contents, only fits 4 list items above -->
             
              
           </ul>
@@ -558,9 +607,10 @@
           <h3 class="mb-0">Crossword Clues</h3>
           <!--<div class="mb-1 text-muted">Nov 12</div>-->
           <ul>
-            <li><a href="https://www.onelook.com/thesaurus/" class="stretched-link">Onelook Reverse Dictionary</a></li>
-            <li><a href="http://www.oneacross.com/" class="stretched-link">OneAcross</a></li>
-            <li><a href="https://www.wordplays.com/crossword-solver/" class="stretched-link">Wordplays Crossword Solver</a></li>  
+            <li><a href="https://www.onelook.com/thesaurus/" class="">Onelook Reverse Dictionary</a></li>
+            <li><a href="http://www.oneacross.com/" class="">OneAcross</a></li>
+            <li><a href="https://www.wordplays.com/crossword-solver/" class="">Wordplays Crossword Solver</a></li>  
+            <li><a href="https://relatedwords.org/" class="">RelatedWords.org</a></li>  
           </ul>
         </div>
         <!--<div class="col-auto d-none d-lg-block">
@@ -610,7 +660,7 @@
 
       <div class="blog-post" id="simple-morse">
         <h2 class="blog-post-title">Morse</h2>
-        <p class="blog-post-meta"><span class="lookFor">Look for: </span>sound, audio, hear, audio, dit, dah, dash, tele-gram, 2 unique characters or occurrences of single vs double/triple</p>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>sound, audio, hear, short, long, gap, dit, dah, dot, dash, tele-gram/graph, CB, CBer, gap, long, radio, Sam, Samuel, SOS, stop, telegraph, 2 unique characters or occurrences of single vs double/triple</p>
         
         <!--<p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>-->
 
@@ -638,6 +688,8 @@
           <li><a href="https://tools.timodenk.com/morse-code-to-text" target="_blank"> Timodenk online tools morse decoder </a></li>
           <li><a href="https://v2.cryptii.com/morsecode/text" target="_blank"> Cryptii morse decoder </a></li>
           <li><a href="https://www.dcode.fr/morse-code" target="_blank"> dCode.fr morse decoder </a></li>
+          <li><a href="https://morsify.net/" target="_blank"> Morsify.net </a></li>
+          
           
         </ul>
         <!--<p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
@@ -663,7 +715,7 @@
 
       <div class="blog-post" id="semaphore">
         <h2 class="blog-post-title">Semaphore</h2>
-        <p class="blog-post-meta"><span class="lookFor">Look for: </span>3x3 grids with center dot, clock hands/times, red/yellow, "flag", "signal", raising or lowering hands/arms, circle of 8, angle with orientation/direction indicated</p>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>3x3 grids with center dot, circle of 8, clock hands/times, red/yellow, "flag", "signal", waving/raising/lowering hands/arms, angle/degrees with orientation/direction indicated, at a distance, at sea, railroad/railway</p>
         
         <div class="svgControls">
           <button class="btn btn-sm btn-outline-secondary clearAllSVG" onClick="clearLetter('semaphore')">Clear All</button>
@@ -701,6 +753,7 @@
         <ul>
           <li><a href="http://flystrip.com/corby/code/test.html#semaphore" target="_blank"> Corby Semaphore decoder </a></li>
           <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original semaphore braille table (uses checkboxes) </a></li>
+          <li><a href="http://www.puzzazz.com/how-to/codes" target="_blank"> Puzzazz Semaphore Interpretations </a></li>
         </ul>
         <!--<p></p>-->
       </div><!-- /.blog-post #semaphore -->
@@ -709,7 +762,7 @@
 
       <div class="blog-post" id="pigpen">
         <h2 class="blog-post-title">Pigpen</h2>
-        <p class="blog-post-meta"><span class="lookFor">Look for: </span>dots and lines (but not Morse or Mayan numerals), pig, pen, porcine</p>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>dots and lines (but not Morse or Mayan numerals), pig, pen, porcine, Charlie Brown, Peanuts, dirty, farm, farming, intersections, oink, sty</p>
 
         <div class="svgControls">
           <button class="btn btn-sm btn-outline-secondary clearAllSVG" onClick="clearLetter('pigpenAll')">Clear All Pigpen</button>
@@ -790,7 +843,7 @@
 
       <div class="blog-post" id="braille">
         <h2 class="blog-post-title">Braille</h2>
-        <p class="blog-post-meta"><span class="lookFor">Look for: </span>2x3 grids, dots, "sight", "see", "feel", "dark"</p>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>2x3 grids, dots, "sight", "see", "feel", "dark", blind, raised bumps, bumpy, finger, holes, tactile, texture, touch</p>
         <!-- braille pips labelled like this: https://www.pharmabraille.com/pharmaceutical-braille/the-braille-alphabet/-->
         <!--
           1 4
@@ -846,7 +899,7 @@
         <h2 class="blog-post-title">Base Conversions</h2>
         <!--<p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>-->
 
-        <h3>Binary</h3>
+        <h3 class="blog-subheader">Binary</h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>0s and 1s (and letters that resemble them, e.g. I, l, o, O), 2 unique characters, "bits", "bytes", shaded or provided elements vs. empty</p>
 
         <table>
@@ -872,7 +925,7 @@
         </table>
 
 
-        <h3>Ternary</h3>
+        <h3 class="blog-subheader">Ternary</h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>3 unique characters, or occurences of 0 vs. 1 vs. 2</p>
 
         <table>
@@ -898,7 +951,7 @@
         </table>
 
 
-        <h3>Hex</h3>
+        <h3 class="blog-subheader">Hex</h3>
 
         <table>
           <tr>
@@ -924,13 +977,12 @@
 
         <!-- https://jsbin.com/depesen/edit?html,css,js,console,output -->
 
-        <p>See also:</p>
+        <p class="seeAlso">See also:</p>
         <ul>
           <li><a href="http://www.cut-the-knot.org/binary.shtml" target="_blank">Cut The Knot Base Converter</a></li>
           <li><a href="http://software.ellerton.net/txt2bin/" target="_blank">ASCII/Unicode + Base Converter</a></li>
         </ul>
-        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+        <!--<p></p>-->
       </div><!-- /.blog-post #base-conversion -->
 
       <!--
@@ -940,6 +992,330 @@
       </nav>
       -->
 
+      <!-- Others to incorporate: -->
+      <!--
+      Alphabet - ABC, ABCs, alpha, alphabet, 5-bit binary, capital, character, letter, message, say, syllabary, ternary, writing, written, XYZ, 26, 27
+      
+      Word Alphabets  - Alpha, Bravo, Charlie, NATO, Western, Union
+      
+      ASCII - alphabet, ASCII, binary, 7-bit binary, 8-bit binary, computer code, decimal, hex, hexadecimal, numbers
+      
+      Kitchen - amount, bake, baking, capacity, convert, conversion, cook, cooking, liquid, measure, measurement, volume  
+      https://picklebums.com/wp-content/uploads/2016/07/cheat-sheet2.png
+
+      Nautical Flags - NATO, Nautical, navigate, navy, sail, sailing, sea, ship, signal, wave
+      
+      Sign Language - ASL, deaf, hand, hands, shadow puppet, sign, signs, signing
+      
+      States - America, capital, continental, country, fifty, president, union, united, USA 
+      puzzazz: http://www.puzzazz.com/how-to/codes has good united states table-->
+
+      <h3 class="pb-4 mb-4 font-italic border-bottom">
+        Reference
+      </h3>
+
+      <div class="blog-post" id="ciphers">
+        <h2 class="blog-post-title">Ciphers</h2>
+        <!--<p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>-->
+
+        <!--<h3 class="blog-subheader">Subheader h3</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+
+        <!-- https://jsbin.com/diyeqaj/edit?html,js,console,output -->
+        <h3 class="blog-subheader">ROT Decoder (Ceasarian Cipher)</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span> "shift", uncommon letters repeated in a result string, particularly if a lack of vowels present </p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td class="label">Input:</td>
+              <td>
+                <textarea id="rotInput" value="0" oninput="decodeROT(this)" size="24"></textarea>
+                <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('rotInput')">X</button>
+              </td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-1</td>
+              <td><span id="converted_rot1"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-2</td>
+              <td><span id="converted_rot2"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-3</td>
+              <td><span id="converted_rot3"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-4</td>
+              <td><span id="converted_rot4"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-5</td>
+              <td><span id="converted_rot5"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-6</td>
+              <td><span id="converted_rot6"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-7</td>
+              <td><span id="converted_rot7"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-8</td>
+              <td><span id="converted_rot8"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-9</td>
+              <td><span id="converted_rot9"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-10</td>
+              <td><span id="converted_rot10"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-11</td>
+              <td><span id="converted_rot11"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-12</td>
+              <td><span id="converted_rot12"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-13</td>
+              <td><span id="converted_rot13"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-14</td>
+              <td><span id="converted_rot14"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-15</td>
+              <td><span id="converted_rot15"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-16</td>
+              <td><span id="converted_rot16"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-17</td>
+              <td><span id="converted_rot17"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-18</td>
+              <td><span id="converted_rot18"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-19</td>
+              <td><span id="converted_rot19"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-20</td>
+              <td><span id="converted_rot20"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-21</td>
+              <td><span id="converted_rot21"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-22</td>
+              <td><span id="converted_rot22"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-23</td>
+              <td><span id="converted_rot23"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-24</td>
+              <td><span id="converted_rot24"></span></td>
+          </tr>
+          <tr>
+              <td class="rot-label">ROT-25</td>
+              <td><span id="converted_rot25"></span></td>
+          </tr>
+        </tbody></table>
+
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li><a href="https://rot13.com/" target="_blank">rot13.com</a></li>
+          <li><a href="http://theblob.org/rot.cgi" target="_blank">theblob rot.cgi</a></li>
+          <li><a href="https://www.dcode.fr/rot-cipher" target="_blank">dCode.fr ROT Cipher</a></li>
+        </ul>
+        <!--<p></p>-->
+
+
+        <!--<h3 class="blog-subheader">Subheader h3</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+
+        <h3 class="blog-subheader">Bacon Cipher</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>two typefaces, using As and Bs for binary with 5 characters</p>
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="https://www.dcode.fr/bacon-cipher" target="_blank">dCode.fr Bacon Cipher</a></li>
+        </ul>
+
+        <!--
+        <h3 class="blog-subheader">xxx</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="xxx" target="_blank">xxx</a></li>
+        </ul>
+        -->
+
+
+      </div><!-- /.blog-post #ciphers -->
+
+      <hr>
+
+      <div class="blog-post" id="other">
+        <h2 class="blog-post-title">Other</h2>
+        <!--<p class="blog-post-meta">Description... less used?</p>-->
+
+        <h3 class="blog-subheader">Periodic Table</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>"element", science themes, 1 or 2 letter abbreviations with first capitalized, chemicals, atoms, molecules</p>
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="https://www.webelements.com/" target="_blank">WebElements</a></li>
+          <li><a href="https://www.ptable.com/" target="_blank">PTable</a></li>
+          <li><a href="https://www.chemicool.com" target="_blank">Chemicool</a></li>
+          <li><a href="http://www.rsc.org/periodic-table" target="_blank">RSC.org</a></li>
+          <li><a href="http://college-cram.com/study/chemistry/atoms-and-molecules/chemical-symbol-lookup-table/" target="_blank">CollegeCram Chemical Symbol Lookup Table</a></li>
+
+          <!-- todo: common molecules: salt, sugar, water, hydrogen,alcohol, ethanol, baking soda, carbon dioxide, oxygen o2 -->
+        </ul>
+
+        <h3 class="blog-subheader"> Resistor Color Code </h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>the normal ROYGBIV colors, without indigo, but including brown, black, and grey (9 colors total, each represents a digit)</p>
+        <img id="xxx" src="http://www.imajeenyus.com/electronics/20120315_resistor_colour_code/lrw_resistor_colour_code.jpg" />
+
+
+        <!-- include TinEye? seems buggy lately... -->
+        <!-- google images: https://www.google.com/imghp -->
+        
+
+        <h3 class="blog-subheader">Flags of the World</h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="https://www.onlinestores.com/flagdetective/" target="_blank">Flag Detective</a></li>
+          <li><a href="http://www.flagid.org" target="_blank">Flag Identifier</a></li>
+        </ul>
+
+        <h3 class="blog-subheader">Country Codes</h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <p class="blog-post-meta">2-letter and 3-letter country codes, phone dialing codes</p>
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="https://www.worldatlas.com/aatlas/ctycodes.htm" target="_blank">World Atlas</a></li>
+        </ul>
+
+        <h3 class="blog-subheader">Airport Codes</h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="https://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" target="_blank">NationsOnline IATA Codes</a></li>
+        </ul>
+
+        <h3 class="blog-subheader"> Piano Keyboard </h3>
+        <!--
+        <p class="blog-post-meta">
+          <span class="lookFor">Look for: </span>...
+        </p>-->
+        <img id="" src="http://www.piano-keyboard-guide.com/wp-content/uploads/2015/05/piano-keyboard_diagram_2.jpg" />
+        <img id="" src="http://www.puzzazz.com/how-to/images/piano.png" /><!-- includes solfege -->
+
+        <h3 class="blog-subheader"> Music Clefs/Notes </h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>audio, aural, music, notes, scale, sing, sang, song, Sound of Music</p>
+        <img id="xxx" src="https://fishandbicylces.files.wordpress.com/2015/03/scale.jpg" />
+        <!--<img id="xxx" src="http://www.puzzazz.com/how-to/images/musical-staffs.png" />-->
+        
+
+        <h3 class="blog-subheader"> Phone Keypad </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="https://www.dcode.fr/tools/phone-keypad/images/keypad.png" />
+        
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li><a href="https://www.dcode.fr/phone-keypad-cipher" target="_blank">dCode.fr Phone Keypad Cipher</a></li>
+          <li><a href="https://phonespell.org/" target="_blank">PhoneSpell</a></li>
+        </ul>
+
+        <h3 class="blog-subheader"> Qwerty Keyboard </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/KB_United_States.svg/2560px-KB_United_States.svg.png" />
+
+        <h3 class="blog-subheader"> Mayan Numbers </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="http://www.yorku.ca/lbianchi/sts3700b/maya_num.gif" />
+
+        <h3 class="blog-subheader"> Egyptian Hieroglyphs </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="http://www.virtual-egypt.com/newhtml/hieroglyphics/sample/alphabet.gif" />
+
+        <h3 class="blog-subheader"> Anglo Saxon Runes Alphabet </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Anglosaxonrunes.svg/1062px-Anglosaxonrunes.svg.png" />
+
+
+        <h3 class="blog-subheader"> Greek Alphabet </h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>  alpha, delta (but not NATO), gamma, omega, college, fraternity/sorority house, math, mathematics, Greek, Phoenician, science</p>
+        <img id="xxx" src="https://www.ancient.eu/img/r/p/500x600/3426.png" />
+        <!-- https://www.medcalc.org/manual/greek_alphabet.php -->
+
+        <img id="xxx" src="https://www.drodd.com/images16/greek-letters1.gif" />
+        
+        <!-- small: 
+        <!-- phonecian vs greek https://www.crystalinks.com/canaanitealph.gif -->
+        
+
+
+        <!-- need summary image for below -->
+        <!-- https://en.wikipedia.org/wiki/Astronomical_symbols -->
+        <!-- Astronomy  alphabet, astral, astronomy, celestial, heavens, planets, sky, space, star, stellar, sun, any planet name -->
+
+        <!-- watermarked, but good: https://previews.123rf.com/images/3xy/3xy1511/3xy151100026/47904280-signs-of-the-zodiac-and-the-solar-system-the-asteroid-goddesses-alchemy-symbols-and-four-elements.jpg -->
+
+        <h3 class="blog-subheader"> Astrological Zodiac </h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>12, Age, animals, astral, astrology, astronomy, birthday, celestial, circle, date, dates, elements, horoscope, longitude, latitude, planets, sign, signs, stars, twelve</p>
+        <img id="xxx" src="https://newsfeed.ph/wp-content/uploads/2016/04/zodiac-signs.png" />
+
+        <h3 class="blog-subheader"> Chinese Zodiac</h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="" src="https://internchina.com/wp-content/uploads/aic-zodiac-3.gif" />
+
+        <h3 class="blog-subheader"> NATO Phonetic/Morse/Semaphore/Naval Flag Alphabet </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="https://www.outsideopen.com/wp-content/uploads/2015/03/Outside-Open-NATO-Alphabet-v11.jpg" />
+
+        <h3 class="blog-subheader"> xxx </h3>
+        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <img id="xxx" src="xxx" />
+
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li>...</li>
+        </ul>
+        <!--<p></p>-->
+
+      </div><!-- /.blog-post #other -->
+
+      <!--
+      <div class="blog-post" id="xyz">
+        <h2 class="blog-post-title">xxx</h2>
+        <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
+
+        <img src="" />
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li>...</li>
+        </ul>
+        <!--<p></p>-->
+      <!--</div><!-- /.blog-post #xyz -->
+      
+      <!--<hr>-->
+
     </div><!-- /.blog-main -->
 
 
@@ -947,18 +1323,16 @@
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-italic">Other Resource Lists</h4>
         <ol class="list-unstyled mb-0">
-          <li><a href="https://www.collegepuzzlechallenge.com/PuzzleTools.aspx">Microsoft College Puzzle Challenge</a></li>
-          <!--<li><a href="https://www.dcode.fr/tools-list">dCode.fr Tools</a></li>
-          <li><a href="#">February 2014</a></li>
-          <li><a href="#">January 2014</a></li>
-          <li><a href="#">December 2013</a></li>
-          <li><a href="#">November 2013</a></li>
-          <li><a href="#">October 2013</a></li>-->
-          <li><a href="http://tilde.club/~maryr/hunting/">Tilde.club Resources</a></li>
-          <li><a href="http://luthorien.altervista.org/Tools/">[Very] Red Luth Riddle Tools</a></li>
-          <li><a href="https://geoleaks.com/gccodebook-v2-0-h.pdf">MIMHS Codebook PDF</a></li>
-          <li><a href="https://www.geocacherscompass.com/puzzle-resources/">Geocacher's Compass</a></li>
+          <li><a href="https://www.collegepuzzlechallenge.com/PuzzleTools.aspx" target="_blank">Microsoft College Puzzle Challenge</a></li>
+          <li><a href="https://www.dcode.fr/tools-list" target="_blank">dCode.fr Tools</a></li>
+          <!--<li><a href="#xxx" target="_blank">xxx</a></li>-->
+          <li><a href="https://www.geocacherscompass.com/puzzle-resources/" target="_blank">Geocacher's Compass</a></li>
           <li><a href="https://www.geocachingtoolbox.com/">Geocaching Toolbox</a></li>
+          <li><a href="https://geoleaks.com/gccodebook-v2-0-h.pdf" target="_blank">MIMHS Codebook PDF</a></li>
+          <li><a href="https://scv.bu.edu/~aarondf/puzzles.html" target="_blank">Aaron's Puzzle Palace</a></li>
+          <li><a href="http://luthorien.altervista.org/Tools/" target="_blank">[Very] Red Luth Riddle Tools</a></li>
+          <li><a href="http://tilde.club/~maryr/hunting/" target="_blank">Tilde.club Resources</a></li>
+          <li><a href="http://www.puzzazz.com/how-to/codes" target="_blank">Puzzazz Common Codes</a></li>
         </ol>
       </div>
 
@@ -984,16 +1358,27 @@
       </div>
     -->
 
-      <!--
       <div class="p-4">
-        <h4 class="font-italic">Elsewhere</h4>
-        <ol class="list-unstyled">
+        <!--<h4 class="font-italic">Elsewhere</h4>-->
+        <!--<ol class="list-unstyled">
           <li><a href="#">GitHub</a></li>
           <li><a href="#">Twitter</a></li>
           <li><a href="#">Facebook</a></li>
+        </ol>-->
+        <h4 class="font-italic">Events</h4>
+        <ol class="list-unstyled">
+          <li><a href="http://www.puzzledpint.com/" target="_blank">Puzzled Pint</a></li>
+          <li><a href="http://playdash.org/" target="_blank">DASH</a></li>
+          <li><a href="http://puzzlehuntcalendar.com/" target="_blank">Puzzle Hunt Calendar</a></li>
+          <li><a href="http://www.pandamagazine.com/" target="_blank">P&A Magazine</a></li>
+          <li><a href="http://www.interngame.com/" target="_blank">Microsoft Intern Game</a></li>
+          <li><a href="http://web.mit.edu/puzzle/www/" target="_blank">MIT Mystery Hunt</a></li>
+          <!--<li><a href="#">Facebook</a></li>-->
+          <!-- http://nja.me/argtools ios app -->
         </ol>
       </div>
-    -->
+      
+ 
     </aside><!-- /.blog-sidebar -->
 
   </div><!-- /.row -->
