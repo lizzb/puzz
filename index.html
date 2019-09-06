@@ -526,6 +526,201 @@
       var textareaInputID = "morseInput";
       document.getElementById("morseOutput").innerHTML = decodeMorse(document.getElementById(textareaInputID).value);
     }
+      
+      
+function microTemplate(templateStr,objData){
+ for(var prop in objData)
+   templateStr = templateStr.replace(new RegExp('{{'+prop+'}}','g'), objData[prop]);
+ return templateStr;
+}
+
+// see https://jsbin.com/wehitid/edit?html,css,js,output
+function init() {
+    var tmpl = document.getElementById("otherItem_template").innerHTML; 
+
+  var output = "";
+  
+  for(var i=0; i< items.length; i++) {
+    output += microTemplate(tmpl, {
+      title: items[i].title, 
+      imgid: items[i].imgID, 
+      lookFor: items[i].lookFor, 
+      imgURL: items[i].imgURL, 
+      // seeAlsoSites: [ ]  
+    });
+  }
+  
+  document.getElementById("otherItemsOutput").innerHTML = output;
+  
+}
+      
+      var items = [
+// 
+// <!-- include TinEye? seems buggy lately... -->
+// <!-- google images: https://www.google.com/imghp -->
+        
+  /*{
+    title: "",
+    lookFor: "",
+    imgID: "",
+    imgURL: "",
+    seeAlsoSites: [
+      { siteName: "", siteURL: "" },
+      { siteName: "", siteURL: "" },
+    ]  
+  },
+  {
+    title: "",
+    lookFor: "",
+    imgID: "",
+    imgURL: "",
+    seeAlsoSites: [ ]
+  },*/
+  {
+    title: "Periodic Table",
+    lookFor: "\"element\", science themes, 1 or 2 letter abbreviations with first capitalized, chemicals, atoms, molecules",
+    //     // <!-- todo: common molecules: salt, sugar, water, hydrogen,alcohol, ethanol, baking soda, carbon dioxide, oxygen o2 -->
+    imgID: "",
+    imgURL: "",
+    seeAlsoSites: [
+      { siteName: "WebElements", siteURL: "https://www.webelements.com/" },
+      { siteName: "PTable", siteURL: "https://www.ptable.com/" },
+      { siteName: "Chemicool", siteURL: "https://www.chemicool.com" },
+      { siteName: "RSC.org", siteURL: "http://www.rsc.org/periodic-table" },
+      { siteName: "CollegeCram Chemical Symbol Lookup Table", siteURL: "http://college-cram.com/study/chemistry/atoms-and-molecules/chemical-symbol-lookup-table/" },
+    ]  
+  },
+  {
+    title: "Resistor Color Code",
+    lookFor: "the normal ROYGBIV colors, without indigo, but including brown, black, and grey (9 colors total, each represents a digit)",
+    imgID: "",
+    imgURL: "http://www.imajeenyus.com/electronics/20120315_resistor_colour_code/lrw_resistor_colour_code.jpg",
+    seeAlsoSites: [ ]  
+  },
+  {
+    title: "Flags of the World",
+    lookFor: "",
+    imgID: "",
+    imgURL: "",
+    seeAlsoSites: [
+      { siteName: "Flag Detective", siteURL: "https://www.onlinestores.com/flagdetective/" },
+      { siteName: "Flag Identifier", siteURL: "http://www.flagid.org" },
+    ]  
+  },
+  {
+    title: "Country Codes",
+    lookFor: "",
+    // 2-letter and 3-letter country codes, phone dialing codes
+    imgID: "",
+    imgURL: "",
+    seeAlsoSites: [
+      { siteName: "World Atlas", siteURL: "https://www.worldatlas.com/aatlas/ctycodes.htm" },
+    ]  
+  },
+  {
+    title: "Airport Codes",
+    lookFor: "",
+    imgID: "",
+    imgURL: "",
+    seeAlsoSites: [
+      { siteName: "NationsOnline IATA Codes", siteURL: "https://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm" },
+    ]  
+  },
+  {
+    title: "Piano Keyboard",
+    lookFor: "",
+    imgID: "",
+    imgURL: "http://www.puzzazz.com/how-to/images/piano.png",
+    // backup: http://www.piano-keyboard-guide.com/wp-content/uploads/2015/05/piano-keyboard_diagram_2.jpg
+    seeAlsoSites: [
+      { siteName: "", siteURL: "" },
+      { siteName: "", siteURL: "" },
+    ]  
+  },
+  {
+    title: "Music Clefs/Notes",
+    lookFor: "audio, aural, music, notes, scale, sing, sang, song, Sound of Music",
+    imgID: "",
+    imgURL: "https://fishandbicylces.files.wordpress.com/2015/03/scale.jpg",
+    // backup: http://www.puzzazz.com/how-to/images/musical-staffs.png
+    seeAlsoSites: [ ]
+  },
+  {
+    title: "Phone Keypad",
+    lookFor: "",
+    imgID: "",
+    imgURL: "https://www.dcode.fr/tools/phone-keypad/images/keypad.png",
+    seeAlsoSites: [
+      { siteName: "dCode.fr Phone Keypad Cipher", siteURL: "https://www.dcode.fr/phone-keypad-cipher" },
+      { siteName: "PhoneSpell", siteURL: "https://phonespell.org/" },
+    ]  
+  },
+  {
+    title: "Qwerty Keyboard",
+    lookFor: "",
+    imgID: "",
+    imgURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/KB_United_States.svg/2560px-KB_United_States.svg.png",
+    seeAlsoSites: [ ]
+  },
+  {
+    title: "Mayan Numbers",
+    lookFor: "",
+    imgID: "",
+    imgURL: "http://www.yorku.ca/lbianchi/sts3700b/maya_num.gif",
+    seeAlsoSites: [ ]
+  },
+  {
+    title: "Egyptian Hieroglyphs",
+    lookFor: "",
+    imgID: "",
+    imgURL: "http://www.virtual-egypt.com/newhtml/hieroglyphics/sample/alphabet.gif",
+    seeAlsoSites: [ ]
+  },
+  {
+    title: "Anglo Saxon Runes Alphabet",
+    lookFor: "",
+    imgID: "",
+    imgURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Anglosaxonrunes.svg/1062px-Anglosaxonrunes.svg.png",
+    seeAlsoSites: [ ]
+  },
+  {
+    title: "Greek Alphabet",
+    lookFor: "alpha, delta (but not NATO), gamma, omega, college, fraternity/sorority house, math, mathematics, Greek, Phoenician, science",
+    imgID: "",
+    imgURL: "https://www.ancient.eu/img/r/p/500x600/3426.png",
+    // also: https://www.drodd.com/images16/greek-letters1.gif
+    // backup: https://www.medcalc.org/manual/greek_alphabet.php
+    // small, phonecian vs greek: https://www.crystalinks.com/canaanitealph.gif
+    seeAlsoSites: [ ]
+  },
+  {
+    title: "Astrological Zodiac",
+    lookFor: "12, Age, animals, astral, astrology, astronomy, birthday, celestial, circle, date, dates, elements, horoscope, longitude, latitude, planets, sign, signs, stars, twelve",
+    // need summary image: https://en.wikipedia.org/wiki/Astronomical_symbols
+    // Astronomy  alphabet, astral, astronomy, celestial, heavens, planets, sky, space, star, stellar, sun, any planet name -->
+    imgID: "",
+    imgURL: "https://newsfeed.ph/wp-content/uploads/2016/04/zodiac-signs.png",
+    // watermarked, but good: https://previews.123rf.com/images/3xy/3xy1511/3xy151100026/47904280-signs-of-the-zodiac-and-the-solar-system-the-asteroid-goddesses-alchemy-symbols-and-four-elements.jpg
+    seeAlsoSites: [ ]  
+  },
+  {
+    title: "Chinese Zodiac",
+    lookFor: "",
+    imgID: "",
+    imgURL: "https://internchina.com/wp-content/uploads/aic-zodiac-3.gif",
+    seeAlsoSites: [ ]  
+  },
+  {
+    title: "NATO Phonetic/Morse/Semaphore/Naval Flag Alphabet",
+    lookFor: "",
+    imgID: "",
+    imgURL: "https://www.outsideopen.com/wp-content/uploads/2015/03/Outside-Open-NATO-Alphabet-v11.jpg",
+    seeAlsoSites: [ ]  
+  },
+  ];
+      
+      // probably a better way to do this/better place
+      window.onload = init;  
   </script>
 
 
@@ -1306,6 +1501,8 @@
           <li>...</li>
         </ul>
         <!--<p></p>-->
+        
+        <div id="otherItemsOutput"></div>
 
       </div><!-- /.blog-post #other -->
 
