@@ -534,25 +534,7 @@ function microTemplate(templateStr,objData){
  return templateStr;
 }
 
-// see https://jsbin.com/wehitid/edit?html,css,js,output
-function init() {
-    var tmpl = document.getElementById("otherItem_template").innerHTML; 
 
-  var output = "";
-  
-  for(var i=0; i< items.length; i++) {
-    output += microTemplate(tmpl, {
-      title: items[i].title, 
-      imgid: items[i].imgID, 
-      lookFor: items[i].lookFor, 
-      imgURL: items[i].imgURL, 
-      // seeAlsoSites: [ ]  
-    });
-  }
-  
-  document.getElementById("otherItemsOutput").innerHTML = output;
-  
-}
       
       var items = [
 // 
@@ -719,8 +701,6 @@ function init() {
   },
   ];
       
-      // probably a better way to do this/better place
-      window.onload = init;  
   </script>
 
 
@@ -1598,6 +1578,30 @@ function init() {
   </p>
 </footer>
 
+    <script>
+            // see https://jsbin.com/wehitid/edit?html,css,js,output
+function init() {
+    var tmpl = document.getElementById("otherItem_template").innerHTML; 
+
+  var output = "";
+  
+  for(var i=0; i< items.length; i++) {
+    output += microTemplate(tmpl, {
+      title: items[i].title, 
+      imgid: items[i].imgID, 
+      lookFor: items[i].lookFor, 
+      imgURL: items[i].imgURL, 
+      // seeAlsoSites: [ ]  
+    });
+  }
+  
+  document.getElementById("otherItemsOutput").innerHTML = output;
+  
+}
+      
+      // probably a better way to do this/better place
+      window.onload = init;  
+    </script>
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
