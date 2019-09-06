@@ -1337,6 +1337,23 @@ function microTemplate(templateStr,objData){
         <ul>
           <li><a href="https://www.dcode.fr/bacon-cipher" target="_blank">dCode.fr Bacon Cipher</a></li>
         </ul>
+        
+        <!-- todo: insert substitution cipher solver, or links (quipquip, dcode.fr, richkni?).
+Made a simple one here: https://jsbin.com/yejeguk/3/edit?html,css,js,output -->
+        
+        <!-- Other ciphers to include:
+Types of ciphers:
+Affine, Atbash, Autokey/Autoclave, Baconian, Beaufort, Keyword, Playfair, ROT/Caesar, Vigenere
+
+brainfuck
+ook
+
+Specialty:
+Gold Bug (edgar allan poe)
+dancing men (sherlock holmes)
+myst
+dCode.fr has many decoders for these
+-->
 
         <!--
         <h3 class="blog-subheader">xxx</h3>
@@ -1355,6 +1372,17 @@ function microTemplate(templateStr,objData){
       <div class="blog-post" id="other">
         <h2 class="blog-post-title">Other</h2>
         <!--<p class="blog-post-meta">Description... less used?</p>-->
+        
+        <h3 class="blog-subheader">Cryptic Crossword Guides</h3>
+        <p class="blog-post-meta">Below are some guides for identifying and solving different cryptic crossword clues.
+          Common types include: Charade, Double Definition, Anagram, Hidden Word, Reversal, Container, Deletions, Selections, Homophone/'Sounds Like', etc.</p>
+        <p class="seeAlso">See:</p>
+        <ul>
+          <li><a href="https://www.theatlantic.com/past/docs/issues/puzzclue.htm" target="_blank">The Atlantic Puzzler Instructions</a></li>
+          <li><a href="http://www.crosswordtools.com/cryptic-crosswords.php" target="_blank">CrosswordTools</a></li>
+          <li><a href="https://www.crosswordgenius.com/guide-to-cryptic-crosswords/" target="_blank">CrosswordGenius</a></li>
+
+        </ul>
 
         <h3 class="blog-subheader">Periodic Table</h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>"element", science themes, 1 or 2 letter abbreviations with first capitalized, chemicals, atoms, molecules</p>
@@ -1508,7 +1536,6 @@ function microTemplate(templateStr,objData){
       <div class="p-4 mb-3 bg-light rounded">
         <h4 class="font-italic">Other Resource Lists</h4>
         <ol class="list-unstyled mb-0">
-          <li><a href="https://www.boxentriq.com/code-breaking" target="_blank">Boxentriq Tools</a></li>
           <li><a href="https://www.collegepuzzlechallenge.com/PuzzleTools.aspx" target="_blank">Microsoft College Puzzle Challenge</a></li>
           <li><a href="https://www.dcode.fr/tools-list" target="_blank">dCode.fr Tools</a></li>
           <!--<li><a href="#xxx" target="_blank">xxx</a></li>-->
@@ -1517,9 +1544,11 @@ function microTemplate(templateStr,objData){
           <li><a href="https://geoleaks.com/gccodebook-v2-0-h.pdf" target="_blank">MIMHS Codebook PDF</a></li>
           <li><a href="https://scv.bu.edu/~aarondf/puzzles.html" target="_blank">Aaron's Puzzle Palace</a></li>
           <li><a href="http://luthorien.altervista.org/Tools/" target="_blank">[Very] Red Luth Riddle Tools</a></li>
+          <li><a href="https://www.boxentriq.com/code-breaking" target="_blank">Boxentriq Tools</a></li>
           <li><a href="http://tilde.club/~maryr/hunting/" target="_blank">Tilde.club Resources</a></li>
           <li><a href="http://www.puzzazz.com/how-to/codes" target="_blank">Puzzazz Common Codes</a></li>
           <li><a href="http://lizzb.github.io/puzz/common" target="_blank">lizzb Common Letter Encodings</a></li>
+          <li><a href="https://www.mit.edu/~puzzle/resources/haveyoutried.pdf" target="_blank">MIT's Have You Tried...?</a></li>
         </ol>
       </div>
 
@@ -1580,7 +1609,7 @@ function microTemplate(templateStr,objData){
   </p>
 </footer>
 
-    <script type="text/html" id="otherItem_template">
+<script type="text/html" id="otherItem_template">
   <h3 class="blog-subheader">{{title}}</h3>
   <p class="blog-post-meta"><span class="lookFor">Look for: </span>{{lookFor}}</p>
   <!--<p class="blog-post-meta">description...</p>-->
@@ -1595,13 +1624,11 @@ function microTemplate(templateStr,objData){
   </ul>
   -->
 </script>
-    <script>
-            // see https://jsbin.com/wehitid/edit?html,css,js,output
+<script>
+// see https://jsbin.com/wehitid/edit?html,css,js,output
 function init() {
-    var tmpl = document.getElementById("otherItem_template").innerHTML; 
-
-  var output = "";
-  
+  var tmpl = document.getElementById("otherItem_template").innerHTML; 
+  var output = ""; 
   for(var i=0; i< items.length; i++) {
     output += microTemplate(tmpl, {
       title: items[i].title, 
@@ -1611,9 +1638,7 @@ function init() {
       // seeAlsoSites: [ ]  
     });
   }
-  
   document.getElementById("otherItemsOutput").innerHTML = output;
-  
 }
       
       // probably a better way to do this/better place
