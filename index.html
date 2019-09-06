@@ -1578,6 +1578,21 @@ function microTemplate(templateStr,objData){
   </p>
 </footer>
 
+    <script type="text/html" id="otherItem_template">
+  <h3 class="blog-subheader">{{title}}</h3>
+  <p class="blog-post-meta"><span class="lookFor">Look for: </span>{{lookFor}}</p>
+  <!--<p class="blog-post-meta">description...</p>-->
+  <img id="{{imgid}}" src="{{imgURL}}" class="other-img"/>
+
+  <!--<p class="seeAlso">See:</p>--><!-- should only say "See" if no image above -->
+  <!--
+  <p class="seeAlso">See also:</p>
+  <ul>
+    <li><a href="{{url1}}" target="_blank">{{url1name}}</a></li>
+    <li><a href="{{url2}}" target="_blank">{{url2name}}</a></li>
+  </ul>
+  -->
+</script>
     <script>
             // see https://jsbin.com/wehitid/edit?html,css,js,output
 function init() {
