@@ -31,7 +31,7 @@
 
 	<script>
 	  $(document).ready(function() {
-	    $('#example').DataTable( {
+	    $('#alphabets').DataTable( {
 	        dom: 'Bfrtip',
 	        paging: false,
 	        buttons: [
@@ -41,21 +41,31 @@
 	} );
 		
 	  $(document).ready(function() {
-	    $('#example2').DataTable( {
+	    $('#states').DataTable( {
 	        dom: 'Bfrtip',
 	        paging: false,
 	        buttons: [
 	            'columnsToggle'
 	        ]
 	    } );
-	} );		
+	} );
+
+		$(document).ready(function() {
+	    $('#countries').DataTable( {
+	        dom: 'Bfrtip',
+	        paging: false,
+	        buttons: [
+	            'columnsToggle'
+	        ]
+	    } );
+	} );	
 		
 	</script>
 
 </head>
 <body>
 
-<table id="example" class="display" style="width:100%">
+<table id="alphabets" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Letter</th>
@@ -458,7 +468,8 @@
     </table>
 	
 	<hr />
-	<table id="example2" class="display" style="width:100%">
+	<br /><br />
+	<table id="states" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Flag</th>
@@ -832,6 +843,2032 @@
             </tr>
         </tfoot>
     </table>
+	
+	
+	<hr />
+	<br /><br />
+	
+	<!-- see also:
+https://countrycode.org/
+https://www.worldatlas.com/aatlas/ctycodes.htm
+https://flagpedia.net/index - images sourced
+
+https://www.countries-ofthe-world.com/flags-of-the-world.html - 2 column
+
+https://www.cia.gov/library/publications/the-world-factbook/docs/flagsoftheworld.html - extra ui componenets
+
+www.crwflags.com/fotw/flags/cou_.html - nice and basic on grey -- but doesn't scale to fit viewport?
+
+https://www.countryflags.com/en/ -- have to hover for names
+
+https://www.united-states-flag.com/world.html - store but fairly good visuals
+
+https://en.wikipedia.org/wiki/Gallery_of_sovereign_state_flags
+
+https://en.wikipedia.org/wiki/List_of_flags_by_color_combination
+
+-->
+
+<!-- made quickly using https://shancarter.github.io/mr-data-converter/, no styling associated atm -->
+	<!-- i'm not even sure if all of these are accurate / how up to date, and how many are countries vs only calling codes -->
+<table id="countries" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th class="country-name"><a href="https://www.worldatlas.com/aatlas/ctycodes.htm" target="_blank">COUNTRY</a></th>
+      <th class="a2-iso">A2 (ISO)</th>
+      <th class="a3-un">A3 (UN)</th>
+      <th class="un-num">NUM (UN)</th>
+      <th class="dialing-code">DIALING CODE</th>
+      <th class="flag-img"><a href="https://flagpedia.net/index" target="_blank">Flag</a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="firstRow">
+      <td class="country-name">Afghanistan</td>
+      <td class="a2-iso">AF</td>
+      <td class="a3-un">AFG</td>
+      <td class="un-num">4</td>
+      <td class="dialing-code">93</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/af.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Albania</td>
+      <td class="a2-iso">AL</td>
+      <td class="a3-un">ALB</td>
+      <td class="un-num">8</td>
+      <td class="dialing-code">355</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/al.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Algeria</td>
+      <td class="a2-iso">DZ</td>
+      <td class="a3-un">DZA</td>
+      <td class="un-num">12</td>
+      <td class="dialing-code">213</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/dz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">American Samoa</td>
+      <td class="a2-iso">AS</td>
+      <td class="a3-un">ASM</td>
+      <td class="un-num">16</td>
+      <td class="dialing-code">1-684</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/as.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Andorra</td>
+      <td class="a2-iso">AD</td>
+      <td class="a3-un">AND</td>
+      <td class="un-num">20</td>
+      <td class="dialing-code">376</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ad.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Angola</td>
+      <td class="a2-iso">AO</td>
+      <td class="a3-un">AGO</td>
+      <td class="un-num">24</td>
+      <td class="dialing-code">244</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ao.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Anguilla</td>
+      <td class="a2-iso">AI</td>
+      <td class="a3-un">AIA</td>
+      <td class="un-num">660</td>
+      <td class="dialing-code">1-264</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ai.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Antarctica</td>
+      <td class="a2-iso">AQ</td>
+      <td class="a3-un">ATA</td>
+      <td class="un-num">10</td>
+      <td class="dialing-code">672</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/aq.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Antigua and Barbuda</td>
+      <td class="a2-iso">AG</td>
+      <td class="a3-un">ATG</td>
+      <td class="un-num">28</td>
+      <td class="dialing-code">1-268</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ag.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Argentina</td>
+      <td class="a2-iso">AR</td>
+      <td class="a3-un">ARG</td>
+      <td class="un-num">32</td>
+      <td class="dialing-code">54</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ar.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Armenia</td>
+      <td class="a2-iso">AM</td>
+      <td class="a3-un">ARM</td>
+      <td class="un-num">51</td>
+      <td class="dialing-code">374</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/am.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Aruba</td>
+      <td class="a2-iso">AW</td>
+      <td class="a3-un">ABW</td>
+      <td class="un-num">533</td>
+      <td class="dialing-code">297</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/aw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Australia</td>
+      <td class="a2-iso">AU</td>
+      <td class="a3-un">AUS</td>
+      <td class="un-num">36</td>
+      <td class="dialing-code">61</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/au.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Austria</td>
+      <td class="a2-iso">AT</td>
+      <td class="a3-un">AUT</td>
+      <td class="un-num">40</td>
+      <td class="dialing-code">43</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/at.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Azerbaijan</td>
+      <td class="a2-iso">AZ</td>
+      <td class="a3-un">AZE</td>
+      <td class="un-num">31</td>
+      <td class="dialing-code">994</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/az.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bahamas</td>
+      <td class="a2-iso">BS</td>
+      <td class="a3-un">BHS</td>
+      <td class="un-num">44</td>
+      <td class="dialing-code">1-242</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bs.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bahrain</td>
+      <td class="a2-iso">BH</td>
+      <td class="a3-un">BHR</td>
+      <td class="un-num">48</td>
+      <td class="dialing-code">973</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bh.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bangladesh</td>
+      <td class="a2-iso">BD</td>
+      <td class="a3-un">BGD</td>
+      <td class="un-num">50</td>
+      <td class="dialing-code">880</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bd.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Barbados</td>
+      <td class="a2-iso">BB</td>
+      <td class="a3-un">BRB</td>
+      <td class="un-num">52</td>
+      <td class="dialing-code">1-246</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bb.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Belarus</td>
+      <td class="a2-iso">BY</td>
+      <td class="a3-un">BLR</td>
+      <td class="un-num">112</td>
+      <td class="dialing-code">375</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/by.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Belgium</td>
+      <td class="a2-iso">BE</td>
+      <td class="a3-un">BEL</td>
+      <td class="un-num">56</td>
+      <td class="dialing-code">32</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/be.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Belize</td>
+      <td class="a2-iso">BZ</td>
+      <td class="a3-un">BLZ</td>
+      <td class="un-num">84</td>
+      <td class="dialing-code">501</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Benin</td>
+      <td class="a2-iso">BJ</td>
+      <td class="a3-un">BEN</td>
+      <td class="un-num">204</td>
+      <td class="dialing-code">229</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bj.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bermuda</td>
+      <td class="a2-iso">BM</td>
+      <td class="a3-un">BMU</td>
+      <td class="un-num">60</td>
+      <td class="dialing-code">1-441</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bhutan</td>
+      <td class="a2-iso">BT</td>
+      <td class="a3-un">BTN</td>
+      <td class="un-num">64</td>
+      <td class="dialing-code">975</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bolivia</td>
+      <td class="a2-iso">BO</td>
+      <td class="a3-un">BOL</td>
+      <td class="un-num">68</td>
+      <td class="dialing-code">591</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bo.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bonaire</td>
+      <td class="a2-iso">BQ</td>
+      <td class="a3-un">BES</td>
+      <td class="un-num">535</td>
+      <td class="dialing-code">599</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bq.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bosnia and Herzegovina</td>
+      <td class="a2-iso">BA</td>
+      <td class="a3-un">BIH</td>
+      <td class="un-num">70</td>
+      <td class="dialing-code">387</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ba.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Botswana</td>
+      <td class="a2-iso">BW</td>
+      <td class="a3-un">BWA</td>
+      <td class="un-num">72</td>
+      <td class="dialing-code">267</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bouvet Island</td>
+      <td class="a2-iso">BV</td>
+      <td class="a3-un">BVT</td>
+      <td class="un-num">74</td>
+      <td class="dialing-code">47</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bv.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Brazil</td>
+      <td class="a2-iso">BR</td>
+      <td class="a3-un">BRA</td>
+      <td class="un-num">76</td>
+      <td class="dialing-code">55</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/br.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">British Indian Ocean Territory</td>
+      <td class="a2-iso">IO</td>
+      <td class="a3-un">IOT</td>
+      <td class="un-num">86</td>
+      <td class="dialing-code">246</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/io.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Brunei Darussalam</td>
+      <td class="a2-iso">BN</td>
+      <td class="a3-un">BRN</td>
+      <td class="un-num">96</td>
+      <td class="dialing-code">673</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Bulgaria</td>
+      <td class="a2-iso">BG</td>
+      <td class="a3-un">BGR</td>
+      <td class="un-num">100</td>
+      <td class="dialing-code">359</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Burkina Faso</td>
+      <td class="a2-iso">BF</td>
+      <td class="a3-un">BFA</td>
+      <td class="un-num">854</td>
+      <td class="dialing-code">226</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Burundi</td>
+      <td class="a2-iso">BI</td>
+      <td class="a3-un">BDI</td>
+      <td class="un-num">108</td>
+      <td class="dialing-code">257</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bi.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cambodia</td>
+      <td class="a2-iso">KH</td>
+      <td class="a3-un">KHM</td>
+      <td class="un-num">116</td>
+      <td class="dialing-code">855</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kh.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cameroon</td>
+      <td class="a2-iso">CM</td>
+      <td class="a3-un">CMR</td>
+      <td class="un-num">120</td>
+      <td class="dialing-code">237</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Canada</td>
+      <td class="a2-iso">CA</td>
+      <td class="a3-un">CAN</td>
+      <td class="un-num">124</td>
+      <td class="dialing-code">1</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ca.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cape Verde</td>
+      <td class="a2-iso">CV</td>
+      <td class="a3-un">CPV</td>
+      <td class="un-num">132</td>
+      <td class="dialing-code">238</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cv.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cayman Islands</td>
+      <td class="a2-iso">KY</td>
+      <td class="a3-un">CYM</td>
+      <td class="un-num">136</td>
+      <td class="dialing-code">1-345</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ky.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Central African Republic</td>
+      <td class="a2-iso">CF</td>
+      <td class="a3-un">CAF</td>
+      <td class="un-num">140</td>
+      <td class="dialing-code">236</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Chad</td>
+      <td class="a2-iso">TD</td>
+      <td class="a3-un">TCD</td>
+      <td class="un-num">148</td>
+      <td class="dialing-code">235</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/td.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Chile</td>
+      <td class="a2-iso">CL</td>
+      <td class="a3-un">CHL</td>
+      <td class="un-num">152</td>
+      <td class="dialing-code">56</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">China</td>
+      <td class="a2-iso">CN</td>
+      <td class="a3-un">CHN</td>
+      <td class="un-num">156</td>
+      <td class="dialing-code">86</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Christmas Island</td>
+      <td class="a2-iso">CX</td>
+      <td class="a3-un">CXR</td>
+      <td class="un-num">162</td>
+      <td class="dialing-code">61</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cx.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cocos (Keeling) Islands</td>
+      <td class="a2-iso">CC</td>
+      <td class="a3-un">CCK</td>
+      <td class="un-num">166</td>
+      <td class="dialing-code">61</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Colombia</td>
+      <td class="a2-iso">CO</td>
+      <td class="a3-un">COL</td>
+      <td class="un-num">170</td>
+      <td class="dialing-code">57</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/co.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Comoros</td>
+      <td class="a2-iso">KM</td>
+      <td class="a3-un">COM</td>
+      <td class="un-num">174</td>
+      <td class="dialing-code">269</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/km.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Congo</td>
+      <td class="a2-iso">CG</td>
+      <td class="a3-un">COG</td>
+      <td class="un-num">178</td>
+      <td class="dialing-code">242</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Democratic Republic of the Congo</td>
+      <td class="a2-iso">CD</td>
+      <td class="a3-un">COD</td>
+      <td class="un-num">180</td>
+      <td class="dialing-code">243</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cd.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cook Islands</td>
+      <td class="a2-iso">CK</td>
+      <td class="a3-un">COK</td>
+      <td class="un-num">184</td>
+      <td class="dialing-code">682</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ck.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Costa Rica</td>
+      <td class="a2-iso">CR</td>
+      <td class="a3-un">CRI</td>
+      <td class="un-num">188</td>
+      <td class="dialing-code">506</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Croatia</td>
+      <td class="a2-iso">HR</td>
+      <td class="a3-un">HRV</td>
+      <td class="un-num">191</td>
+      <td class="dialing-code">385</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/hr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cuba</td>
+      <td class="a2-iso">CU</td>
+      <td class="a3-un">CUB</td>
+      <td class="un-num">192</td>
+      <td class="dialing-code">53</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Curacao</td>
+      <td class="a2-iso">CW</td>
+      <td class="a3-un">CUW</td>
+      <td class="un-num">531</td>
+      <td class="dialing-code">599</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cyprus</td>
+      <td class="a2-iso">CY</td>
+      <td class="a3-un">CYP</td>
+      <td class="un-num">196</td>
+      <td class="dialing-code">357</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cy.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Czech Republic</td>
+      <td class="a2-iso">CZ</td>
+      <td class="a3-un">CZE</td>
+      <td class="un-num">203</td>
+      <td class="dialing-code">420</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/cz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Cote d'Ivoire</td>
+      <td class="a2-iso">CI</td>
+      <td class="a3-un">CIV</td>
+      <td class="un-num">384</td>
+      <td class="dialing-code">225</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ci.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Denmark</td>
+      <td class="a2-iso">DK</td>
+      <td class="a3-un">DNK</td>
+      <td class="un-num">208</td>
+      <td class="dialing-code">45</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/dk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Djibouti</td>
+      <td class="a2-iso">DJ</td>
+      <td class="a3-un">DJI</td>
+      <td class="un-num">262</td>
+      <td class="dialing-code">253</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/dj.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Dominica</td>
+      <td class="a2-iso">DM</td>
+      <td class="a3-un">DMA</td>
+      <td class="un-num">212</td>
+      <td class="dialing-code">1-767</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/dm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Dominican Republic</td>
+      <td class="a2-iso">DO</td>
+      <td class="a3-un">DOM</td>
+      <td class="un-num">214</td>
+      <td class="dialing-code">1-809,1-829,1-849</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/do.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Ecuador</td>
+      <td class="a2-iso">EC</td>
+      <td class="a3-un">ECU</td>
+      <td class="un-num">218</td>
+      <td class="dialing-code">593</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ec.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Egypt</td>
+      <td class="a2-iso">EG</td>
+      <td class="a3-un">EGY</td>
+      <td class="un-num">818</td>
+      <td class="dialing-code">20</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/eg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">El Salvador</td>
+      <td class="a2-iso">SV</td>
+      <td class="a3-un">SLV</td>
+      <td class="un-num">222</td>
+      <td class="dialing-code">503</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sv.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Equatorial Guinea</td>
+      <td class="a2-iso">GQ</td>
+      <td class="a3-un">GNQ</td>
+      <td class="un-num">226</td>
+      <td class="dialing-code">240</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gq.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Eritrea</td>
+      <td class="a2-iso">ER</td>
+      <td class="a3-un">ERI</td>
+      <td class="un-num">232</td>
+      <td class="dialing-code">291</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/er.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Estonia</td>
+      <td class="a2-iso">EE</td>
+      <td class="a3-un">EST</td>
+      <td class="un-num">233</td>
+      <td class="dialing-code">372</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ee.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Ethiopia</td>
+      <td class="a2-iso">ET</td>
+      <td class="a3-un">ETH</td>
+      <td class="un-num">231</td>
+      <td class="dialing-code">251</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/et.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Falkland Islands (Malvinas)</td>
+      <td class="a2-iso">FK</td>
+      <td class="a3-un">FLK</td>
+      <td class="un-num">238</td>
+      <td class="dialing-code">500</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/fk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Faroe Islands</td>
+      <td class="a2-iso">FO</td>
+      <td class="a3-un">FRO</td>
+      <td class="un-num">234</td>
+      <td class="dialing-code">298</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/fo.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Fiji</td>
+      <td class="a2-iso">FJ</td>
+      <td class="a3-un">FJI</td>
+      <td class="un-num">242</td>
+      <td class="dialing-code">679</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/fj.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Finland</td>
+      <td class="a2-iso">FI</td>
+      <td class="a3-un">FIN</td>
+      <td class="un-num">246</td>
+      <td class="dialing-code">358</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/fi.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">France</td>
+      <td class="a2-iso">FR</td>
+      <td class="a3-un">FRA</td>
+      <td class="un-num">250</td>
+      <td class="dialing-code">33</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/fr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">French Guiana</td>
+      <td class="a2-iso">GF</td>
+      <td class="a3-un">GUF</td>
+      <td class="un-num">254</td>
+      <td class="dialing-code">594</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">French Polynesia</td>
+      <td class="a2-iso">PF</td>
+      <td class="a3-un">PYF</td>
+      <td class="un-num">258</td>
+      <td class="dialing-code">689</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">French Southern Territories</td>
+      <td class="a2-iso">TF</td>
+      <td class="a3-un">ATF</td>
+      <td class="un-num">260</td>
+      <td class="dialing-code">262</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Gabon</td>
+      <td class="a2-iso">GA</td>
+      <td class="a3-un">GAB</td>
+      <td class="un-num">266</td>
+      <td class="dialing-code">241</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ga.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Gambia</td>
+      <td class="a2-iso">GM</td>
+      <td class="a3-un">GMB</td>
+      <td class="un-num">270</td>
+      <td class="dialing-code">220</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Georgia</td>
+      <td class="a2-iso">GE</td>
+      <td class="a3-un">GEO</td>
+      <td class="un-num">268</td>
+      <td class="dialing-code">995</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ge.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Germany</td>
+      <td class="a2-iso">DE</td>
+      <td class="a3-un">DEU</td>
+      <td class="un-num">276</td>
+      <td class="dialing-code">49</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/de.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Ghana</td>
+      <td class="a2-iso">GH</td>
+      <td class="a3-un">GHA</td>
+      <td class="un-num">288</td>
+      <td class="dialing-code">233</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gh.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Gibraltar</td>
+      <td class="a2-iso">GI</td>
+      <td class="a3-un">GIB</td>
+      <td class="un-num">292</td>
+      <td class="dialing-code">350</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gi.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Greece</td>
+      <td class="a2-iso">GR</td>
+      <td class="a3-un">GRC</td>
+      <td class="un-num">300</td>
+      <td class="dialing-code">30</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Greenland</td>
+      <td class="a2-iso">GL</td>
+      <td class="a3-un">GRL</td>
+      <td class="un-num">304</td>
+      <td class="dialing-code">299</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Grenada</td>
+      <td class="a2-iso">GD</td>
+      <td class="a3-un">GRD</td>
+      <td class="un-num">308</td>
+      <td class="dialing-code">1-473</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gd.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guadeloupe</td>
+      <td class="a2-iso">GP</td>
+      <td class="a3-un">GLP</td>
+      <td class="un-num">312</td>
+      <td class="dialing-code">590</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gp.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guam</td>
+      <td class="a2-iso">GU</td>
+      <td class="a3-un">GUM</td>
+      <td class="un-num">316</td>
+      <td class="dialing-code">1-671</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guatemala</td>
+      <td class="a2-iso">GT</td>
+      <td class="a3-un">GTM</td>
+      <td class="un-num">320</td>
+      <td class="dialing-code">502</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guernsey</td>
+      <td class="a2-iso">GG</td>
+      <td class="a3-un">GGY</td>
+      <td class="un-num">831</td>
+      <td class="dialing-code">44</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guinea</td>
+      <td class="a2-iso">GN</td>
+      <td class="a3-un">GIN</td>
+      <td class="un-num">324</td>
+      <td class="dialing-code">224</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guinea-Bissau</td>
+      <td class="a2-iso">GW</td>
+      <td class="a3-un">GNB</td>
+      <td class="un-num">624</td>
+      <td class="dialing-code">245</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Guyana</td>
+      <td class="a2-iso">GY</td>
+      <td class="a3-un">GUY</td>
+      <td class="un-num">328</td>
+      <td class="dialing-code">592</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gy.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Haiti</td>
+      <td class="a2-iso">HT</td>
+      <td class="a3-un">HTI</td>
+      <td class="un-num">332</td>
+      <td class="dialing-code">509</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ht.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Heard Island and McDonald Islands</td>
+      <td class="a2-iso">HM</td>
+      <td class="a3-un">HMD</td>
+      <td class="un-num">334</td>
+      <td class="dialing-code">672</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/hm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Holy See (Vatican City State)</td>
+      <td class="a2-iso">VA</td>
+      <td class="a3-un">VAT</td>
+      <td class="un-num">336</td>
+      <td class="dialing-code">379</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/va.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Honduras</td>
+      <td class="a2-iso">HN</td>
+      <td class="a3-un">HND</td>
+      <td class="un-num">340</td>
+      <td class="dialing-code">504</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/hn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Hong Kong</td>
+      <td class="a2-iso">HK</td>
+      <td class="a3-un">HKG</td>
+      <td class="un-num">344</td>
+      <td class="dialing-code">852</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/hk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Hungary</td>
+      <td class="a2-iso">HU</td>
+      <td class="a3-un">HUN</td>
+      <td class="un-num">348</td>
+      <td class="dialing-code">36</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/hu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Iceland</td>
+      <td class="a2-iso">IS</td>
+      <td class="a3-un">ISL</td>
+      <td class="un-num">352</td>
+      <td class="dialing-code">354</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/is.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">India</td>
+      <td class="a2-iso">IN</td>
+      <td class="a3-un">IND</td>
+      <td class="un-num">356</td>
+      <td class="dialing-code">91</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/in.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Indonesia</td>
+      <td class="a2-iso">ID</td>
+      <td class="a3-un">IDN</td>
+      <td class="un-num">360</td>
+      <td class="dialing-code">62</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/id.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Iran, Islamic Republic of</td>
+      <td class="a2-iso">IR</td>
+      <td class="a3-un">IRN</td>
+      <td class="un-num">364</td>
+      <td class="dialing-code">98</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ir.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Iraq</td>
+      <td class="a2-iso">IQ</td>
+      <td class="a3-un">IRQ</td>
+      <td class="un-num">368</td>
+      <td class="dialing-code">964</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/iq.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Ireland</td>
+      <td class="a2-iso">IE</td>
+      <td class="a3-un">IRL</td>
+      <td class="un-num">372</td>
+      <td class="dialing-code">353</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ie.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Isle of Man</td>
+      <td class="a2-iso">IM</td>
+      <td class="a3-un">IMN</td>
+      <td class="un-num">833</td>
+      <td class="dialing-code">44</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/im.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Israel</td>
+      <td class="a2-iso">IL</td>
+      <td class="a3-un">ISR</td>
+      <td class="un-num">376</td>
+      <td class="dialing-code">972</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/il.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Italy</td>
+      <td class="a2-iso">IT</td>
+      <td class="a3-un">ITA</td>
+      <td class="un-num">380</td>
+      <td class="dialing-code">39</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/it.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Jamaica</td>
+      <td class="a2-iso">JM</td>
+      <td class="a3-un">JAM</td>
+      <td class="un-num">388</td>
+      <td class="dialing-code">1-876</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/jm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Japan</td>
+      <td class="a2-iso">JP</td>
+      <td class="a3-un">JPN</td>
+      <td class="un-num">392</td>
+      <td class="dialing-code">81</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/jp.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Jersey</td>
+      <td class="a2-iso">JE</td>
+      <td class="a3-un">JEY</td>
+      <td class="un-num">832</td>
+      <td class="dialing-code">44</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/je.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Jordan</td>
+      <td class="a2-iso">JO</td>
+      <td class="a3-un">JOR</td>
+      <td class="un-num">400</td>
+      <td class="dialing-code">962</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/jo.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Kazakhstan</td>
+      <td class="a2-iso">KZ</td>
+      <td class="a3-un">KAZ</td>
+      <td class="un-num">398</td>
+      <td class="dialing-code">7</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Kenya</td>
+      <td class="a2-iso">KE</td>
+      <td class="a3-un">KEN</td>
+      <td class="un-num">404</td>
+      <td class="dialing-code">254</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ke.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Kiribati</td>
+      <td class="a2-iso">KI</td>
+      <td class="a3-un">KIR</td>
+      <td class="un-num">296</td>
+      <td class="dialing-code">686</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ki.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Korea, Democratic People's Republic of</td>
+      <td class="a2-iso">KP</td>
+      <td class="a3-un">PRK</td>
+      <td class="un-num">408</td>
+      <td class="dialing-code">850</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kp.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Korea, Republic of</td>
+      <td class="a2-iso">KR</td>
+      <td class="a3-un">KOR</td>
+      <td class="un-num">410</td>
+      <td class="dialing-code">82</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Kuwait</td>
+      <td class="a2-iso">KW</td>
+      <td class="a3-un">KWT</td>
+      <td class="un-num">414</td>
+      <td class="dialing-code">965</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Kyrgyzstan</td>
+      <td class="a2-iso">KG</td>
+      <td class="a3-un">KGZ</td>
+      <td class="un-num">417</td>
+      <td class="dialing-code">996</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Lao People's Democratic Republic</td>
+      <td class="a2-iso">LA</td>
+      <td class="a3-un">LAO</td>
+      <td class="un-num">418</td>
+      <td class="dialing-code">856</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/la.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Latvia</td>
+      <td class="a2-iso">LV</td>
+      <td class="a3-un">LVA</td>
+      <td class="un-num">428</td>
+      <td class="dialing-code">371</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lv.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Lebanon</td>
+      <td class="a2-iso">LB</td>
+      <td class="a3-un">LBN</td>
+      <td class="un-num">422</td>
+      <td class="dialing-code">961</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lb.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Lesotho</td>
+      <td class="a2-iso">LS</td>
+      <td class="a3-un">LSO</td>
+      <td class="un-num">426</td>
+      <td class="dialing-code">266</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ls.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Liberia</td>
+      <td class="a2-iso">LR</td>
+      <td class="a3-un">LBR</td>
+      <td class="un-num">430</td>
+      <td class="dialing-code">231</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Libya</td>
+      <td class="a2-iso">LY</td>
+      <td class="a3-un">LBY</td>
+      <td class="un-num">434</td>
+      <td class="dialing-code">218</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ly.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Liechtenstein</td>
+      <td class="a2-iso">LI</td>
+      <td class="a3-un">LIE</td>
+      <td class="un-num">438</td>
+      <td class="dialing-code">423</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/li.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Lithuania</td>
+      <td class="a2-iso">LT</td>
+      <td class="a3-un">LTU</td>
+      <td class="un-num">440</td>
+      <td class="dialing-code">370</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Luxembourg</td>
+      <td class="a2-iso">LU</td>
+      <td class="a3-un">LUX</td>
+      <td class="un-num">442</td>
+      <td class="dialing-code">352</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Macao</td>
+      <td class="a2-iso">MO</td>
+      <td class="a3-un">MAC</td>
+      <td class="un-num">446</td>
+      <td class="dialing-code">853</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mo.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Macedonia, the Former Yugoslav Republic of</td>
+      <td class="a2-iso">MK</td>
+      <td class="a3-un">MKD</td>
+      <td class="un-num">807</td>
+      <td class="dialing-code">389</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Madagascar</td>
+      <td class="a2-iso">MG</td>
+      <td class="a3-un">MDG</td>
+      <td class="un-num">450</td>
+      <td class="dialing-code">261</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Malawi</td>
+      <td class="a2-iso">MW</td>
+      <td class="a3-un">MWI</td>
+      <td class="un-num">454</td>
+      <td class="dialing-code">265</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Malaysia</td>
+      <td class="a2-iso">MY</td>
+      <td class="a3-un">MYS</td>
+      <td class="un-num">458</td>
+      <td class="dialing-code">60</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/my.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Maldives</td>
+      <td class="a2-iso">MV</td>
+      <td class="a3-un">MDV</td>
+      <td class="un-num">462</td>
+      <td class="dialing-code">960</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mv.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mali</td>
+      <td class="a2-iso">ML</td>
+      <td class="a3-un">MLI</td>
+      <td class="un-num">466</td>
+      <td class="dialing-code">223</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ml.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Malta</td>
+      <td class="a2-iso">MT</td>
+      <td class="a3-un">MLT</td>
+      <td class="un-num">470</td>
+      <td class="dialing-code">356</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Marshall Islands</td>
+      <td class="a2-iso">MH</td>
+      <td class="a3-un">MHL</td>
+      <td class="un-num">584</td>
+      <td class="dialing-code">692</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mh.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Martinique</td>
+      <td class="a2-iso">MQ</td>
+      <td class="a3-un">MTQ</td>
+      <td class="un-num">474</td>
+      <td class="dialing-code">596</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mq.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mauritania</td>
+      <td class="a2-iso">MR</td>
+      <td class="a3-un">MRT</td>
+      <td class="un-num">478</td>
+      <td class="dialing-code">222</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mauritius</td>
+      <td class="a2-iso">MU</td>
+      <td class="a3-un">MUS</td>
+      <td class="un-num">480</td>
+      <td class="dialing-code">230</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mayotte</td>
+      <td class="a2-iso">YT</td>
+      <td class="a3-un">MYT</td>
+      <td class="un-num">175</td>
+      <td class="dialing-code">262</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/yt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mexico</td>
+      <td class="a2-iso">MX</td>
+      <td class="a3-un">MEX</td>
+      <td class="un-num">484</td>
+      <td class="dialing-code">52</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mx.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Micronesia, Federated States of</td>
+      <td class="a2-iso">FM</td>
+      <td class="a3-un">FSM</td>
+      <td class="un-num">583</td>
+      <td class="dialing-code">691</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/fm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Moldova, Republic of</td>
+      <td class="a2-iso">MD</td>
+      <td class="a3-un">MDA</td>
+      <td class="un-num">498</td>
+      <td class="dialing-code">373</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/md.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Monaco</td>
+      <td class="a2-iso">MC</td>
+      <td class="a3-un">MCO</td>
+      <td class="un-num">492</td>
+      <td class="dialing-code">377</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mongolia</td>
+      <td class="a2-iso">MN</td>
+      <td class="a3-un">MNG</td>
+      <td class="un-num">496</td>
+      <td class="dialing-code">976</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Montenegro</td>
+      <td class="a2-iso">ME</td>
+      <td class="a3-un">MNE</td>
+      <td class="un-num">499</td>
+      <td class="dialing-code">382</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/me.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Montserrat</td>
+      <td class="a2-iso">MS</td>
+      <td class="a3-un">MSR</td>
+      <td class="un-num">500</td>
+      <td class="dialing-code">1-664</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ms.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Morocco</td>
+      <td class="a2-iso">MA</td>
+      <td class="a3-un">MAR</td>
+      <td class="un-num">504</td>
+      <td class="dialing-code">212</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ma.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Mozambique</td>
+      <td class="a2-iso">MZ</td>
+      <td class="a3-un">MOZ</td>
+      <td class="un-num">508</td>
+      <td class="dialing-code">258</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Myanmar</td>
+      <td class="a2-iso">MM</td>
+      <td class="a3-un">MMR</td>
+      <td class="un-num">104</td>
+      <td class="dialing-code">95</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Namibia</td>
+      <td class="a2-iso">NA</td>
+      <td class="a3-un">NAM</td>
+      <td class="un-num">516</td>
+      <td class="dialing-code">264</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/na.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Nauru</td>
+      <td class="a2-iso">NR</td>
+      <td class="a3-un">NRU</td>
+      <td class="un-num">520</td>
+      <td class="dialing-code">674</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/nr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Nepal</td>
+      <td class="a2-iso">NP</td>
+      <td class="a3-un">NPL</td>
+      <td class="un-num">524</td>
+      <td class="dialing-code">977</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/np.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Netherlands</td>
+      <td class="a2-iso">NL</td>
+      <td class="a3-un">NLD</td>
+      <td class="un-num">528</td>
+      <td class="dialing-code">31</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/nl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">New Caledonia</td>
+      <td class="a2-iso">NC</td>
+      <td class="a3-un">NCL</td>
+      <td class="un-num">540</td>
+      <td class="dialing-code">687</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/nc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">New Zealand</td>
+      <td class="a2-iso">NZ</td>
+      <td class="a3-un">NZL</td>
+      <td class="un-num">554</td>
+      <td class="dialing-code">64</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/nz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Nicaragua</td>
+      <td class="a2-iso">NI</td>
+      <td class="a3-un">NIC</td>
+      <td class="un-num">558</td>
+      <td class="dialing-code">505</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ni.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Niger</td>
+      <td class="a2-iso">NE</td>
+      <td class="a3-un">NER</td>
+      <td class="un-num">562</td>
+      <td class="dialing-code">227</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ne.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Nigeria</td>
+      <td class="a2-iso">NG</td>
+      <td class="a3-un">NGA</td>
+      <td class="un-num">566</td>
+      <td class="dialing-code">234</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ng.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Niue</td>
+      <td class="a2-iso">NU</td>
+      <td class="a3-un">NIU</td>
+      <td class="un-num">570</td>
+      <td class="dialing-code">683</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/nu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Norfolk Island</td>
+      <td class="a2-iso">NF</td>
+      <td class="a3-un">NFK</td>
+      <td class="un-num">574</td>
+      <td class="dialing-code">672</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/nf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Northern Mariana Islands</td>
+      <td class="a2-iso">MP</td>
+      <td class="a3-un">MNP</td>
+      <td class="un-num">580</td>
+      <td class="dialing-code">1-670</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mp.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Norway</td>
+      <td class="a2-iso">NO</td>
+      <td class="a3-un">NOR</td>
+      <td class="un-num">578</td>
+      <td class="dialing-code">47</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/no.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Oman</td>
+      <td class="a2-iso">OM</td>
+      <td class="a3-un">OMN</td>
+      <td class="un-num">512</td>
+      <td class="dialing-code">968</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/om.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Pakistan</td>
+      <td class="a2-iso">PK</td>
+      <td class="a3-un">PAK</td>
+      <td class="un-num">586</td>
+      <td class="dialing-code">92</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Palau</td>
+      <td class="a2-iso">PW</td>
+      <td class="a3-un">PLW</td>
+      <td class="un-num">585</td>
+      <td class="dialing-code">680</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Palestine, State of</td>
+      <td class="a2-iso">PS</td>
+      <td class="a3-un">PSE</td>
+      <td class="un-num">275</td>
+      <td class="dialing-code">970</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ps.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Panama</td>
+      <td class="a2-iso">PA</td>
+      <td class="a3-un">PAN</td>
+      <td class="un-num">591</td>
+      <td class="dialing-code">507</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pa.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Papua New Guinea</td>
+      <td class="a2-iso">PG</td>
+      <td class="a3-un">PNG</td>
+      <td class="un-num">598</td>
+      <td class="dialing-code">675</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Paraguay</td>
+      <td class="a2-iso">PY</td>
+      <td class="a3-un">PRY</td>
+      <td class="un-num">600</td>
+      <td class="dialing-code">595</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/py.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Peru</td>
+      <td class="a2-iso">PE</td>
+      <td class="a3-un">PER</td>
+      <td class="un-num">604</td>
+      <td class="dialing-code">51</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pe.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Philippines</td>
+      <td class="a2-iso">PH</td>
+      <td class="a3-un">PHL</td>
+      <td class="un-num">608</td>
+      <td class="dialing-code">63</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ph.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Pitcairn</td>
+      <td class="a2-iso">PN</td>
+      <td class="a3-un">PCN</td>
+      <td class="un-num">612</td>
+      <td class="dialing-code">870</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Poland</td>
+      <td class="a2-iso">PL</td>
+      <td class="a3-un">POL</td>
+      <td class="un-num">616</td>
+      <td class="dialing-code">48</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Portugal</td>
+      <td class="a2-iso">PT</td>
+      <td class="a3-un">PRT</td>
+      <td class="un-num">620</td>
+      <td class="dialing-code">351</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Puerto Rico</td>
+      <td class="a2-iso">PR</td>
+      <td class="a3-un">PRI</td>
+      <td class="un-num">630</td>
+      <td class="dialing-code">1</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Qatar</td>
+      <td class="a2-iso">QA</td>
+      <td class="a3-un">QAT</td>
+      <td class="un-num">634</td>
+      <td class="dialing-code">974</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/qa.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Romania</td>
+      <td class="a2-iso">RO</td>
+      <td class="a3-un">ROU</td>
+      <td class="un-num">642</td>
+      <td class="dialing-code">40</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ro.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Russian Federation</td>
+      <td class="a2-iso">RU</td>
+      <td class="a3-un">RUS</td>
+      <td class="un-num">643</td>
+      <td class="dialing-code">7</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ru.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Rwanda</td>
+      <td class="a2-iso">RW</td>
+      <td class="a3-un">RWA</td>
+      <td class="un-num">646</td>
+      <td class="dialing-code">250</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/rw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Reunion</td>
+      <td class="a2-iso">RE</td>
+      <td class="a3-un">REU</td>
+      <td class="un-num">638</td>
+      <td class="dialing-code">262</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/re.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Barthelemy</td>
+      <td class="a2-iso">BL</td>
+      <td class="a3-un">BLM</td>
+      <td class="un-num">652</td>
+      <td class="dialing-code">590</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/bl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Helena</td>
+      <td class="a2-iso">SH</td>
+      <td class="a3-un">SHN</td>
+      <td class="un-num">654</td>
+      <td class="dialing-code">290</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sh.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Kitts and Nevis</td>
+      <td class="a2-iso">KN</td>
+      <td class="a3-un">KNA</td>
+      <td class="un-num">659</td>
+      <td class="dialing-code">1-869</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/kn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Lucia</td>
+      <td class="a2-iso">LC</td>
+      <td class="a3-un">LCA</td>
+      <td class="un-num">662</td>
+      <td class="dialing-code">1-758</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Martin (French part)</td>
+      <td class="a2-iso">MF</td>
+      <td class="a3-un">MAF</td>
+      <td class="un-num">663</td>
+      <td class="dialing-code">590</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/mf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Pierre and Miquelon</td>
+      <td class="a2-iso">PM</td>
+      <td class="a3-un">SPM</td>
+      <td class="un-num">666</td>
+      <td class="dialing-code">508</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/pm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saint Vincent and the Grenadines</td>
+      <td class="a2-iso">VC</td>
+      <td class="a3-un">VCT</td>
+      <td class="un-num">670</td>
+      <td class="dialing-code">1-784</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/vc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Samoa</td>
+      <td class="a2-iso">WS</td>
+      <td class="a3-un">WSM</td>
+      <td class="un-num">882</td>
+      <td class="dialing-code">685</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ws.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">San Marino</td>
+      <td class="a2-iso">SM</td>
+      <td class="a3-un">SMR</td>
+      <td class="un-num">674</td>
+      <td class="dialing-code">378</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Sao Tome and Principe</td>
+      <td class="a2-iso">ST</td>
+      <td class="a3-un">STP</td>
+      <td class="un-num">678</td>
+      <td class="dialing-code">239</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/st.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Saudi Arabia</td>
+      <td class="a2-iso">SA</td>
+      <td class="a3-un">SAU</td>
+      <td class="un-num">682</td>
+      <td class="dialing-code">966</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sa.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Senegal</td>
+      <td class="a2-iso">SN</td>
+      <td class="a3-un">SEN</td>
+      <td class="un-num">686</td>
+      <td class="dialing-code">221</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Serbia</td>
+      <td class="a2-iso">RS</td>
+      <td class="a3-un">SRB</td>
+      <td class="un-num">688</td>
+      <td class="dialing-code">381</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/rs.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Seychelles</td>
+      <td class="a2-iso">SC</td>
+      <td class="a3-un">SYC</td>
+      <td class="un-num">690</td>
+      <td class="dialing-code">248</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Sierra Leone</td>
+      <td class="a2-iso">SL</td>
+      <td class="a3-un">SLE</td>
+      <td class="un-num">694</td>
+      <td class="dialing-code">232</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Singapore</td>
+      <td class="a2-iso">SG</td>
+      <td class="a3-un">SGP</td>
+      <td class="un-num">702</td>
+      <td class="dialing-code">65</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Sint Maarten (Dutch part)</td>
+      <td class="a2-iso">SX</td>
+      <td class="a3-un">SXM</td>
+      <td class="un-num">534</td>
+      <td class="dialing-code">1-721</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sx.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Slovakia</td>
+      <td class="a2-iso">SK</td>
+      <td class="a3-un">SVK</td>
+      <td class="un-num">703</td>
+      <td class="dialing-code">421</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Slovenia</td>
+      <td class="a2-iso">SI</td>
+      <td class="a3-un">SVN</td>
+      <td class="un-num">705</td>
+      <td class="dialing-code">386</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/si.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Solomon Islands</td>
+      <td class="a2-iso">SB</td>
+      <td class="a3-un">SLB</td>
+      <td class="un-num">90</td>
+      <td class="dialing-code">677</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sb.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Somalia</td>
+      <td class="a2-iso">SO</td>
+      <td class="a3-un">SOM</td>
+      <td class="un-num">706</td>
+      <td class="dialing-code">252</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/so.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">South Africa</td>
+      <td class="a2-iso">ZA</td>
+      <td class="a3-un">ZAF</td>
+      <td class="un-num">710</td>
+      <td class="dialing-code">27</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/za.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">South Georgia and the South Sandwich Islands</td>
+      <td class="a2-iso">GS</td>
+      <td class="a3-un">SGS</td>
+      <td class="un-num">239</td>
+      <td class="dialing-code">500</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gs.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">South Sudan</td>
+      <td class="a2-iso">SS</td>
+      <td class="a3-un">SSD</td>
+      <td class="un-num">728</td>
+      <td class="dialing-code">211</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ss.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Spain</td>
+      <td class="a2-iso">ES</td>
+      <td class="a3-un">ESP</td>
+      <td class="un-num">724</td>
+      <td class="dialing-code">34</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/es.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Sri Lanka</td>
+      <td class="a2-iso">LK</td>
+      <td class="a3-un">LKA</td>
+      <td class="un-num">144</td>
+      <td class="dialing-code">94</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/lk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Sudan</td>
+      <td class="a2-iso">SD</td>
+      <td class="a3-un">SDN</td>
+      <td class="un-num">729</td>
+      <td class="dialing-code">249</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sd.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Suriname</td>
+      <td class="a2-iso">SR</td>
+      <td class="a3-un">SUR</td>
+      <td class="un-num">740</td>
+      <td class="dialing-code">597</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Svalbard and Jan Mayen</td>
+      <td class="a2-iso">SJ</td>
+      <td class="a3-un">SJM</td>
+      <td class="un-num">744</td>
+      <td class="dialing-code">47</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sj.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Swaziland</td>
+      <td class="a2-iso">SZ</td>
+      <td class="a3-un">SWZ</td>
+      <td class="un-num">748</td>
+      <td class="dialing-code">268</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Sweden</td>
+      <td class="a2-iso">SE</td>
+      <td class="a3-un">SWE</td>
+      <td class="un-num">752</td>
+      <td class="dialing-code">46</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/se.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Switzerland</td>
+      <td class="a2-iso">CH</td>
+      <td class="a3-un">CHE</td>
+      <td class="un-num">756</td>
+      <td class="dialing-code">41</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ch.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Syrian Arab Republic</td>
+      <td class="a2-iso">SY</td>
+      <td class="a3-un">SYR</td>
+      <td class="un-num">760</td>
+      <td class="dialing-code">963</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/sy.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Taiwan</td>
+      <td class="a2-iso">TW</td>
+      <td class="a3-un">TWN</td>
+      <td class="un-num">158</td>
+      <td class="dialing-code">886</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tw.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Tajikistan</td>
+      <td class="a2-iso">TJ</td>
+      <td class="a3-un">TJK</td>
+      <td class="un-num">762</td>
+      <td class="dialing-code">992</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tj.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">United Republic of Tanzania</td>
+      <td class="a2-iso">TZ</td>
+      <td class="a3-un">TZA</td>
+      <td class="un-num">834</td>
+      <td class="dialing-code">255</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Thailand</td>
+      <td class="a2-iso">TH</td>
+      <td class="a3-un">THA</td>
+      <td class="un-num">764</td>
+      <td class="dialing-code">66</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/th.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Timor-Leste</td>
+      <td class="a2-iso">TL</td>
+      <td class="a3-un">TLS</td>
+      <td class="un-num">626</td>
+      <td class="dialing-code">670</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tl.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Togo</td>
+      <td class="a2-iso">TG</td>
+      <td class="a3-un">TGO</td>
+      <td class="un-num">768</td>
+      <td class="dialing-code">228</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Tokelau</td>
+      <td class="a2-iso">TK</td>
+      <td class="a3-un">TKL</td>
+      <td class="un-num">772</td>
+      <td class="dialing-code">690</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tk.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Tonga</td>
+      <td class="a2-iso">TO</td>
+      <td class="a3-un">TON</td>
+      <td class="un-num">776</td>
+      <td class="dialing-code">676</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/to.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Trinidad and Tobago</td>
+      <td class="a2-iso">TT</td>
+      <td class="a3-un">TTO</td>
+      <td class="un-num">780</td>
+      <td class="dialing-code">1-868</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tt.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Tunisia</td>
+      <td class="a2-iso">TN</td>
+      <td class="a3-un">TUN</td>
+      <td class="un-num">788</td>
+      <td class="dialing-code">216</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Turkey</td>
+      <td class="a2-iso">TR</td>
+      <td class="a3-un">TUR</td>
+      <td class="un-num">792</td>
+      <td class="dialing-code">90</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tr.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Turkmenistan</td>
+      <td class="a2-iso">TM</td>
+      <td class="a3-un">TKM</td>
+      <td class="un-num">795</td>
+      <td class="dialing-code">993</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tm.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Turks and Caicos Islands</td>
+      <td class="a2-iso">TC</td>
+      <td class="a3-un">TCA</td>
+      <td class="un-num">796</td>
+      <td class="dialing-code">1-649</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tc.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Tuvalu</td>
+      <td class="a2-iso">TV</td>
+      <td class="a3-un">TUV</td>
+      <td class="un-num">798</td>
+      <td class="dialing-code">688</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/tv.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Uganda</td>
+      <td class="a2-iso">UG</td>
+      <td class="a3-un">UGA</td>
+      <td class="un-num">800</td>
+      <td class="dialing-code">256</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ug.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Ukraine</td>
+      <td class="a2-iso">UA</td>
+      <td class="a3-un">UKR</td>
+      <td class="un-num">804</td>
+      <td class="dialing-code">380</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ua.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">United Arab Emirates</td>
+      <td class="a2-iso">AE</td>
+      <td class="a3-un">ARE</td>
+      <td class="un-num">784</td>
+      <td class="dialing-code">971</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ae.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">United Kingdom</td>
+      <td class="a2-iso">GB</td>
+      <td class="a3-un">GBR</td>
+      <td class="un-num">826</td>
+      <td class="dialing-code">44</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/gb.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">United States</td>
+      <td class="a2-iso">US</td>
+      <td class="a3-un">USA</td>
+      <td class="un-num">840</td>
+      <td class="dialing-code">1</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/us.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">United States Minor Outlying Islands</td>
+      <td class="a2-iso">UM</td>
+      <td class="a3-un">UMI</td>
+      <td class="un-num">581</td>
+      <td class="dialing-code">1</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/um.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Uruguay</td>
+      <td class="a2-iso">UY</td>
+      <td class="a3-un">URY</td>
+      <td class="un-num">858</td>
+      <td class="dialing-code">598</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/uy.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Uzbekistan</td>
+      <td class="a2-iso">UZ</td>
+      <td class="a3-un">UZB</td>
+      <td class="un-num">860</td>
+      <td class="dialing-code">998</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/uz.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Vanuatu</td>
+      <td class="a2-iso">VU</td>
+      <td class="a3-un">VUT</td>
+      <td class="un-num">548</td>
+      <td class="dialing-code">678</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/vu.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Venezuela</td>
+      <td class="a2-iso">VE</td>
+      <td class="a3-un">VEN</td>
+      <td class="un-num">862</td>
+      <td class="dialing-code">58</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ve.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Viet Nam</td>
+      <td class="a2-iso">VN</td>
+      <td class="a3-un">VNM</td>
+      <td class="un-num">704</td>
+      <td class="dialing-code">84</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/vn.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">British Virgin Islands</td>
+      <td class="a2-iso">VG</td>
+      <td class="a3-un">VGB</td>
+      <td class="un-num">92</td>
+      <td class="dialing-code">1-284</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/vg.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">US Virgin Islands</td>
+      <td class="a2-iso">VI</td>
+      <td class="a3-un">VIR</td>
+      <td class="un-num">850</td>
+      <td class="dialing-code">1-340</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/vi.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Wallis and Futuna</td>
+      <td class="a2-iso">WF</td>
+      <td class="a3-un">WLF</td>
+      <td class="un-num">876</td>
+      <td class="dialing-code">681</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/wf.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Western Sahara</td>
+      <td class="a2-iso">EH</td>
+      <td class="a3-un">ESH</td>
+      <td class="un-num">732</td>
+      <td class="dialing-code">212</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/eh.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Yemen</td>
+      <td class="a2-iso">YE</td>
+      <td class="a3-un">YEM</td>
+      <td class="un-num">887</td>
+      <td class="dialing-code">967</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/ye.png"/></td>
+    </tr>
+    <tr>
+      <td class="country-name">Zambia</td>
+      <td class="a2-iso">ZM</td>
+      <td class="a3-un">ZMB</td>
+      <td class="un-num">894</td>
+      <td class="dialing-code">260</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/zm.png"/></td>
+    </tr>
+    <tr class="lastRow">
+      <td class="country-name">Zimbabwe</td>
+      <td class="a2-iso">ZW</td>
+      <td class="a3-un">ZWE</td>
+      <td class="un-num">716</td>
+      <td class="dialing-code">263</td>
+      <td class="flag-img"><img class="country-flag" src="https://flagpedia.net/data/flags/h160/zw.png"/></td>
+    </tr>
+  </tbody>
+</table>
 
 
 </body>
