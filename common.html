@@ -60,10 +60,22 @@
 	    } );
 	} );	
 		
+		$(document).ready(function() {
+	    $('#elements').DataTable( {
+	        dom: 'Bfrtip',
+	        paging: false,
+	        buttons: [
+	            'columnsToggle'
+	        ]
+	    } );
+	} );	
+		
 	</script>
 
 </head>
 <body>
+	
+	<h2>Alphabets</h2>
 
 <table id="alphabets" class="display" style="width:100%">
         <thead>
@@ -469,6 +481,8 @@
 	
 	<hr />
 	<br /><br />
+	<h2>States</h2>
+	
 	<table id="states" class="display" style="width:100%">
         <thead>
             <tr>
@@ -848,6 +862,7 @@
 	<hr />
 	<br /><br />
 	
+	<h2>Countries</h2>
 	<!-- see also:
 https://countrycode.org/
 https://www.worldatlas.com/aatlas/ctycodes.htm
@@ -2870,6 +2885,1087 @@ https://en.wikipedia.org/wiki/List_of_flags_by_color_combination
   </tbody>
 </table>
 
+	<hr>
+	<br /><br />
+	<h2>Elements</h2>
+	
+	<table id="elements">
+  <thead>
+    <tr>
+      <th class="atom-no">Atomic Number</th>
+      <th class="chem-symbol">Symbol</th>
+      <th class="element-name">Element</th>
+      <th class="atomic-weight">Atomic weight</th>
+      <th class="subcategory">Subcategory</th>
+      <th class="family-group-col">Group</th>
+      <th class="period-row">Period</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="atom-no">1</td>
+      <td class="chem-symbol">H</td>
+      <td class="element-name">Hydrogen</td>
+      <td class="atomic-weight">1.008</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">1</td>
+    </tr>
+    <tr>
+      <td class="atom-no">2</td>
+      <td class="chem-symbol">He</td>
+      <td class="element-name">Helium</td>
+      <td class="atomic-weight">4.002602(2)</td>
+      <td class="subcategory">Noble gas</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">1</td>
+    </tr>
+    <tr>
+      <td class="atom-no">3</td>
+      <td class="chem-symbol">Li</td>
+      <td class="element-name">Lithium</td>
+      <td class="atomic-weight">6.94</td>
+      <td class="subcategory">Alkali metal</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">4</td>
+      <td class="chem-symbol">Be</td>
+      <td class="element-name">Beryllium</td>
+      <td class="atomic-weight">9.0121831(5)</td>
+      <td class="subcategory">Alkaline earth metal</td>
+      <td class="family-group-col">2</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">5</td>
+      <td class="chem-symbol">B</td>
+      <td class="element-name">Boron</td>
+      <td class="atomic-weight">10.81</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">13</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">6</td>
+      <td class="chem-symbol">C</td>
+      <td class="element-name">Carbon</td>
+      <td class="atomic-weight">12.011</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">14</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">7</td>
+      <td class="chem-symbol">N</td>
+      <td class="element-name">Nitrogen</td>
+      <td class="atomic-weight">14.007</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">15</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">8</td>
+      <td class="chem-symbol">O</td>
+      <td class="element-name">Oxygen</td>
+      <td class="atomic-weight">15.999</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">16</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">9</td>
+      <td class="chem-symbol">F</td>
+      <td class="element-name">Fluorine</td>
+      <td class="atomic-weight">18.998403163(6)</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">17</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">10</td>
+      <td class="chem-symbol">Ne</td>
+      <td class="element-name">Neon</td>
+      <td class="atomic-weight">20.1797(6)</td>
+      <td class="subcategory">Noble gas</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">2</td>
+    </tr>
+    <tr>
+      <td class="atom-no">11</td>
+      <td class="chem-symbol">Na</td>
+      <td class="element-name">Sodium</td>
+      <td class="atomic-weight">22.98976928(2)</td>
+      <td class="subcategory">Alkali metal</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">12</td>
+      <td class="chem-symbol">Mg</td>
+      <td class="element-name">Magnesium</td>
+      <td class="atomic-weight">24.305</td>
+      <td class="subcategory">Alkaline earth metal</td>
+      <td class="family-group-col">2</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">13</td>
+      <td class="chem-symbol">Al</td>
+      <td class="element-name">Aluminium</td>
+      <td class="atomic-weight">26.9815384(3)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">13</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">14</td>
+      <td class="chem-symbol">Si</td>
+      <td class="element-name">Silicon</td>
+      <td class="atomic-weight">28.085</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">14</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">15</td>
+      <td class="chem-symbol">P</td>
+      <td class="element-name">Phosphorus</td>
+      <td class="atomic-weight">30.973761998(5)</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">15</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">16</td>
+      <td class="chem-symbol">S</td>
+      <td class="element-name">Sulfur</td>
+      <td class="atomic-weight">32.06</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">16</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">17</td>
+      <td class="chem-symbol">Cl</td>
+      <td class="element-name">Chlorine</td>
+      <td class="atomic-weight">35.45</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">17</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">18</td>
+      <td class="chem-symbol">Ar</td>
+      <td class="element-name">Argon</td>
+      <td class="atomic-weight">39.948</td>
+      <td class="subcategory">Noble gas</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">3</td>
+    </tr>
+    <tr>
+      <td class="atom-no">19</td>
+      <td class="chem-symbol">K</td>
+      <td class="element-name">Potassium</td>
+      <td class="atomic-weight">39.0983(1)</td>
+      <td class="subcategory">Alkali metal</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">20</td>
+      <td class="chem-symbol">Ca</td>
+      <td class="element-name">Calcium</td>
+      <td class="atomic-weight">40.078(4)</td>
+      <td class="subcategory">Alkaline earth metal</td>
+      <td class="family-group-col">2</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">21</td>
+      <td class="chem-symbol">Sc</td>
+      <td class="element-name">Scandium</td>
+      <td class="atomic-weight">44.955908(5)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">3</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">22</td>
+      <td class="chem-symbol">Ti</td>
+      <td class="element-name">Titanium</td>
+      <td class="atomic-weight">47.867(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">4</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">23</td>
+      <td class="chem-symbol">V</td>
+      <td class="element-name">Vanadium</td>
+      <td class="atomic-weight">50.9415(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">5</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">24</td>
+      <td class="chem-symbol">Cr</td>
+      <td class="element-name">Chromium</td>
+      <td class="atomic-weight">51.9961(6)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">6</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">25</td>
+      <td class="chem-symbol">Mn</td>
+      <td class="element-name">Manganese</td>
+      <td class="atomic-weight">54.938043(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">7</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">26</td>
+      <td class="chem-symbol">Fe</td>
+      <td class="element-name">Iron</td>
+      <td class="atomic-weight">55.845(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">8</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">27</td>
+      <td class="chem-symbol">Co</td>
+      <td class="element-name">Cobalt</td>
+      <td class="atomic-weight">58.933194(3)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">9</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">28</td>
+      <td class="chem-symbol">Ni</td>
+      <td class="element-name">Nickel</td>
+      <td class="atomic-weight">58.6934(4)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">10</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">29</td>
+      <td class="chem-symbol">Cu</td>
+      <td class="element-name">Copper</td>
+      <td class="atomic-weight">63.546(3)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">11</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">30</td>
+      <td class="chem-symbol">Zn</td>
+      <td class="element-name">Zinc</td>
+      <td class="atomic-weight">65.38(2)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">12</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">31</td>
+      <td class="chem-symbol">Ga</td>
+      <td class="element-name">Gallium</td>
+      <td class="atomic-weight">69.723(1)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">13</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">32</td>
+      <td class="chem-symbol">Ge</td>
+      <td class="element-name">Germanium</td>
+      <td class="atomic-weight">72.630(8)</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">14</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">33</td>
+      <td class="chem-symbol">As</td>
+      <td class="element-name">Arsenic</td>
+      <td class="atomic-weight">74.921595(6)</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">15</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">34</td>
+      <td class="chem-symbol">Se</td>
+      <td class="element-name">Selenium</td>
+      <td class="atomic-weight">78.971(8)</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">16</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">35</td>
+      <td class="chem-symbol">Br</td>
+      <td class="element-name">Bromine</td>
+      <td class="atomic-weight">79.904</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">17</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">36</td>
+      <td class="chem-symbol">Kr</td>
+      <td class="element-name">Krypton</td>
+      <td class="atomic-weight">83.798(2)</td>
+      <td class="subcategory">Noble gas</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">4</td>
+    </tr>
+    <tr>
+      <td class="atom-no">37</td>
+      <td class="chem-symbol">Rb</td>
+      <td class="element-name">Rubidium</td>
+      <td class="atomic-weight">85.4678(3)</td>
+      <td class="subcategory">Alkali metal</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">38</td>
+      <td class="chem-symbol">Sr</td>
+      <td class="element-name">Strontium</td>
+      <td class="atomic-weight">87.62(1)</td>
+      <td class="subcategory">Alkaline earth metal</td>
+      <td class="family-group-col">2</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">39</td>
+      <td class="chem-symbol">Y</td>
+      <td class="element-name">Yttrium</td>
+      <td class="atomic-weight">88.90584(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">3</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">40</td>
+      <td class="chem-symbol">Zr</td>
+      <td class="element-name">Zirconium</td>
+      <td class="atomic-weight">91.224(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">4</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">41</td>
+      <td class="chem-symbol">Nb</td>
+      <td class="element-name">Niobium</td>
+      <td class="atomic-weight">92.90637(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">5</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">42</td>
+      <td class="chem-symbol">Mo</td>
+      <td class="element-name">Molybdenum</td>
+      <td class="atomic-weight">95.95(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">6</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">43</td>
+      <td class="chem-symbol">Tc</td>
+      <td class="element-name">Technetium</td>
+      <td class="atomic-weight">[98]</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">7</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">44</td>
+      <td class="chem-symbol">Ru</td>
+      <td class="element-name">Ruthenium</td>
+      <td class="atomic-weight">101.07(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">8</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">45</td>
+      <td class="chem-symbol">Rh</td>
+      <td class="element-name">Rhodium</td>
+      <td class="atomic-weight">102.90549(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">9</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">46</td>
+      <td class="chem-symbol">Pd</td>
+      <td class="element-name">Palladium</td>
+      <td class="atomic-weight">106.42(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">10</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">47</td>
+      <td class="chem-symbol">Ag</td>
+      <td class="element-name">Silver</td>
+      <td class="atomic-weight">107.8682(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">11</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">48</td>
+      <td class="chem-symbol">Cd</td>
+      <td class="element-name">Cadmium</td>
+      <td class="atomic-weight">112.414(4)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">12</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">49</td>
+      <td class="chem-symbol">In</td>
+      <td class="element-name">Indium</td>
+      <td class="atomic-weight">114.818(1)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">13</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">50</td>
+      <td class="chem-symbol">Sn</td>
+      <td class="element-name">Tin</td>
+      <td class="atomic-weight">118.710(7)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">14</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">51</td>
+      <td class="chem-symbol">Sb</td>
+      <td class="element-name">Antimony</td>
+      <td class="atomic-weight">121.760(1)</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">15</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">52</td>
+      <td class="chem-symbol">Te</td>
+      <td class="element-name">Tellurium</td>
+      <td class="atomic-weight">127.60(3)</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">16</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">53</td>
+      <td class="chem-symbol">I</td>
+      <td class="element-name">Iodine</td>
+      <td class="atomic-weight">126.90447(3)</td>
+      <td class="subcategory">Reactive nonmental</td>
+      <td class="family-group-col">17</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">54</td>
+      <td class="chem-symbol">Xe</td>
+      <td class="element-name">Xenon</td>
+      <td class="atomic-weight">131.293(6)</td>
+      <td class="subcategory">Noble gas</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">5</td>
+    </tr>
+    <tr>
+      <td class="atom-no">55</td>
+      <td class="chem-symbol">Cs</td>
+      <td class="element-name">Caesium</td>
+      <td class="atomic-weight">132.90545196(6)</td>
+      <td class="subcategory">Alkali metal</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">56</td>
+      <td class="chem-symbol">Ba</td>
+      <td class="element-name">Barium</td>
+      <td class="atomic-weight">137.327(7)</td>
+      <td class="subcategory">Alkaline earth metal</td>
+      <td class="family-group-col">2</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">57</td>
+      <td class="chem-symbol">La</td>
+      <td class="element-name">Lanthanum</td>
+      <td class="atomic-weight">138.90547(7)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col">3</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">58</td>
+      <td class="chem-symbol">Ce</td>
+      <td class="element-name">Cerium</td>
+      <td class="atomic-weight">140.116(1)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">59</td>
+      <td class="chem-symbol">Pr</td>
+      <td class="element-name">Praseodymium</td>
+      <td class="atomic-weight">140.90766(1)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">60</td>
+      <td class="chem-symbol">Nd</td>
+      <td class="element-name">Neodymium</td>
+      <td class="atomic-weight">144.242(3)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">61</td>
+      <td class="chem-symbol">Pm</td>
+      <td class="element-name">Promethium</td>
+      <td class="atomic-weight">[145]</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">62</td>
+      <td class="chem-symbol">Sm</td>
+      <td class="element-name">Samarium</td>
+      <td class="atomic-weight">150.36(2)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">63</td>
+      <td class="chem-symbol">Eu</td>
+      <td class="element-name">Europium</td>
+      <td class="atomic-weight">151.964(1)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">64</td>
+      <td class="chem-symbol">Gd</td>
+      <td class="element-name">Gadolinium</td>
+      <td class="atomic-weight">157.25(3)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">65</td>
+      <td class="chem-symbol">Tb</td>
+      <td class="element-name">Terbium</td>
+      <td class="atomic-weight">158.925354(8)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">66</td>
+      <td class="chem-symbol">Dy</td>
+      <td class="element-name">Dysprosium</td>
+      <td class="atomic-weight">162.500(1)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">67</td>
+      <td class="chem-symbol">Ho</td>
+      <td class="element-name">Holmium</td>
+      <td class="atomic-weight">164.930328(7)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">68</td>
+      <td class="chem-symbol">Er</td>
+      <td class="element-name">Erbium</td>
+      <td class="atomic-weight">167.259(3)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">69</td>
+      <td class="chem-symbol">Tm</td>
+      <td class="element-name">Thulium</td>
+      <td class="atomic-weight">168.934218(6)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">70</td>
+      <td class="chem-symbol">Yb</td>
+      <td class="element-name">Ytterbium</td>
+      <td class="atomic-weight">173.045(10)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">71</td>
+      <td class="chem-symbol">Lu</td>
+      <td class="element-name">Lutetium</td>
+      <td class="atomic-weight">174.9668(1)</td>
+      <td class="subcategory">Lanthanide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">72</td>
+      <td class="chem-symbol">Hf</td>
+      <td class="element-name">Hafnium</td>
+      <td class="atomic-weight">178.49(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">4</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">73</td>
+      <td class="chem-symbol">Ta</td>
+      <td class="element-name">Tantalum</td>
+      <td class="atomic-weight">180.94788(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">5</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">74</td>
+      <td class="chem-symbol">W</td>
+      <td class="element-name">Tungsten</td>
+      <td class="atomic-weight">183.84(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">6</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">75</td>
+      <td class="chem-symbol">Re</td>
+      <td class="element-name">Rhenium</td>
+      <td class="atomic-weight">186.207(1)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">7</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">76</td>
+      <td class="chem-symbol">Os</td>
+      <td class="element-name">Osmium</td>
+      <td class="atomic-weight">190.23(3)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">8</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">77</td>
+      <td class="chem-symbol">Ir</td>
+      <td class="element-name">Iridium</td>
+      <td class="atomic-weight">192.217(2)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">9</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">78</td>
+      <td class="chem-symbol">Pt</td>
+      <td class="element-name">Platinum</td>
+      <td class="atomic-weight">195.084(9)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">10</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">79</td>
+      <td class="chem-symbol">Au</td>
+      <td class="element-name">Gold</td>
+      <td class="atomic-weight">196.966570(4)</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">11</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">80</td>
+      <td class="chem-symbol">Hg</td>
+      <td class="element-name">Mercury</td>
+      <td class="atomic-weight">200.592(3)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">12</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">81</td>
+      <td class="chem-symbol">Tl</td>
+      <td class="element-name">Thallium</td>
+      <td class="atomic-weight">204.38</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">13</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">82</td>
+      <td class="chem-symbol">Pb</td>
+      <td class="element-name">Lead</td>
+      <td class="atomic-weight">207.2(1)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">14</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">83</td>
+      <td class="chem-symbol">Bi</td>
+      <td class="element-name">Bismuth</td>
+      <td class="atomic-weight">208.98040(1)</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">15</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">84</td>
+      <td class="chem-symbol">Po</td>
+      <td class="element-name">Polonium</td>
+      <td class="atomic-weight">[209]</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">16</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">85</td>
+      <td class="chem-symbol">At</td>
+      <td class="element-name">Astatine</td>
+      <td class="atomic-weight">[210]</td>
+      <td class="subcategory">Metalloid</td>
+      <td class="family-group-col">17</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">86</td>
+      <td class="chem-symbol">Rn</td>
+      <td class="element-name">Radon</td>
+      <td class="atomic-weight">[222]</td>
+      <td class="subcategory">Noble gas</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">6</td>
+    </tr>
+    <tr>
+      <td class="atom-no">87</td>
+      <td class="chem-symbol">Fr</td>
+      <td class="element-name">Francium</td>
+      <td class="atomic-weight">[223]</td>
+      <td class="subcategory">Alkali metal</td>
+      <td class="family-group-col">1</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">88</td>
+      <td class="chem-symbol">Ra</td>
+      <td class="element-name">Radium</td>
+      <td class="atomic-weight">[226]</td>
+      <td class="subcategory">Alkaline earth metal</td>
+      <td class="family-group-col">2</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">89</td>
+      <td class="chem-symbol">Ac</td>
+      <td class="element-name">Actinium</td>
+      <td class="atomic-weight">[227]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col">3</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">90</td>
+      <td class="chem-symbol">Th</td>
+      <td class="element-name">Thorium</td>
+      <td class="atomic-weight">232.0377(4)</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">91</td>
+      <td class="chem-symbol">Pa</td>
+      <td class="element-name">Protactinium</td>
+      <td class="atomic-weight">231.03588(1)</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">92</td>
+      <td class="chem-symbol">U</td>
+      <td class="element-name">Uranium</td>
+      <td class="atomic-weight">238.02891(3)</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">93</td>
+      <td class="chem-symbol">Np</td>
+      <td class="element-name">Neptunium</td>
+      <td class="atomic-weight">[237]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">94</td>
+      <td class="chem-symbol">Pu</td>
+      <td class="element-name">Plutonium</td>
+      <td class="atomic-weight">[244]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">95</td>
+      <td class="chem-symbol">Am</td>
+      <td class="element-name">Americium</td>
+      <td class="atomic-weight">[243]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">96</td>
+      <td class="chem-symbol">Cm</td>
+      <td class="element-name">Curium</td>
+      <td class="atomic-weight">[247]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">97</td>
+      <td class="chem-symbol">Bk</td>
+      <td class="element-name">Berkelium</td>
+      <td class="atomic-weight">[247]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">98</td>
+      <td class="chem-symbol">Cf</td>
+      <td class="element-name">Californium</td>
+      <td class="atomic-weight">[251]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">99</td>
+      <td class="chem-symbol">Es</td>
+      <td class="element-name">Einsteinium</td>
+      <td class="atomic-weight">[252]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">100</td>
+      <td class="chem-symbol">Fm</td>
+      <td class="element-name">Fermium</td>
+      <td class="atomic-weight">[257]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">101</td>
+      <td class="chem-symbol">Md</td>
+      <td class="element-name">Mendelevium</td>
+      <td class="atomic-weight">[258]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">102</td>
+      <td class="chem-symbol">No</td>
+      <td class="element-name">Nobelium</td>
+      <td class="atomic-weight">[259]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">103</td>
+      <td class="chem-symbol">Lr</td>
+      <td class="element-name">Lawrencium</td>
+      <td class="atomic-weight">[266]</td>
+      <td class="subcategory">Actinide</td>
+      <td class="family-group-col"></td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">104</td>
+      <td class="chem-symbol">Rf</td>
+      <td class="element-name">Rutherfordium</td>
+      <td class="atomic-weight">[267]</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">4</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">105</td>
+      <td class="chem-symbol">Db</td>
+      <td class="element-name">Dubnium</td>
+      <td class="atomic-weight">[268]</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">5</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">106</td>
+      <td class="chem-symbol">Sg</td>
+      <td class="element-name">Seaborgium</td>
+      <td class="atomic-weight">[269]</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">6</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">107</td>
+      <td class="chem-symbol">Bh</td>
+      <td class="element-name">Bohrium</td>
+      <td class="atomic-weight">[270]</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">7</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">108</td>
+      <td class="chem-symbol">Hs</td>
+      <td class="element-name">Hassium</td>
+      <td class="atomic-weight">[270]</td>
+      <td class="subcategory">Transition metal</td>
+      <td class="family-group-col">8</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">109</td>
+      <td class="chem-symbol">Mt</td>
+      <td class="element-name">Meitnerium</td>
+      <td class="atomic-weight">[278]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">9</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">110</td>
+      <td class="chem-symbol">Ds</td>
+      <td class="element-name">Darmstadtium</td>
+      <td class="atomic-weight">[281]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">10</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">111</td>
+      <td class="chem-symbol">Rg</td>
+      <td class="element-name">Roentgenium</td>
+      <td class="atomic-weight">[282]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">11</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">112</td>
+      <td class="chem-symbol">Cn</td>
+      <td class="element-name">Copernicium</td>
+      <td class="atomic-weight">[285]</td>
+      <td class="subcategory">Post-transition metal</td>
+      <td class="family-group-col">12</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">113</td>
+      <td class="chem-symbol">Nh</td>
+      <td class="element-name">Nihonium</td>
+      <td class="atomic-weight">[286]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">13</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">114</td>
+      <td class="chem-symbol">Fl</td>
+      <td class="element-name">Flerovium</td>
+      <td class="atomic-weight">[289]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">14</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">115</td>
+      <td class="chem-symbol">Mc</td>
+      <td class="element-name">Moscovium</td>
+      <td class="atomic-weight">[290]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">15</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">116</td>
+      <td class="chem-symbol">Lv</td>
+      <td class="element-name">Livermorium</td>
+      <td class="atomic-weight">[293]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">16</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">117</td>
+      <td class="chem-symbol">Ts</td>
+      <td class="element-name">Tennessine</td>
+      <td class="atomic-weight">[294]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">17</td>
+      <td class="period-row">7</td>
+    </tr>
+    <tr>
+      <td class="atom-no">118</td>
+      <td class="chem-symbol">Og</td>
+      <td class="element-name">Oganesson</td>
+      <td class="atomic-weight">[294]</td>
+      <td class="subcategory">Unknown chemical properties</td>
+      <td class="family-group-col">18</td>
+      <td class="period-row">7</td>
+    </tr>
+  </tbody>
+</table>
 
 </body>
 </html>
