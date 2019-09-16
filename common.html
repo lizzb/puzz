@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Common Alphabet Encodings using Datatables</title>
+  <title>Common Alphabet Encodings and Tables using Datatables.JS</title>
 
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
@@ -30,47 +30,46 @@
 
 
 	<script>
-	  $(document).ready(function() {
-	    $('#alphabets').DataTable( {
-	        dom: 'Bfrtip',
-	        paging: false,
-	        buttons: [
-	            'columnsToggle'
-	        ]
-	    } );
-	} );
-		
-	  $(document).ready(function() {
-	    $('#states').DataTable( {
-	        dom: 'Bfrtip',
-	        paging: false,
-	        buttons: [
-	            'columnsToggle'
-	        ]
-	    } );
-	} );
+  $(document).ready(function() {
 
-		$(document).ready(function() {
-	    $('#countries').DataTable( {
-	        dom: 'Bfrtip',
-	        paging: false,
-	        buttons: [
-	            'columnsToggle'
-	        ]
-	    } );
-	} );	
-		
-		$(document).ready(function() {
-	    $('#elements').DataTable( {
-	        dom: 'Bfrtip',
-	        paging: false,
-	        buttons: [
-	            'columnsToggle'
-	        ]
-	    } );
-	} );	
-		
-	</script>
+    $('#alphabets').DataTable( {
+        //data: alphabetsData, // using inline html for now
+        dom: 'Bfrtip', // buttons for toggling columns
+        paging: false,
+        buttons: [
+            'columnsToggle'
+        ]
+    } );
+
+    $('#states').DataTable( {
+        //data: statesData,
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [
+            'columnsToggle'
+        ]
+    } );
+
+    $('#countries').DataTable( {
+        //data: countriesData,
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [
+            'columnsToggle'
+        ]
+    } );
+
+    $('#elements').DataTable( {
+        //data: elementsData,
+        dom: 'Bfrtip',
+        paging: false,
+        buttons: [
+            'columnsToggle'
+        ]
+    } );
+
+  } );
+</script>
 
 </head>
 <body>
