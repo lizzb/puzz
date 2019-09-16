@@ -70,8 +70,13 @@
       #converted_unicode16 { text-decoration: underline; }
       #decimalInput, #binaryInput, #ternaryInput, #hexInput {font-size: 12px; }
       textarea { font-size: 14px; padding: 5px; }
-
+      
+      #substitutionInput { width: 50px; }
+      #inputFrequencies {vertical-align: top;}
+      .sub-label { }
+      
       .rot-label { font-weight: bold; width: 75px; }
+      .rot-input-label { }
 
       img {width: 85%; padding-bottom: 20px;}
 
@@ -82,6 +87,8 @@
     </style>
 
     <script>
+      /* ========== Interactive SVG decoder functions ========== */
+
       // Prefix naming notes:
       // Pigpen: b = box shape, v = V shape, U = upper, L = lower, M = middle
 
@@ -330,6 +337,7 @@
           document.getElementById(currentLetterID).innerHTML = decodedLetter.letter;
       }
 
+      // this function currently not called because div commented out
       function updateLabel(element) {
           // as of now, this function only updates the label if a single element changes opacity,
           // it isn't called if select all or clear all called
@@ -345,7 +353,7 @@
     </script>
     <script>
         function clearInput(inputElementID) {
-          // default rotInput
+          // default rotInput, substitutionInput
           document.getElementById(inputElementID).value = "";
 
           // need to clear multiple fields for the base conversion section
@@ -377,6 +385,8 @@
             document.getElementById(convertedUnicodeID).innerHTML = "";
           }          
         }
+
+        /* ========== Base Conversion functions ========== */
 
         function convertToText(element, inputBase){
           
@@ -444,6 +454,8 @@
 
         }
 
+        /* ========== ROT functions ========== */
+
         function decodeROT(element){
           
           // Convert input string into array of characters
@@ -477,77 +489,188 @@
           }
         }
 
-    </script>
-    <script>
-    // simple from https://steelx.gitbooks.io/javascript-algorithms/decode-the-morse-code.html
-    var MORSE_CODE = {".-": "a", "-...":"b", "-.-.": "c", "-..": "d", ".":"e", "..-.":"f", "--.":"g", "....":"h", "..":"i", ".---":"j", "-.-":"k", ".-..":"l", "--":"m", "-.":"n", "---":"o", ".--.":"p", "--.-":"q", ".-.":"r", "...":"s", "-":"t", "..-":"u", "...-":"v", ".--":"w", "-..-":"x", "-.--":"y", "--..":"z", ".----":"1", "..---":"2", "...--":"3", "....-":"4", ".....":"5", "-....":"6", "--...":"7", "---..":"8", "----.":"9", "-----":"0", "|":" "};
 
-    var decodeMorse = function(morseCode){
-      var words = (morseCode).split('  ');
-      var letters = words.map((w) => w.split(' '));
-      var decoded = [];
+        /* ========== Substitution functions ========== */
 
-      for(var i = 0; i < letters.length; i++){
-        decoded[i] = [];
-        for(var x = 0; x < letters[i].length; x++){
-            if(MORSE_CODE[letters[i][x]]){
-                decoded[i].push( MORSE_CODE[letters[i][x]] );
-            }
+        function resetAllSubstitutionLetters(){
+          
+          var alphabetStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          var alphabetArr = alphabetStr.split("");
+          var subLetterElementID = "";
+          for (var i=0; i<26; i++)
+          {
+            subLetterElementID = "sub_" + alphabetArr[i];
+                //console.log("subLetterElementID: ", subLetterElementID);
+
+            document.getElementById(subLetterElementID).value = ".";
+          }
+          decodeSubstitution();
         }
+
+        // TODO: maintain whitespace differences if possible (e.g. line breaks) -- in all inputs with a textarea
+        function decodeSubstitution(){
+          var element = document.getElementById("substitutionInput");
+          // Convert input string into array of characters
+          var valToConvert = element.value;
+          valsArray = valToConvert.split("");
+          
+          getFrequency(valToConvert);
+
+          var alphabetStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          //var alphabetStr = "..........................";
+          var alphabetArr = alphabetStr.split("");
+          var subLetterElementID = "";
+          var newLetter = "";
+          var substitutionAlphabetArr = new Array();
+          for (var i=0; i<26; i++)
+          {
+            subLetterElementID = "sub_" + alphabetArr[i];
+              // note that if clear input is called previously the value will be empty, perhaps should replace with space? or null char?
+            newLetter = document.getElementById(subLetterElementID).value;
+            substitutionAlphabetArr.push(newLetter);
+          }
+
+          //console.log("substitutionAlphabetArr: ", substitutionAlphabetArr);
+          //document.getElementById("substitutionAlphabetArr").innerHTML = substitutionAlphabetArr;
+
+          var outputArray = [];
+
+          for (var i=0; i<valsArray.length; i++)
+          {
+            var originalLetter = valsArray[i];
+            var originalIndex = alphabetArr.indexOf(originalLetter.toUpperCase());
+            if (originalIndex >= 0) {
+              //var newLetterIndex = (originalIndex + i) % 26;
+              //var convertedLetter = alphabetArr[newLetterIndex];
+              var convertedLetter = substitutionAlphabetArr[originalIndex];
+              outputArray.push(convertedLetter);
+            }
+            else {
+              // if the letter wasn't found (e.g. numbers), return original
+              // also style original letter to differentiate that it wasnt converted
+              outputArray.push('<u>'+originalLetter+'</u>');
+            }
+          }
+
+          var convertedElementID = "converted_substitution";
+          document.getElementById(convertedElementID).innerHTML = outputArray.join("");
+        }
+
+
+        // https://stackoverflow.com/questions/18619785/counting-frequency-of-characters-in-a-string-using-javascript
+        function getFrequency(string) {
+            var freq = {};
+            for (var i=0; i<string.length;i++) {
+                var character = string.charAt(i);
+                if (freq[character]) {
+                   freq[character]++;
+                } else {
+                   freq[character] = 1;
+                }
+            }
+            //return freq;
+            //console.log("freq: ", freq);
+          
+            var freqArray = [];
+            // convert Object of properties to array,
+            // so that it can be sorted by frequency value
+            for (prop in freq) {
+              freqArray.push( { letter: prop, count: freq[prop] });
+            }
+            //console.log("freqArray: ", freqArray);
+          
+          freqArray.sort(function(a, b){
+            var valA=a.count, valB=b.count;
+            return valB-valA; //sort by number descending
+          });
+          
+              //console.log("freqArraySorted: ", freqArray);
+
+            var output = "Letter = Count";
+            for (var j=0; j<freqArray.length; j++) {
+              output += "<br>" + freqArray[j].letter + " = " + freqArray[j].count + (" (" + parseFloat(freqArray[j].count/string.length*100).toFixed(2) + "%)")
+            }
+            document.getElementById("inputFrequencies").innerHTML = output;
+          // nothing being done with this
+            return freqArray;
+        };
+
+
+        /* ========== Morse functions ========== */
+
+        // TODO: use these characters instead · − for better visibility
+
+      // simple from https://steelx.gitbooks.io/javascript-algorithms/decode-the-morse-code.html
+      var MORSE_CODE = {".-": "a", "-...":"b", "-.-.": "c", "-..": "d", ".":"e", "..-.":"f", "--.":"g", "....":"h", "..":"i", ".---":"j", "-.-":"k", ".-..":"l", "--":"m", "-.":"n", "---":"o", ".--.":"p", "--.-":"q", ".-.":"r", "...":"s", "-":"t", "..-":"u", "...-":"v", ".--":"w", "-..-":"x", "-.--":"y", "--..":"z", ".----":"1", "..---":"2", "...--":"3", "....-":"4", ".....":"5", "-....":"6", "--...":"7", "---..":"8", "----.":"9", "-----":"0", "|":" "};
+
+      var decodeMorse = function(morseCode){
+        var words = (morseCode).split('  ');
+        var letters = words.map((w) => w.split(' '));
+        var decoded = [];
+
+        for(var i = 0; i < letters.length; i++){
+          decoded[i] = [];
+          for(var x = 0; x < letters[i].length; x++){
+              if(MORSE_CODE[letters[i][x]]){
+                  decoded[i].push( MORSE_CODE[letters[i][x]] );
+              }
+          }
+        }
+        
+        var returnValue = decoded.map(arr => arr.join('')).join(' ');
+        if (returnValue) return returnValue;
+        // todo: return unknown char if cant find a valid one
+        // t his is not robust for subsequent letters
+        else return "�"; // this doesn't look like it is being added if letter invalid
+      }
+
+      function addChar(character) {
+        var textareaInputID = "morseInput";
+        document.getElementById(textareaInputID).value += character;
+        decode();
+      }
+        
+      function removeLastChar() {
+        var textareaInputID = "morseInput";
+        var curr = document.getElementById(textareaInputID).value;
+        document.getElementById(textareaInputID).value = curr.substring(0, curr.length - 1);
+        decode();
+      }
+
+      function clearMorseInput() {
+        var textareaInputID = "morseInput";
+        document.getElementById(textareaInputID).value = "";
+        decode();
+      }
+
+      function swapDitsDahs() {
+        var textareaInputID = "morseInput";
+        var originalVal = document.getElementById(textareaInputID).value;
+        var newVal = originalVal.replace(/[-]/g, 'x');
+        newVal = newVal.replace(/[\.]/g, '-');
+        newVal = newVal.replace(/[x]/g, '.');
+        document.getElementById(textareaInputID).value = newVal;
+
+        decode();
+      }
+
+      function decode() {
+        var textareaInputID = "morseInput";
+        document.getElementById("morseOutput").innerHTML = decodeMorse(document.getElementById(textareaInputID).value);
       }
       
-      var returnValue = decoded.map(arr => arr.join('')).join(' ');
-      if (returnValue) return returnValue;
-      // todo: return unknown char if cant find a valid one
-      // t his is not robust for subsequent letters
-      else return "�"; // this doesn't look like it is being added if letter invalid
-    }
 
-    function addChar(character) {
-      var textareaInputID = "morseInput";
-      document.getElementById(textareaInputID).value += character;
-      decode();
-    }
-      
-    function removeLastChar() {
-      var textareaInputID = "morseInput";
-      var curr = document.getElementById(textareaInputID).value;
-      document.getElementById(textareaInputID).value = curr.substring(0, curr.length - 1);
-      decode();
-    }
-
-    function clearMorseInput() {
-      var textareaInputID = "morseInput";
-      document.getElementById(textareaInputID).value = "";
-      decode();
-    }
-
-    function swapDitsDahs() {
-      var textareaInputID = "morseInput";
-      var originalVal = document.getElementById(textareaInputID).value;
-      var newVal = originalVal.replace(/[-]/g, 'x');
-      newVal = newVal.replace(/[\.]/g, '-');
-      newVal = newVal.replace(/[x]/g, '.');
-      document.getElementById(textareaInputID).value = newVal;
-
-      decode();
-    }
-
-    function decode() {
-      var textareaInputID = "morseInput";
-      document.getElementById("morseOutput").innerHTML = decodeMorse(document.getElementById(textareaInputID).value);
-    }
-      
-      
-function microTemplate(templateStr,objData){
- for(var prop in objData)
-   templateStr = templateStr.replace(new RegExp('{{'+prop+'}}','g'), objData[prop]);
- return templateStr;
-}
+      /* ========== Templating functions/data ========== */
+            
+      function microTemplate(templateStr,objData){
+       for(var prop in objData)
+         templateStr = templateStr.replace(new RegExp('{{'+prop+'}}','g'), objData[prop]);
+       return templateStr;
+      }
 
 
       
-      var items = [
+var items = [
 // 
 // <!-- include TinEye? seems buggy lately... -->
 // <!-- google images: https://www.google.com/imghp -->
@@ -581,6 +704,7 @@ function microTemplate(templateStr,objData){
       { siteName: "Chemicool", siteURL: "https://www.chemicool.com" },
       { siteName: "RSC.org", siteURL: "http://www.rsc.org/periodic-table" },
       { siteName: "CollegeCram Chemical Symbol Lookup Table", siteURL: "http://college-cram.com/study/chemistry/atoms-and-molecules/chemical-symbol-lookup-table/" },
+      // https://www.science.co.il/elements/, https://en.wikipedia.org/wiki/List_of_chemical_elements, http://www.thingsmadethinkable.com/item/atoms.php
     ]  
   },
   {
@@ -654,6 +778,9 @@ function microTemplate(templateStr,objData){
     imgID: "",
     imgURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/KB_United_States.svg/2560px-KB_United_States.svg.png",
     seeAlsoSites: [ ]
+    // https://www.geocachingtoolbox.com/index.php?lang=en&page=dvorakKeyboard
+    // http://wbic16.xedoloh.com/dvorak.html
+    // https://chaidarun.com/dvorak
   },
   {
     title: "Mayan Numbers",
@@ -780,7 +907,7 @@ function microTemplate(templateStr,objData){
             <li><a href="https://wordsmith.org/anagram/" class="">I, Rearrangement Servant</a>, <a href="http://www.ssynth.co.uk/~gay/anagram.html" class="">Andy's Anagram Solver</a></li>
             <li><a href="https://www.onelook.com" class="">Onelook Dictionary</a></li>         
             <li><a href="https://www.rhymezone.com/" class="">RhymeZone</a></li>    
-            <li><a href="https://quipqiup.com/" class="">quipquip Cryptogram Solver</a></li>  
+            <li><a href="https://quipqiup.com/" class="">quipqiup Cryptogram Solver</a></li>  
             <li><a href="https://www.quinapalus.com/cgi-bin/qat" class="">QAT</a></li>  
 
             <!-- TODO: need to adjust these components to scale to contents, only fits 4 list items above -->
@@ -883,6 +1010,9 @@ function microTemplate(templateStr,objData){
           <li><a href="https://v2.cryptii.com/morsecode/text" target="_blank"> Cryptii morse decoder </a></li>
           <li><a href="https://www.dcode.fr/morse-code" target="_blank"> dCode.fr morse decoder </a></li>
           <li><a href="https://morsify.net/" target="_blank"> Morsify.net </a></li>
+          <li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>
+
+          
           
           
         </ul>
@@ -945,8 +1075,9 @@ function microTemplate(templateStr,objData){
 
         <p>See also:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>
+          <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original lizzb semaphore braille table (uses checkboxes) </a></li>
           <li><a href="http://flystrip.com/corby/code/test.html#semaphore" target="_blank"> Corby Semaphore decoder </a></li>
-          <li><a href="http://lizzb.github.io/puzz/semaphore.html" target="_blank"> Original semaphore braille table (uses checkboxes) </a></li>
           <li><a href="http://www.puzzazz.com/how-to/codes" target="_blank"> Puzzazz Semaphore Interpretations </a></li>
         </ul>
         <!--<p></p>-->
@@ -1027,6 +1158,7 @@ function microTemplate(templateStr,objData){
 
         <p>See also:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>
           <li><a href="https://crypto.interactive-maths.com/pigpen-cipher.html" target="_blank"> Crypto Pigpen decoder </a></li>
           <li><a href="https://planetcalc.com/7842/" target="_blank"> PlanetCalc Pigpen decoder </a></li>
           <li><a href="https://www.dcode.fr/pigpen-cipher" target="_blank"> dCode.fr Pigpen decoder </a></li>
@@ -1077,6 +1209,7 @@ function microTemplate(templateStr,objData){
 
         <p>See also:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>
           <li><a href="http://lizzb.github.io/puzz/braille.html" target="_blank"> Original interactive braille table (uses checkboxes) </a></li>
         </ul>
         <!--<p></p>-->
@@ -1199,6 +1332,7 @@ function microTemplate(templateStr,objData){
 
         <p class="seeAlso">See also:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>
           <li><a href="http://www.cut-the-knot.org/binary.shtml" target="_blank">Cut The Knot Base Converter</a></li>
           <li><a href="http://software.ellerton.net/txt2bin/" target="_blank">ASCII/Unicode + Base Converter</a></li>
         </ul>
@@ -1230,9 +1364,7 @@ function microTemplate(templateStr,objData){
       States - America, capital, continental, country, fifty, president, union, united, USA 
       puzzazz: http://www.puzzazz.com/how-to/codes has good united states table-->
 
-      <h3 class="pb-4 mb-4 font-italic border-bottom">
-        Reference
-      </h3>
+      
 
       <div class="blog-post" id="ciphers">
         <h2 class="blog-post-title">Ciphers</h2>
@@ -1243,12 +1375,12 @@ function microTemplate(templateStr,objData){
 
         <!-- https://jsbin.com/diyeqaj/edit?html,js,console,output -->
         <h3 class="blog-subheader">ROT Decoder (Ceasarian Cipher)</h3>
-        <p class="blog-post-meta"><span class="lookFor">Look for: </span> "shift", uncommon letters repeated in a result string, particularly if a lack of vowels present </p>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span> "shift", uncommon letters repeated in a result string, particularly if a lack of vowels present, julius caesar, rotation </p>
 
         <table>
           <tbody>
             <tr>
-              <td class="label">Input:</td>
+              <td class="rot-input-label">Input:</td>
               <td>
                 <textarea id="rotInput" value="0" oninput="decodeROT(this)" size="24"></textarea>
                 <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('rotInput')">X</button>
@@ -1365,6 +1497,309 @@ function microTemplate(templateStr,objData){
         <!--<p></p>-->
 
 
+
+
+
+        <!-- simple substitution cipher helper: https://jsbin.com/yejeguk/3/edit?html,css,js,output -->
+        <h3 class="blog-subheader">Substitution Cipher Helper</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>  uncommon letters repeated in a result string, particularly if a lack of vowels present </p>
+
+        <table>
+        <tbody>
+          <tr>
+            <td class="sub-label">Input:</td>
+            <td>
+              <textarea id="substitutionInput" value="0" oninput="decodeSubstitution(this)" size="24"></textarea>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('substitutionInput')">X</button>
+            </td>
+          </tr>
+          <tr>
+              <td class="sub-label">Substituted:</td>
+              <td><span id="converted_substitution"></span></td>
+          </tr>
+        </tbody>
+      </table>
+        
+      <br><br>
+        
+        
+      <table>
+      <tbody>
+      <tr>
+      <td>
+      <table>
+      <tr>
+      <td><!-- A-H -->
+      <table>
+        <tbody>
+        <tr>
+        <td>
+          <tr>
+            <td class="original-letter">A:</td>
+            <td>
+              <input id="sub_A" value="A" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_A')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">B:</td>
+            <td>
+              <input id="sub_B" value="B" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_B')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">C:</td>
+            <td>
+              <input id="sub_C" value="C" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_C')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">D:</td>
+            <td>
+              <input id="sub_D" value="D" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_D')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">A:</td>
+            <td>
+              <input id="sub_E" value="E" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_E')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">F:</td>
+            <td>
+              <input id="sub_F" value="F" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_F')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">G:</td>
+            <td>
+              <input id="sub_G" value="G" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_G')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">H:</td>
+            <td>
+              <input id="sub_H" value="H" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_H')">X</button>
+            </td>
+          </tr>
+        </td>
+        </tr>
+        </tbody>
+      </table>
+      </td><!-- / A-H -->
+      <td><!-- I-Q -->
+      <table>
+        <tbody>
+        <tr>
+        <td>
+          <tr>
+            <td class="original-letter">I:</td>
+            <td>
+              <input id="sub_I" value="I" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_I')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">J:</td>
+            <td>
+              <input id="sub_J" value="J" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_J')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">K:</td>
+            <td>
+              <input id="sub_K" value="K" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_K')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">L:</td>
+            <td>
+              <input id="sub_L" value="L" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_L')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">M:</td>
+            <td>
+              <input id="sub_M" value="M" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_M')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">N:</td>
+            <td>
+              <input id="sub_N" value="N" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_N')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">O:</td>
+            <td>
+              <input id="sub_O" value="O" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_O')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">P:</td>
+            <td>
+              <input id="sub_P" value="P" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_P')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">Q:</td>
+            <td>
+              <input id="sub_Q" value="Q" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_Q')">X</button>
+            </td>
+          </tr>
+        </td>
+        </tr>
+        </tbody>
+      </table>
+      </td><!-- / I-Q -->
+      <td><!-- R-Z -->
+      <table>
+        <tbody>
+        <tr>
+        <td>
+          <tr>
+            <td class="original-letter">R:</td>
+            <td>
+              <input id="sub_R" value="R" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_R')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">S:</td>
+            <td>
+              <input id="sub_S" value="S" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_S')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">T:</td>
+            <td>
+              <input id="sub_T" value="T" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_T')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">U:</td>
+            <td>
+              <input id="sub_U" value="U" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_U')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">V:</td>
+            <td>
+              <input id="sub_V" value="V" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_V')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">W:</td>
+            <td>
+              <input id="sub_W" value="W" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_W')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">X:</td>
+            <td>
+              <input id="sub_X" value="X" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_X')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">Y:</td>
+            <td>
+              <input id="sub_Y" value="Y" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_Y')">X</button>
+            </td>
+          </tr>
+          <tr>
+            <td class="original-letter">Z:</td>
+            <td>
+              <input id="sub_Z" value="Z" oninput="decodeSubstitution()"></input>
+              <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_Z')">X</button>
+            </td>
+          </tr>
+        </td>
+        </tr>
+        </tbody>
+      </table>
+      </td><!-- / R-Z -->
+      </tr>
+      </table>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+
+      <button onclick="resetAllSubstitutionLetters()">Reset All</button>
+
+      <!--<span id="substitutionAlphabetArr"></span>-->
+      <br><br>
+
+      <table>
+        <tr>
+          <td style="vertical-align: top;"><div id="inputFrequencies"></div></td>
+          <td><div id="englishFrequencies">
+            English Relative Frequency </br>
+            e = 12.702% </br>
+            t = 9.056% </br> 
+            a = 8.167% </br> 
+            o = 7.507% </br> 
+            i = 6.966% </br> 
+            n = 6.749% </br> 
+            s = 6.327% </br> 
+            h = 6.094% </br> 
+            r = 5.987% </br> 
+            d = 4.253% </br> 
+            l = 4.025% </br> 
+            c = 2.782% </br> 
+            u = 2.758% </br> 
+            m = 2.406% </br> 
+            w = 2.360% </br> 
+            f = 2.228% </br> 
+            g = 2.015% </br> 
+            y = 1.974% </br> 
+            p = 1.929% </br> 
+            b = 1.492% </br> 
+            v = 0.978% </br> 
+            k = 0.772% </br> 
+            j = 0.153% </br> 
+            x = 0.150% </br> 
+            q = 0.095% </br> 
+            z = 0.074%
+          </div></td>
+        </tr>
+      </table>
+
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li><a href="https://quipqiup.com" target="_blank">quipqiup Cryptogram Solver</a></li>
+          <li><a href="https://www.dcode.fr/monoalphabetic-substitution" target="_blank">dCode.fr Automatic Alphabetical Substitution Decryption</a></li>
+          <li><a href="http://www.richkni.co.uk/php/crypta/letreplace.php" target="_blank">Richkni Letter Replacement</a></li>
+        </ul>
+        <!--<p></p>-->
+
+
+
+
+
         <!--<h3 class="blog-subheader">Subheader h3</h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
 
@@ -1373,10 +1808,17 @@ function microTemplate(templateStr,objData){
         <p class="seeAlso">See:</p>
         <ul>
           <li><a href="https://www.dcode.fr/bacon-cipher" target="_blank">dCode.fr Bacon Cipher</a></li>
+          <li><a href="http://rumkin.com/tools/cipher/index.php" target="_blank">Rumkin Cipher Tools</a></li>
         </ul>
         
         <!-- todo: insert substitution cipher solver, or links (quipquip, dcode.fr, richkni?).
 Made a simple one here: https://jsbin.com/yejeguk/3/edit?html,css,js,output -->
+
+
+
+
+
+
         
         <!-- Other ciphers to include:
 Types of ciphers:
@@ -1404,6 +1846,10 @@ dCode.fr has many decoders for these
 
       </div><!-- /.blog-post #ciphers -->
 
+      <h3 class="pb-4 mb-4 font-italic border-bottom">
+        Reference
+      </h3>
+
       <hr>
 
       <div class="blog-post" id="other">
@@ -1413,18 +1859,47 @@ dCode.fr has many decoders for these
         <h3 class="blog-subheader">Cryptic Crossword Guides</h3>
         <p class="blog-post-meta">Below are some guides for identifying and solving different cryptic crossword clues.
           Common types include: Charade, Double Definition, Anagram, Hidden Word, Reversal, Container, Deletions, Selections, Homophone/'Sounds Like', etc.</p>
+
+        <p class="blog-post-meta">Some basic cryptic examples:
+        <ul>
+          <li><b>Charade</b> - 1000 in family (3) ⟶ KIN (k+in)</li>
+
+          <!-- Agriculture in remote Chinese dynasty (7) ⟶ FARMING -->
+          
+          <li><b>Double Definition</b> - Able to preserve (3) ⟶ CAN</li>
+          
+          <li><b>Anagram</b> - Captures crazy parts (5) ⟶ TRAPS (parts)</li>
+          <!-- Noises in restless slumber (7). ⟶ RUMBLES -->
+          
+          <li><b>Hidden Word</b> - Vacate everyone held in contempt yesterday (5) ⟶ EMPTY</li>
+          
+          <li><b>Reversal</b> - Flying mammals impale the wrong way (4) ⟶ BATS (stab)</li>
+          <!-- Strike friend's back (4) --> SLAP -->
+          
+          <li><b>Container</b> - Ship structure, as in Bozeman’s st. (4) ⟶ MAST</li>
+          <!-- Mr. Crosby keeps it sharp (6) ⟶ BITING -->
+          
+          <li><b>Deletions</b> - Writer Virginia unfinished yarn material (4) ⟶ Answer: WOOL (woolf)</li>
+
+          <li><b>Selections</b> - Even Elvis meets citrus fruits (5) ⟶ LIMES (eLvIs MeEtS)</li>
+          
+          <li><b>Homophone</b> - Noisily propelled boat to street (4) ⟶ ROAD (rowed)</li>
+          <!-- Vocal gossip for a lodger (6) ⟶ ROOMER -->
+        </ul>
+        </p>
+
         <p class="seeAlso">See:</p>
         <ul>
           <li><a href="https://www.theatlantic.com/past/docs/issues/puzzclue.htm" target="_blank">The Atlantic Puzzler Instructions</a></li>
           <li><a href="http://www.crosswordtools.com/cryptic-crosswords.php" target="_blank">CrosswordTools</a></li>
           <li><a href="https://www.crosswordgenius.com/guide-to-cryptic-crosswords/" target="_blank">CrosswordGenius</a></li>
-
         </ul>
 
         <h3 class="blog-subheader">Periodic Table</h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>"element", science themes, 1 or 2 letter abbreviations with first capitalized, chemicals, atoms, molecules</p>
         <p class="seeAlso">See:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#elements" target="_blank"> lizzb Elements Table </a></li>
           <li><a href="https://www.webelements.com/" target="_blank">WebElements</a></li>
           <li><a href="https://www.ptable.com/" target="_blank">PTable</a></li>
           <li><a href="https://www.chemicool.com" target="_blank">Chemicool</a></li>
@@ -1447,6 +1922,7 @@ dCode.fr has many decoders for these
         <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
         <p class="seeAlso">See:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#countries" target="_blank"> lizzb Countries Table </a></li>
           <li><a href="https://www.onlinestores.com/flagdetective/" target="_blank">Flag Detective</a></li>
           <li><a href="http://www.flagid.org" target="_blank">Flag Identifier</a></li>
         </ul>
@@ -1456,6 +1932,7 @@ dCode.fr has many decoders for these
         <p class="blog-post-meta">2-letter and 3-letter country codes, phone dialing codes</p>
         <p class="seeAlso">See:</p>
         <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#countries" target="_blank"> lizzb Countries Table </a></li>
           <li><a href="https://www.worldatlas.com/aatlas/ctycodes.htm" target="_blank">World Atlas</a></li>
         </ul>
 
@@ -1493,6 +1970,13 @@ dCode.fr has many decoders for these
         <h3 class="blog-subheader"> Qwerty Keyboard </h3>
         <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
         <img id="xxx" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/KB_United_States.svg/2560px-KB_United_States.svg.png" />
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li><a href="https://www.geocachingtoolbox.com/index.php?lang=en&page=dvorakKeyboard" target="_blank">Geocaching Toolbox Qwerty/Dvorak Converter</a></li>
+          <li><a href="http://wbic16.xedoloh.com/dvorak.html" target="_blank">WBIC16 Qwerty/Dvorak Converter</a></li>
+          <li><a href="https://chaidarun.com/dvorak" target="_blank">Chaidarun Qwerty-->Dvorak</a></li>
+        </ul>
+
 
         <h3 class="blog-subheader"> Mayan Numbers </h3>
         <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
