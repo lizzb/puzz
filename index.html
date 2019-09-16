@@ -77,6 +77,7 @@
       
       .rot-label { font-weight: bold; width: 75px; }
       .rot-input-label { }
+      .sub-input { width: 50px; padding: 0px 5px; }
 
       img {width: 85%; padding-bottom: 20px;}
 
@@ -781,6 +782,11 @@ var items = [
     // https://www.geocachingtoolbox.com/index.php?lang=en&page=dvorakKeyboard
     // http://wbic16.xedoloh.com/dvorak.html
     // https://chaidarun.com/dvorak
+    /*
+    <li><a href="https://www.geocachingtoolbox.com/index.php?lang=en&page=dvorakKeyboard" target="_blank">Geocaching Toolbox Qwerty/Dvorak Converter</a></li>
+          <li><a href="http://wbic16.xedoloh.com/dvorak.html" target="_blank">WBIC16 Qwerty/Dvorak Converter</a></li>
+          <li><a href="https://chaidarun.com/dvorak" target="_blank">Chaidarun Qwerty-->Dvorak</a></li>
+          */
   },
   {
     title: "Mayan Numbers",
@@ -807,11 +813,22 @@ var items = [
     title: "Greek Alphabet",
     lookFor: "alpha, delta (but not NATO), gamma, omega, college, fraternity/sorority house, math, mathematics, Greek, Phoenician, science",
     imgID: "",
-    imgURL: "https://www.ancient.eu/img/r/p/500x600/3426.png",
+    imgURL: "https://www.ancient.eu/img/r/p/500x600/3426.png",// this one is kind of redundant, splits it into 2
     // also: https://www.drodd.com/images16/greek-letters1.gif
-    // backup: https://www.medcalc.org/manual/greek_alphabet.php
+    // backup: https://www.medcalc.org/manual/greek_alphabet.php - table but could screenshot
     // small, phonecian vs greek: https://www.crystalinks.com/canaanitealph.gif
-    seeAlsoSites: [ ]
+    seeAlsoSites: [
+      { siteName: "Medcalc.org", siteURL: "https://www.medcalc.org/manual/greek_alphabet.php" },
+    ]
+  },
+  {
+    title: "Astronomy Symbols",
+    lookFor: "Astronomy  alphabet, astral, astronomy, celestial, heavens, planets, sky, space, star, stellar, sun, any planet name",
+    imgID: "",
+    imgURL: "https://solarsystem.nasa.gov/system/resources/detail_files/680_all_symbols.jpg", // nasa planet symbols
+    seeAlsoSites: [
+      { siteName: "Wikipedia Astronomical Symbols", siteURL: "https://en.wikipedia.org/wiki/Astronomical_symbols" }, // need summary image for this
+    ]
   },
   {
     title: "Astrological Zodiac",
@@ -819,7 +836,8 @@ var items = [
     // need summary image: https://en.wikipedia.org/wiki/Astronomical_symbols
     // Astronomy  alphabet, astral, astronomy, celestial, heavens, planets, sky, space, star, stellar, sun, any planet name -->
     imgID: "",
-    imgURL: "https://newsfeed.ph/wp-content/uploads/2016/04/zodiac-signs.png",
+    //imgURL: "https://newsfeed.ph/wp-content/uploads/2016/04/zodiac-signs.png", - this image doesnt indicate that aries is first clearly
+    imgURL: "https://i.pinimg.com/564x/59/70/c6/5970c61b0d1b20e59b054fbdce3abda5.jpg",
     // watermarked, but good: https://previews.123rf.com/images/3xy/3xy1511/3xy151100026/47904280-signs-of-the-zodiac-and-the-solar-system-the-asteroid-goddesses-alchemy-symbols-and-four-elements.jpg
     seeAlsoSites: [ ]  
   },
@@ -1537,56 +1555,56 @@ var items = [
           <tr>
             <td class="original-letter">A:</td>
             <td>
-              <input id="sub_A" value="A" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_A" value="A" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_A')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">B:</td>
             <td>
-              <input id="sub_B" value="B" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_B" value="B" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_B')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">C:</td>
             <td>
-              <input id="sub_C" value="C" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_C" value="C" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_C')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">D:</td>
             <td>
-              <input id="sub_D" value="D" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_D" value="D" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_D')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">A:</td>
             <td>
-              <input id="sub_E" value="E" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_E" value="E" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_E')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">F:</td>
             <td>
-              <input id="sub_F" value="F" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_F" value="F" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_F')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">G:</td>
             <td>
-              <input id="sub_G" value="G" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_G" value="G" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_G')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">H:</td>
             <td>
-              <input id="sub_H" value="H" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_H" value="H" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_H')">X</button>
             </td>
           </tr>
@@ -1603,63 +1621,63 @@ var items = [
           <tr>
             <td class="original-letter">I:</td>
             <td>
-              <input id="sub_I" value="I" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_I" value="I" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_I')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">J:</td>
             <td>
-              <input id="sub_J" value="J" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_J" value="J" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_J')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">K:</td>
             <td>
-              <input id="sub_K" value="K" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_K" value="K" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_K')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">L:</td>
             <td>
-              <input id="sub_L" value="L" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_L" value="L" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_L')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">M:</td>
             <td>
-              <input id="sub_M" value="M" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_M" value="M" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_M')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">N:</td>
             <td>
-              <input id="sub_N" value="N" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_N" value="N" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_N')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">O:</td>
             <td>
-              <input id="sub_O" value="O" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_O" value="O" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_O')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">P:</td>
             <td>
-              <input id="sub_P" value="P" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_P" value="P" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_P')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">Q:</td>
             <td>
-              <input id="sub_Q" value="Q" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_Q" value="Q" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_Q')">X</button>
             </td>
           </tr>
@@ -1676,63 +1694,63 @@ var items = [
           <tr>
             <td class="original-letter">R:</td>
             <td>
-              <input id="sub_R" value="R" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_R" value="R" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_R')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">S:</td>
             <td>
-              <input id="sub_S" value="S" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_S" value="S" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_S')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">T:</td>
             <td>
-              <input id="sub_T" value="T" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_T" value="T" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_T')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">U:</td>
             <td>
-              <input id="sub_U" value="U" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_U" value="U" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_U')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">V:</td>
             <td>
-              <input id="sub_V" value="V" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_V" value="V" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_V')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">W:</td>
             <td>
-              <input id="sub_W" value="W" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_W" value="W" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_W')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">X:</td>
             <td>
-              <input id="sub_X" value="X" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_X" value="X" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_X')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">Y:</td>
             <td>
-              <input id="sub_Y" value="Y" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_Y" value="Y" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_Y')">X</button>
             </td>
           </tr>
           <tr>
             <td class="original-letter">Z:</td>
             <td>
-              <input id="sub_Z" value="Z" oninput="decodeSubstitution()"></input>
+              <input class="sub_input" id="sub_Z" value="Z" oninput="decodeSubstitution()"></input>
               <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('sub_Z')">X</button>
             </td>
           </tr>
@@ -1994,24 +2012,34 @@ dCode.fr has many decoders for these
         <h3 class="blog-subheader"> Greek Alphabet </h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>  alpha, delta (but not NATO), gamma, omega, college, fraternity/sorority house, math, mathematics, Greek, Phoenician, science</p>
         <img id="xxx" src="https://www.ancient.eu/img/r/p/500x600/3426.png" />
-        <!-- https://www.medcalc.org/manual/greek_alphabet.php -->
-
+        <!-- this one is kind of redundant, splits upper and lower separately -->
         <img id="xxx" src="https://www.drodd.com/images16/greek-letters1.gif" />
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <!-- need summary image for below -->
+          <li><a href="https://www.medcalc.org/manual/greek_alphabet.php" target="_blank">Medcalc.org Greek Alphabet</a></li>
+        </ul>
         
         <!-- small: 
         <!-- phonecian vs greek https://www.crystalinks.com/canaanitealph.gif -->
         
 
+        <h3 class="blog-subheader"> Astronomy Symbols </h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>Astronomy  alphabet, astral, astronomy, celestial, heavens, planets, sky, space, star, stellar, sun, any planet name</p>
+        <img id="xxx" src="https://solarsystem.nasa.gov/system/resources/detail_files/680_all_symbols.jpg" /><!-- Nasa planet symbols  -->
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <!-- need summary image for below -->
+          <li><a href="https://en.wikipedia.org/wiki/Astronomical_symbols" target="_blank">Wikipedia Astronomical Symbols</a></li>
+        </ul>
 
-        <!-- need summary image for below -->
-        <!-- https://en.wikipedia.org/wiki/Astronomical_symbols -->
-        <!-- Astronomy  alphabet, astral, astronomy, celestial, heavens, planets, sky, space, star, stellar, sun, any planet name -->
 
         <!-- watermarked, but good: https://previews.123rf.com/images/3xy/3xy1511/3xy151100026/47904280-signs-of-the-zodiac-and-the-solar-system-the-asteroid-goddesses-alchemy-symbols-and-four-elements.jpg -->
 
         <h3 class="blog-subheader"> Astrological Zodiac </h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>12, Age, animals, astral, astrology, astronomy, birthday, celestial, circle, date, dates, elements, horoscope, longitude, latitude, planets, sign, signs, stars, twelve</p>
-        <img id="xxx" src="https://newsfeed.ph/wp-content/uploads/2016/04/zodiac-signs.png" />
+        <!--<img id="xxx" src="https://newsfeed.ph/wp-content/uploads/2016/04/zodiac-signs.png" /> this image doesnt indicate that aries is first clearly -->
+        <img id="xxx" src="https://i.pinimg.com/564x/59/70/c6/5970c61b0d1b20e59b054fbdce3abda5.jpg" />
 
         <h3 class="blog-subheader"> Chinese Zodiac</h3>
         <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
@@ -2020,16 +2048,22 @@ dCode.fr has many decoders for these
         <h3 class="blog-subheader"> NATO Phonetic/Morse/Semaphore/Naval Flag Alphabet </h3>
         <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
         <img id="xxx" src="https://www.outsideopen.com/wp-content/uploads/2015/03/Outside-Open-NATO-Alphabet-v11.jpg" />
-
+        <p class="seeAlso">See also:</p>
+        <ul>
+          <li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>
+        </ul>
+        
+        <!--
         <h3 class="blog-subheader"> xxx </h3>
-        <!--<p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>-->
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>...</p>
         <img id="xxx" src="xxx" />
 
         <p class="seeAlso">See also:</p>
         <ul>
           <li>...</li>
         </ul>
-        <!--<p></p>-->
+        <p></p>
+        -->
         
         <div id="otherItemsOutput"></div>
 
