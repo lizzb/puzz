@@ -64,10 +64,11 @@
             font-weight: bold;
         }
       td.label { text-align: right; } /* used for binary conversion labels */
+      #converted_unicode10,
       #converted_unicode,
       #converted_unicode3,
       #converted_unicode16 { text-decoration: underline; }
-      #binaryInput, #ternaryInput, #hexInput {font-size: 12px; }
+      #decimalInput, #binaryInput, #ternaryInput, #hexInput {font-size: 12px; }
       textarea { font-size: 14px; padding: 5px; }
 
       .rot-label { font-weight: bold; width: 75px; }
@@ -348,7 +349,7 @@
           document.getElementById(inputElementID).value = "";
 
           // need to clear multiple fields for the base conversion section
-          if (inputElementID == "binaryInput" || inputElementID == "ternaryInput" || inputElementID == "hexInput") {
+          if (inputElementID == "binaryInput" || inputElementID == "ternaryInput" || inputElementID == "decimalInput" || inputElementID == "hexInput") {
 
             // default for element.id == binaryInput
             var convertedDecimalID = "converted_decimal";
@@ -359,6 +360,11 @@
               convertedDecimalID = "converted_decimal3";
               convertedAlphaNumericID = "converted_alphaNumeric3";
               convertedUnicodeID = "converted_unicode3";
+            }
+            else if (inputElementID == "decimalInput") {
+              convertedDecimalID = "converted_decimal10"; // leaving this redundant field for now for quick insert
+              convertedAlphaNumericID = "converted_alphaNumeric10";
+              convertedUnicodeID = "converted_unicode10";
             }
             else if (inputElementID == "hexInput") {
               convertedDecimalID = "converted_decimal16";
@@ -383,6 +389,11 @@
             convertedDecimalID = "converted_decimal3";
             convertedAlphaNumericID = "converted_alphaNumeric3";
             convertedUnicodeID = "converted_unicode3";
+          }
+          else if (element.id == "decimalInput") {
+            convertedDecimalID = "converted_decimal10";
+            convertedAlphaNumericID = "converted_alphaNumeric10";
+            convertedUnicodeID = "converted_unicode10";
           }
           else if (element.id == "hexInput") {
             convertedDecimalID = "converted_decimal16";
@@ -1082,6 +1093,32 @@ function microTemplate(templateStr,objData){
         <h2 class="blog-post-title">Base Conversions</h2>
         <!--<p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>-->
 
+        <h3 class="blog-subheader">Decimal</h3>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span> 1-26 (alphanumeric), 65-90 (ASCII A-Z), 97-122 (ASCII a-z) </p>
+
+        <table>
+          <tr>
+            <td class="label">Alphanumeric:</td>
+            <td><span id="converted_alphaNumeric10">�</td>
+          </tr>
+          <tr>
+            <td class="label">Unicode:</td>
+            <td><span id="converted_unicode10"></span></td>
+          </tr>
+          <tr>
+            <td class="label">Decimal:</td>
+            <td><span id="converted_decimal10">0</span></td><!-- leaving this redundant field here for now for quick insertion -->
+          </tr>
+          <tr>
+            <td class="label">Decimal:</td>
+            <td>
+              <textarea id="decimalInput" value="0" oninput="convertToText(this, 10)" size="24"></textarea>
+              <button class="btn btn-sm btn-outline-secondary clearNumberString" onclick="clearInput('decimalInput')">X</button>
+            </td>
+          </tr>
+        </table>
+        
+        
         <h3 class="blog-subheader">Binary</h3>
         <p class="blog-post-meta"><span class="lookFor">Look for: </span>0s and 1s (and letters that resemble them, e.g. I, l, o, O), 2 unique characters, "bits", "bytes", shaded or provided elements vs. empty</p>
 
