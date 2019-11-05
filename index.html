@@ -85,6 +85,11 @@
       h3.blog-subheader {padding-top: 20px;} /* used for groupings in reference section */
 
       .seeAlso {margin-top: 5px;}
+      
+      .tapCodeTable, .polybiusSquareTable {border-collapse: collapse;}
+      .polybiusSquareTable td, .tapCodeTable td, .polybiusSquareTable th, .tapCodeTable th {width: 20px; text-align: center;   border: 1px solid grey; }
+      .tap-label, .sub-label, .polybius-label { }
+      #simple-tapcode, #simple-polybius { }
 
     </style>
 
@@ -355,8 +360,11 @@
     </script>
     <script>
         function clearInput(inputElementID) {
-          // default rotInput, substitutionInput
+          // default rotInput, substitutionInput, tapInput, polybiusInput
           document.getElementById(inputElementID).value = "";
+          
+          // TODO: also recall relevant functions or add watching
+          // e.g. decodeROT, decodeTap, decodePolybius, decodeSubstitution(this)
 
           // need to clear multiple fields for the base conversion section
           if (inputElementID == "binaryInput" || inputElementID == "ternaryInput" || inputElementID == "decimalInput" || inputElementID == "hexInput") {
@@ -490,6 +498,204 @@
             document.getElementById(convertedROTElementID).innerHTML = outputArray.join("");
           }
         }
+      
+      
+      /* ========== Tap functions ========== */
+
+function decodeTap(element){
+  
+  var inputGrid = [
+    [ "a", "b", "c/k", "d", "e"],
+    [ "f", "g", "h", "i", "j"],
+    [ "l", "m", "n", "o", "p"],
+    [ "q", "r", "s", "t", "u"],
+    [ "v", "w", "x/", "y", "z"]
+  ]; 
+  
+  var textareaInputID = "tapInput";
+  
+  // Convert input string into array of characters
+  var valToConvert = element.value;
+  //var valToConvert = document.getElementById(textareaInputID).value;
+  // trim will get rid of trailing spaces,
+  // but won't fix if there are extra spaces or line breaks between numbers
+  valToConvert = valToConvert.trim();
+  valsArray = valToConvert.split(" ");
+
+  var xCoords = [];
+  var yCoords = [];
+
+  for (var i=0; i<valsArray.length; i++) {
+    
+      // this wont work if there are extra spaces somewhere!
+    
+      // subtracting 1 from each to avoid index 0 vs index 1 math
+      // if it is not a number (e.g. letter), will turn into NaN
+      if (i % 2 === 0) {
+        xCoords.push(valsArray[i]-1);
+      }
+      else {
+        yCoords.push(valsArray[i]-1);
+      }
+    
+  }
+  
+  //console.log("xCoords", xCoords);
+  // console.log("yCoords", yCoords);
+
+  var outputArray = [];
+  
+  // todo: need a way to logically detect
+  // if inserting taps or coordinates
+  // eg "3 5" vs. "... ....."
+  
+  for (var j=0; j < xCoords.length; j++) {
+    // default fallback value
+    var decodedLetter = "�";
+    
+    var row = xCoords[j];
+    var col = -1;
+    // access corresponding y coord for x coord if it exists
+    // e.g. xCoords and yCoords must be same length
+    if (yCoords.length >= j - 1) col = yCoords[j];
+    
+    if (row >= 0 && col>= 0 && row < inputGrid.length && col < inputGrid[row].length) {
+      decodedLetter = inputGrid[row][col];
+    }
+    
+    // return unknown char if can't find valid value
+    // (e.g. only 1 coordinate provided, or coordinates out of range)
+    outputArray.push(decodedLetter);
+    
+  }
+  var convertedTapElementID = "tapOutput";
+  document.getElementById(convertedTapElementID).innerHTML = outputArray.join("");
+
+}
+
+
+
+function decodeTap(element){
+  
+  var tapInputGrid = [
+    [ "a", "b", "c/k", "d", "e"],
+    [ "f", "g", "h", "i", "j"],
+    [ "l", "m", "n", "o", "p"],
+    [ "q", "r", "s", "t", "u"],
+    [ "v", "w", "x/", "y", "z"]
+  ]; 
+  
+  var textareaInputID = "tapInput";
+  
+  // Convert input string into array of characters
+  var valToConvert = element.value;
+  //var valToConvert = document.getElementById(textareaInputID).value;
+  // trim will get rid of trailing spaces,
+  // but won't fix if there are extra spaces or line breaks between numbers
+  valToConvert = valToConvert.trim();
+  valsArray = valToConvert.split(" ");
+
+  var xCoords = [];
+  var yCoords = [];
+
+  for (var i=0; i<valsArray.length; i++) {
+    
+      // this wont work if there are extra spaces somewhere!
+    
+      // subtracting 1 from each to avoid index 0 vs index 1 math
+      // if it is not a number (e.g. letter), will turn into NaN
+      if (i % 2 === 0) {
+        xCoords.push(valsArray[i]-1);
+      }
+      else {
+        yCoords.push(valsArray[i]-1);
+      }
+    
+  }
+  
+  //console.log("xCoords", xCoords);
+  // console.log("yCoords", yCoords); 
+  
+  var convertedTapElementID = "tapOutput";
+  document.getElementById(convertedTapElementID).innerHTML = decodeCoords(tapInputGrid, xCoords, yCoords);
+
+}
+
+
+function decodePolybius(element){
+  
+  var polybiusInputGrid = [
+    [ "a", "b", "c", "d", "e"],
+    [ "f", "g", "h", "i/j", "k"],
+    [ "l", "m", "n", "o", "p"],
+    [ "q", "r", "s", "t", "u"],
+    [ "v", "w", "x", "y", "z"]
+  ]; 
+  
+  var textareaInputID = "polybiusInput";
+  
+  // Convert input string into array of characters
+  var valToConvert = element.value;
+  //var valToConvert = document.getElementById(textareaInputID).value;
+  valsArray = valToConvert.trim().split(" ");
+
+  var xCoords = [];
+  var yCoords = [];
+
+  for (var i=0; i<valsArray.length; i++) {
+      
+    var digits = valsArray[i].split("");
+
+    // subtracting 1 from each to avoid index 0 vs index 1 math
+      // if it is not a number (e.g. letter), will turn into NaN
+    if (digits.length == 2) {
+      xCoords.push(digits[0]-1);
+      yCoords.push(digits[1]-1);
+    }
+    else {
+      xCoords.push(-1);
+      yCoords.push(-1);
+    }
+    
+  }
+
+  
+  var convertedElementID = "polybiusOutput";
+  document.getElementById(convertedElementID).innerHTML = decodeCoords(polybiusInputGrid, xCoords, yCoords);
+
+}
+
+function decodeCoords(inputGrid, xCoords, yCoords) {
+  
+  var outputArray = [];
+  
+  // todo: need a way to logically detect
+  // if inserting taps or coordinates
+  // eg "3 5" vs. "... ....."
+  
+  for (var j=0; j < xCoords.length; j++) {
+    // default fallback value
+    var decodedLetter = "�";
+    
+    var row = xCoords[j];
+    var col = -1;
+    // access corresponding y coord for x coord if it exists
+    // e.g. xCoords and yCoords must be same length
+    if (yCoords.length >= j - 1) col = yCoords[j];
+    
+    if (row >= 0 && col>= 0 && row < inputGrid.length && col < inputGrid[row].length) {
+      decodedLetter = inputGrid[row][col];
+    }
+    
+    // return unknown char if can't find valid value
+    // (e.g. only 1 coordinate provided, or coordinates out of range)
+    outputArray.push(decodedLetter);
+    
+  }
+  
+  return outputArray.join("");
+}
+
 
 
         /* ========== Substitution functions ========== */
@@ -1873,11 +2079,205 @@ dCode.fr has many decoders for these
 
       </div><!-- /.blog-post #ciphers -->
 
+
+<!-- should probably include tap code and polybius as part of ciphers or substitution? not sure how to best categorize -->
+
+
+<!-- https://jsbin.com/womajos/6/edit?html,css,js,output
+starter  -->
+
+<div class="blog-post" id="simple-tapcode">
+        <h2 class="blog-post-title">Tap Code</h2>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>number pairs/coordinates of 1,1 to 5,5, "tap", Vietnam</p>
+        
+        <!-- TODO: provide counting and interpretation of singles and easier input other than keyboard input for taps -->
+        <!--
+        <button class="btn btn-info btn-lg morseButton" onclick="addTapChar('.')"> Dot (.) </button>
+        <button class="btn btn-info btn-lg morseButton" onclick="addTapChar(' ')"> Space ( ) </button><br>
+        <button class="btn btn-info btn-lg morseButton" onclick="removeLastTapChar()"> ← Remove Last </button><br>
+        -->
+
+          Assumes standard tap code grid:
+  <table class="tapCodeTable">
+    <tr>
+      <th>R,C</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>a</td>
+      <td>b</td>
+      <td>c/k</td>
+      <td>d</td>
+      <td>e</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>f</td>
+      <td>g</td>
+      <td>h</td>
+      <td>i</td>
+      <td>j</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>l</td>
+      <td>m</td>
+      <td>n</td>
+      <td>o</td>
+      <td>p</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>q</td>
+      <td>r</td>
+      <td>s</td>
+      <td>t</td>
+      <td>u</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>v</td>
+      <td>w</td>
+      <td>x</td>
+      <td>y</td>
+      <td>z</td>
+    </tr>
+  </table>
+
+  <br>
+    <em>Use single space to separate x, y coordinates and letters (e.g. 4 4 2 3 1 5...)
+  </em>
+  <br>
+
+  
+        <table>
+            <tbody>
+              <tr>
+                <td class="tap-label">Coordinate Input:</td>
+                <td>
+                  <textarea id="tapInput" oninput="decodeTap(this)"></textarea>
+                  <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('tapInput')">X</button>
+                </td>
+              </tr>
+              <tr>
+                  <td class="tap-label">Tap Code Output:</td>
+                  <td><span id="tapOutput"></span></td>
+              </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+
+        <p>See also:</p>
+        <ul>
+          <li><a href="https://www.dcode.fr/tap-cipher" target="_blank"> dCode.fr tap code decoder </a></li>
+          <!--<li><a href="http://lizzb.github.io/puzz/common#alphabets" target="_blank"> lizzb Common Encodings Table </a></li>-->
+        </ul>
+       
+      </div><!-- /.blog-post #simple-tapcode -->
+  
+  <div class="blog-post" id="simple-polybius">
+        <h2 class="blog-post-title">Polybius Square</h2>
+        <p class="blog-post-meta"><span class="lookFor">Look for: </span>2 digit numbers from 11 to 55... not sure how different from knock and tap code, other than i/j vs c/k</p>
+
+
+          Assumes standard Polybius square:
+  <table class="polybiusSquareTable">
+    <tr>
+      <th>R,C</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+      <td>d</td>
+      <td>e</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>f</td>
+      <td>g</td>
+      <td>h</td>
+      <td>i/j</td>
+      <td>k</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>l</td>
+      <td>m</td>
+      <td>n</td>
+      <td>o</td>
+      <td>p</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>q</td>
+      <td>r</td>
+      <td>s</td>
+      <td>t</td>
+      <td>u</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>v</td>
+      <td>w</td>
+      <td>x</td>
+      <td>y</td>
+      <td>z</td>
+    </tr>
+  </table>
+
+  <br>
+    <em>Use space to separate XY numbers coordinates and letters (e.g. 44 23 15...)
+  </em>
+  <br>
+
+  
+        <table>
+            <tbody>
+              <tr>
+                <td class="polybius-label">Coordinate Input:</td>
+                <td>
+                  <textarea id="polybiusInput" oninput="decodePolybius(this)"></textarea>
+                  <button class="btn btn-sm btn-outline-secondary clearRunningString" onclick="clearInput('polybiusInput')">X</button>
+                </td>
+              </tr>
+              <tr>
+                  <td class="polybius-label">Polybius Code Output:</td>
+                  <td><span id="polybiusOutput"></span></td>
+              </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+
+        <p>See also:</p>
+        <ul>
+          <li><a href="https://www.dcode.fr/polybius-cipher" target="_blank"> dCode.fr polybius cipher decoder </a></li>
+        </ul>
+       
+      </div><!-- /.blog-post #simple-polybius -->
+
+
+
       <h3 class="pb-4 mb-4 font-italic border-bottom">
         Reference
       </h3>
 
-      <hr>
+      <!--<hr>-->
 
       <div class="blog-post" id="other">
         <h2 class="blog-post-title">Other</h2>
